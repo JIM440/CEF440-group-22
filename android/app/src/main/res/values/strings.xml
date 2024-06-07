@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">rescueradar</string>
+    <string name="title_activity_main">rescueradar</string>
+    <string name="package_name">ionic.rescueradar</string>
+    <string name="custom_url_scheme">ionic.rescueradar</string>
+</resources>
