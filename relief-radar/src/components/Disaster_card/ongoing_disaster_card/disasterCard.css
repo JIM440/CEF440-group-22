@@ -1,0 +1,154 @@
+.disaster-card {
+	height: 325px;
+	width: 100%;
+	color: var(--ion-color-contrast);
+	border-radius: 25px;
+	position: relative;
+	overflow: hidden;
+	background-color: #000;
+}
+
+.brief-disaster-info,
+.disaster-type-location {
+	display: flex;
+	border-radius: 10px;
+	height: 100px;
+	width: 95%;
+	position: absolute;
+	left: 50%;
+	bottom: 10px;
+	transform: translate(-50%, 0px);
+	justify-content: space-around;
+	align-items: center;
+	border-radius: 15px;
+	padding: 10px;
+	font-size: 12px;
+	
+	letter-spacing: 0.06em;
+	background: var(
+		--ion-tab-bar-background,
+		var(--ion-color-step-50, var(--ion-background-color-step-50, #f7f7f7))
+	);
+	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+	border: 2px solid var(0, 0, 0, 0.9);
+}
+
+.disaster-type-location {
+	top: 10px;
+	width: 50%;
+	height: 140px;
+	left: 5%;
+	transform: translate(-5%, 0px);
+	flex-direction: column;
+	align-items: flex-start;
+	max-width: 200px;
+}
+
+.disaster-type-location div {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 14px;
+	gap: 8px;
+}
+
+.disaster-type-location div ion-icon {
+	width: 20px;
+	height: 20px;
+	color: var(--ion-color-primary);
+}
+
+.brief-disaster-info .value {
+	font-size: 16px;
+
+}
+
+.info-division {
+	display: flex;
+	gap: 4px;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 30%;
+}
+
+.info-division ion-icon {
+	width: 25px;
+	height: 25px;
+	padding: 3px;
+	border-radius: 50%;
+	color: var(--ion-color-primary);
+}
+
+.disaster-map-point {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0.8;
+}
+
+.disaster-map-point img {
+	width: 100%;
+	height: 100%;
+}
+
+div.disaster-type {
+	font-size: 16px;
+	
+}
+
+div.disaster-type ion-icon {
+	width: 30px;
+	height: 30px;
+}
+
+div.disaster-distance-away{
+	text-align: center;
+	width: 100%;
+	padding: 10px 0px;
+}
+
+@media screen and (max-width: 360px) {
+	.disaster-card {
+		height: 300px;
+	}
+}
+
+@media screen and (max-width: 350px) {
+	.disaster-type-location div{
+		font-size: 11px;
+	}
+
+	div.disaster-type{
+		font-size: 14px;
+	}
+
+	.disaster-type-location {
+		width: 55%;
+		height: 120px;
+	}
+
+	.brief-disaster-info {
+		height: 80px;
+	}
+
+	.brief-disaster-info ion-icon {
+		width: 20px;
+		height: 20px;
+	}
+
+	.brief-disaster-info .value{
+		font-size: 14px;
+	}
+
+	.disaster-card {
+		height: 280px;
+	}
+
+	.brief-disaster-info{
+		font-size: 11px;
+	}
+}
