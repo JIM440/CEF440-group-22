@@ -204,7 +204,7 @@ const HomePage: React.FC<ContainerProps> = (locale) => {
 		setUpLocation();
 		setWeatherData(JSON.parse(localStorage.getItem("current_weather")!));
 		const fetchWeatherData = async (location: location, lang: string) => {
-			const apiKey = "//17c0ca1503c9a82af4b6be08659549df";
+			const apiKey = "17c0ca1503c9a82af4b6be08659549df";
 			let url = `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&appid=${apiKey}&lang=${lang}`;
 
 			if (lang == "en" || lang == "") {
