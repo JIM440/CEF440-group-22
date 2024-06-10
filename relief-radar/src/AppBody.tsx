@@ -17,6 +17,8 @@ import communityIcon from "./assets/icons/community-md.svg";
 import Menu from "./components/Side_bar_Menu/Menu";
 import MapPage from "./pages/Map/index";
 import CommunityPage from "./pages/Community/index";
+import CommunityChatPage from "./pages/Community/CommunityChatPage/CommunityChatPage";
+import ForumInfo from "./pages/Community/ForumInfo/ForumInfo";
 import HomePage from "./pages/Home/index";
 import ReportPage from "./pages/Emergency/index";
 import SettingPage from "./pages/SideMenuPages/settings/settings";
@@ -24,6 +26,8 @@ import { FormattedMessage } from "react-intl";
 
 import { useState, useEffect } from "react";
 import { Redirect, Route, useLocation, useHistory } from "react-router-dom";
+import ChatBot from "./pages/ChatBot/ChatBot";
+import WeatherDetailPage from "./pages/WeatherDetailPage/WeatherDetailPage";
 
 interface ContainerProps {
 	locale: string;
@@ -77,11 +81,23 @@ const AppBody: React.FC<ContainerProps> = ({locale, setLocale}) => {
 					<Route path="/tabs/home" exact={true}>
 						<HomePage locale={locale} />
 					</Route>
+					<Route path="/tabs/home/weatherdetail" exact={true}>
+						<WeatherDetailPage/>
+					</Route>
 					<Route path="/tabs/map" exact={true}>
 						<MapPage />
 					</Route>
 					<Route path="/tabs/community" exact={true}>
 						<CommunityPage />
+					</Route>
+					<Route path="/community/chatpage" exact={true}>
+						<CommunityChatPage />
+					</Route>
+					<Route path="/community/foruminfo" exact={true}>
+						<ForumInfo/>
+					</Route>
+					<Route path="/chatbot" exact={true}>
+						<ChatBot/>
 					</Route>
 					<Route path="/tabs/report" exact={true}>
 						<ReportPage />

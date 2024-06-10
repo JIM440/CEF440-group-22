@@ -18,6 +18,37 @@ import ChatBotButton from "../../components/Buttons/Ai_bot";
 import HeaderAvatar from "../../components/Avatar";
 
 import { FormattedMessage } from "react-intl";
+import ForumSessionCard from "../../components/ForumSessionCard/ForumSessionCard";
+
+import genericForum from '../../assets/icons/genericForum.svg'
+import './Community.css'
+
+const disasterForums = [
+  {
+    group_name: "Mount Cameroon Evacuation Zone",
+    date: "June 6",
+    last_text: "Evacuation underway due to potential volcanic eruption. Follow instructions from emergency personnel.",
+    icon: genericForum, 
+  },
+  {
+    group_name: "Limbe Flood Warning",
+    date: "May 5",
+    last_text: "Heavy rains expected in Limbe area. Residents in low-lying areas advised to evacuate.",
+    icon: '',
+  },
+  {
+    group_name: "National Search and Rescue",
+    date: "June 3",
+    last_text: "Search operation ongoing for missing hikers",
+    icon: genericForum,
+  },
+  {
+    group_name: "Nationwide Summer",
+    date: "May 30",
+    last_text: "Government distributing emergency food supplies to affected areas. ",
+    icon: '',
+  },
+];
 
 const CommunityPage = () => (
 	<IonPage>
@@ -41,26 +72,16 @@ const CommunityPage = () => (
 			</IonToolbar>
 		</IonHeader>
 		<IonContent>
-			<div
-				style={{
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "center",
-					height: "100%",
-				}}>
-				<div id="container">
-					<strong>Chatroom and Forums</strong>
-					<p>
-						Explore{" "}
-						<a
-							target="_blank"
-							rel="noopener noreferrer"
-							href="https://ionicframework.com/docs/components">
-							UI Components
-						</a>
-					</p>
-				</div>
+			<div className="community-header">
+				icons
 			</div>
+ 
+			{
+				disasterForums.map((forum,i) => (
+					<ForumSessionCard key={i} group_name={forum.group_name} date={forum.date} last_text={forum.last_text} icon={ forum.icon} />
+				))
+			}
+			
 			<ChatBotButton />
 		</IonContent>
 	</IonPage>

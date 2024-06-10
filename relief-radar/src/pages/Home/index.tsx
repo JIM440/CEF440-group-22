@@ -29,6 +29,7 @@ import getImageFromString from "../../modules/weather/weather";
 import { FormattedMessage } from "react-intl";
 
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 
 type JsonObject = {
 	type: string;
@@ -169,6 +170,7 @@ const HomePage: React.FC<ContainerProps> = (locale) => {
 	const [greetingText, setGreetingText] = useState<string>("Hello");
 	const [weatherData, setWeatherData] = useState(defaultWeatherValue);
 	const [currentLocation, setCurrentLocation] = useState(0);
+	const navigate = useHistory();
 
 	const handleChangeLocation = (e: CustomEvent) => {
 		setCurrentLocation(e.detail.value);
@@ -200,11 +202,15 @@ const HomePage: React.FC<ContainerProps> = (locale) => {
 		return formattedDate;
 	}
 
+	function navigateToWeatherDetail() {
+		navigate.push('/tabs/home/weatherdetail')
+	}
+
 	useEffect(() => {
 		setUpLocation();
 		setWeatherData(JSON.parse(localStorage.getItem("current_weather")!));
 		const fetchWeatherData = async (location: location, lang: string) => {
-			const apiKey = "//17c0ca1503c9a82af4b6be08659549df";
+			const apiKey = "17c0ca1503c9a82af4b6be08659549df";
 			let url = `https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.lon}&appid=${apiKey}&lang=${lang}`;
 
 			if (lang == "en" || lang == "") {
@@ -296,7 +302,7 @@ const HomePage: React.FC<ContainerProps> = (locale) => {
 						</div>
 					</div>
 
-					<div className="weather-section">
+					<div className="weather-section" onClick={navigateToWeatherDetail}>
 						<div className="weather-illustrator">
 							<div className="weather-detail">
 								<div className="date">
