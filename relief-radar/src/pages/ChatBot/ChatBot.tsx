@@ -13,7 +13,7 @@ import {
   IonRow,
   IonCol,
 } from "@ionic/react";
-import LessThan from "../../assets/icons/LessThan.svg";
+import chevronLeft from "../../assets/icons/IonChevronLeft.svg";
 import { useHistory } from "react-router-dom";
 import attachment from "../../assets/icons/attachment.svg";
 import send from "../../assets/icons/send.svg";
@@ -47,7 +47,7 @@ function ChatBot() {
         <IonToolbar>
           <div className="chatbot-header-wrapper">
             <div className="back-part" onClick={goBack}>
-              <IonIcon className="chatbot-header-icon" src={LessThan} />
+              <IonIcon className="chatbot-header-icon" src={chevronLeft} />
               <span>Back</span>
             </div>
             <div className="chatbot-header-text">
