@@ -43,7 +43,7 @@ function ChatBot() {
 
   return (
     <IonPage>
-      <IonHeader className="chatbot-header-container">
+      <IonHeader class="ion-no-border" className="chatbot-header-container">
         <IonToolbar>
           <div className="chatbot-header-wrapper">
             <div className="back-part" onClick={goBack}>
