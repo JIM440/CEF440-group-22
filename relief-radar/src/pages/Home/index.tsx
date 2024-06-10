@@ -29,6 +29,7 @@ import getImageFromString from "../../modules/weather/weather";
 import { FormattedMessage } from "react-intl";
 
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 
 type JsonObject = {
 	type: string;
@@ -169,6 +170,7 @@ const HomePage: React.FC<ContainerProps> = (locale) => {
 	const [greetingText, setGreetingText] = useState<string>("Hello");
 	const [weatherData, setWeatherData] = useState(defaultWeatherValue);
 	const [currentLocation, setCurrentLocation] = useState(0);
+	const navigate = useHistory();
 
 	const handleChangeLocation = (e: CustomEvent) => {
 		setCurrentLocation(e.detail.value);
@@ -198,6 +200,10 @@ const HomePage: React.FC<ContainerProps> = (locale) => {
 		};
 		const formattedDate = local_date.toLocaleDateString(locale.locale, options);
 		return formattedDate;
+	}
+
+	function navigateToWeatherDetail() {
+		navigate.push('/tabs/home/weatherdetail')
 	}
 
 	useEffect(() => {
@@ -296,7 +302,7 @@ const HomePage: React.FC<ContainerProps> = (locale) => {
 						</div>
 					</div>
 
-					<div className="weather-section">
+					<div className="weather-section" onClick={navigateToWeatherDetail}>
 						<div className="weather-illustrator">
 							<div className="weather-detail">
 								<div className="date">

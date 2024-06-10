@@ -1,0 +1,134 @@
+.community-chat-container {
+  color: var(--ion-color-contrast);
+}
+
+.chat-session-header {
+  box-shadow: none;
+  height: 58px;
+  border-bottom: 1px solid rgba(190, 190, 190, 0.3);
+}
+
+.community-chat-header {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.chat-session-header .pop-up{
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  top: 0;
+  right: 0;
+  z-index: 900;
+  background-color: rgb(29, 27, 27);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 0px ;
+  transition: all .4s ease;
+}
+
+
+
+.pop-btn{
+  width: 0;
+  font-size: 20px;
+  height: 0px;
+  display: flex;
+  justify-content: start;
+  padding: 10px;
+  transition: all .4s ease ;
+}
+
+.pop-btn.pop{
+   width: 100%;
+  height: 40px;
+}
+.pop-up.pop{
+  width: 25vh;
+  height: 23vh;
+}
+
+.line{
+  width: 100%;
+  height: 2px;
+  background-color: aliceblue;
+  position: absolute;
+  bottom: 50px;
+}
+.community-chat-header .part1 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.part1 .name-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17.5px;
+}
+
+.name-label a{
+  font-size: 17.6px;
+  font-weight: 450;
+  color: var(--ion-color-contrast);
+}
+
+.part1 .arrow-left-icon {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.part1 .name-label div:nth-child(1) {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: #fff;
+  background-color: var(--ion-color-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-container {
+  background-color: aliceblue;
+}
+
+.messages-container {
+  height: 12vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgba(190, 190, 190, 1);
+}
+
+.messages-container p {
+  width: 80vw;
+  text-align: center;
+}
+
+.message-send-section {
+  box-shadow: none;
+  border-top: 1px solid rgba(190, 190, 190, 0.3);
+  z-index: 999;
+}
+
+.message-send-section .footer-contents {
+  align-items: center;
+  display: flex;
+}
+
+.footer-contents div {
+  width: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-contents .icon {
+  font-size: 17px;
+}

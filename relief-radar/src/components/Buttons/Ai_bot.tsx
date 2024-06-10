@@ -6,7 +6,7 @@ import "./ButtonComponents.css";
 function ChatBotButton() {
 	return (
 		<IonFab className="float chatbot-float">
-			<IonFabButton className="primary-button">
+			<IonFabButton routerLink="/chatbot" className="primary-button">
 				<IonIcon icon={chatBotIcon}></IonIcon>
 			</IonFabButton>
 		</IonFab>
