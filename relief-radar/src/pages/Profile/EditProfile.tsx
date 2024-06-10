@@ -12,20 +12,16 @@ import {
     IonToolbar,
   } from '@ionic/react';
   import React from 'react';
-  import avatar from '../assets/avatar.jpeg';
+  import avatar from '../../assets/images/avatar.jpeg';
   import './Profile.css';
   import { cameraOutline } from 'ionicons/icons';
+import BackBtn from '../ResponderPanel/HeaderBack';
   
   const EditProfile: React.FC = () => {
     return (
       <IonPage>
         <IonHeader class="ion-no-border">
-          <IonToolbar color="clear">
-            <IonButtons>
-              <IonBackButton></IonBackButton>
-            </IonButtons>
-            <IonTitle>Edit Profile</IonTitle>
-          </IonToolbar>
+          <BackBtn title='Edit Profile' />
         </IonHeader>
   
         <IonContent className="ion-padding">

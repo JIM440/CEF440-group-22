@@ -4,7 +4,6 @@ import {
     IonButtons,
     IonCheckbox,
     IonContent,
-    IonFooter,
     IonHeader,
     IonIcon,
     IonInput,
@@ -22,8 +21,9 @@ import {
   } from 'ionicons/icons';
   import React, { useState } from 'react';
   import { History } from 'history';
-  import avatar from '../assets/avatar.jpeg';
+  import avatar from '../../assets/images/avatar.jpeg';
   import './Profile.css';
+import BackBtn from '../ResponderPanel/HeaderBack';
   
   interface ContainerProps {
     history: History;
@@ -43,12 +43,7 @@ import {
     return (
       <IonPage>
         <IonHeader class="ion-no-border">
-          <IonToolbar color="clear">
-            <IonButtons slot="start">
-              <IonBackButton mode="ios"></IonBackButton>
-            </IonButtons>
-            <IonTitle>Profile</IonTitle>
-          </IonToolbar>
+          <BackBtn title='Profile' />
         </IonHeader>
   
         <IonContent className="ion-padding">
@@ -215,7 +210,7 @@ import {
             mode="ios"
             type="button"
             fill="outline"
-            routerLink="/edit/profile"
+            routerLink="/menu/profile/edit"
             expand="block"
             color="dark"
           >
@@ -244,19 +239,6 @@ import {
           </IonButton>
   </div>
         </IonContent>
-  
-  
-        {/* <IonFooter className="btn-bottom-container">
-          <IonButton fill="clear" color="dark">
-            <IonIcon slot="start" icon={helpCircleOutline} /> Help & Support
-          </IonButton>
-          <IonButton fill="clear" color="dark">
-            <IonIcon slot="start" icon={logOutOutline} /> Log Out
-          </IonButton>
-          <IonButton fill="clear" color="danger">
-            <IonIcon slot="start" icon={trashBinOutline} /> Delete Account
-          </IonButton>
-        </IonFooter> */}
       </IonPage>
     );
   };

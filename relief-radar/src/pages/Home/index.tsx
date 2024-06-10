@@ -14,6 +14,7 @@ import {
 	IonSegmentButton,
 	IonSelectOption,
 	IonSelect,
+	useIonRouter,
 } from "@ionic/react";
 
 import menuIcon from "../../assets/icons/menu.svg";
@@ -250,6 +251,7 @@ const HomePage: React.FC<ContainerProps> = (locale) => {
 		setGreetingText(greeting[Math.floor(Math.random() * 4)]);
 	}, []);
 
+	const router = useIonRouter()
 	return (
 		<IonPage>
 			<IonHeader class="ion-no-border">
@@ -261,7 +263,7 @@ const HomePage: React.FC<ContainerProps> = (locale) => {
 					</IonButtons>
 					<IonTitle>Dashboard</IonTitle>
 					<IonButtons slot="end" className="notification">
-						<IonButton>
+						<IonButton onClick={()=>{router.push('/alerts')}}>
 							<IonIcon src={notificationIcon}></IonIcon>
 							<IonBadge class="dot-badge">.</IonBadge>
 						</IonButton>

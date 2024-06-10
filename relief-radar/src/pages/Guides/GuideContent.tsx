@@ -1,6 +1,6 @@
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonSegment, IonSegmentButton, IonLabel, IonTitle, IonToolbar, IonText } from '@ionic/react';
 import React from 'react';
-import fireGuide from '../assets/fire-guide.png'
+import fireGuide from '../../assets/images/fire-guide.png'
 
 const GuideContent: React.FC = () => {
 

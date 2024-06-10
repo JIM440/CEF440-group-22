@@ -139,3 +139,87 @@ ion-segment-button.ios::part(native) {
   /* border: 1px solid #383838; */
   width: fit-content;
 }
+
+.alerts-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  padding-block: 4px;
+  width: fit-content;
+}
+
+.btn-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: transparent;
+}
+
+.alerts-btn-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-link span {
+  color: #1e7fdb;
+  font-size: 16px;
+}
+
+.btn-right-aligned {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm-disaster {
+  padding-bottom: 1rem;
+  padding-inline: 1rem;
+}
+
+.pending {
+  background-color: #1e7fdb;
+}
+
+.btn-right-aligned button {
+  padding: 10px 2rem;
+  font-size: 1rem;
+  background-color: #1e7fdb;
+  color: #fff;
+  border-radius: 4px;
+  border: 1px solid #1e7fdb;
+}
+
+button.cancel {
+  color: #333;
+  background-color: transparent;
+  border: 1px solid #333333;
+}
+
+.header-pending-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+}
+
+.header-pending-content h4 {
+  font-size: 24px;
+  font-weight: 700px;
+}
+/* 
+.intro-image-report,
+.intro-image-report img {
+  border-radius: 8px;
+} */
+
+.check-box-container {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.check-box-container {
+  width: fit-content;
+}

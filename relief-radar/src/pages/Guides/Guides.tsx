@@ -1,6 +1,5 @@
 import {
     IonBackButton,
-    IonButton,
     IonButtons,
     IonContent,
     IonHeader,
@@ -11,12 +10,12 @@ import {
     useIonRouter,
   } from '@ionic/react';
   import React from 'react';
-  import fire from '../assets/fire.png';
-  import eruption from '../assets/volcano.png';
-  import landslide from '../assets/landslide.webp';
-  import tornado from '../assets/tornado.webp';
-  import earthquake from '../assets/earthquake.png';
-  import flood from '../assets/flood.png';
+  import fire from '../../assets/images/fire.png';
+  import eruption from '../../assets/images/volcano.png';
+  import landslide from '../../assets/images/landslide.webp';
+  import tornado from '../../assets/images/tornado.webp';
+  import earthquake from '../../assets/images/earthquake.png';
+  import flood from '../../assets/images/flood.png';
   import './Guides.css'
 import { chevronForward } from 'ionicons/icons';
   
@@ -76,18 +75,7 @@ import { chevronForward } from 'ionicons/icons';
         <IonContent className="ion-padding">
           <div className="guide-list-containers">
             {Guides.map((guide, index) => (
-              <div key={index}>
-                {/* <button
-                key={index}
-                className="guide-box"
-                onClick={() => {
-                  router.push('/guides/content');
-                }}
-              >
-                <img src={guide.image} alt="" />
-                <h3>{guide.name}</h3>
-              </button> */}
-              
+              <div key={index}>              
               <div className="guide-list-containers">
                 <div className="guide-list-card">
                   <img src={guide.image} alt="" />
@@ -96,7 +84,7 @@ import { chevronForward } from 'ionicons/icons';
                     <p>{guide.description}</p>
                    <div className="btn-chevron-container">
                    <button onClick={() => {
-                  router.push('/guides/content');
+                  router.push('/menu/guides/content');
                 }}>Learn More </button><IonIcon color='primary' icon={chevronForward} />
                    </div>
                   </div>
