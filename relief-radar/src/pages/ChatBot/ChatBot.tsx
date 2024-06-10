@@ -26,12 +26,20 @@ import hurricane from "../../assets/icons/hurricane.svg";
 import AiMessageCard from "../../components/AiMessageCard/AiMessageCard";
 
 function ChatBot() {
-  const [showMessageCard, setShowMessageCard] = useState(false);
+  const [showMessageCard, setShowMessageCard] = useState(true);
   const history = useHistory();
 
   const goBack = () => {
     history.goBack();
+    setShowMessageCard(!showMessageCard);
   };
+
+  const showCard = () => {
+    setShowMessageCard(!showMessageCard);
+  };
+
+
+
 
   return (
     <IonPage>
@@ -57,25 +65,25 @@ function ChatBot() {
           <div className="sample-questions-container">
             <IonGrid>
               <IonRow className="questions-row">
-                <IonCol className="question-col">
+                <IonCol className="question-col" onClick={showCard}>
                   <div className="question1">
                     <IonIcon src={earthquake} className="icon" />
                     How to prepare for an earthquake?
                   </div>
                 </IonCol>
-                <IonCol className="question-col">
+                <IonCol className="question-col"  onClick={showCard}>
                   <div className="question1">
                     <IonIcon src={flood} className="icon" />
                     What to do during a flood?
                   </div>
                 </IonCol>
-                <IonCol className="question-col">
+                <IonCol className="question-col"  onClick={showCard}>
                   <div className="question1">
                     <IonIcon src={hurricane} className="icon" />
                     Safety tips for a hurricane?
                   </div>
                 </IonCol>
-                <IonCol className="question-col">
+                <IonCol className="question-col"  onClick={showCard}>
                   <div className="question1">
                     <IonIcon src={fire} className="icon" />
                     How to stay safe during a wildfire?
