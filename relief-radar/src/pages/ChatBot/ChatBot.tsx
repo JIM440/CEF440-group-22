@@ -63,34 +63,36 @@ function ChatBot() {
             <IonIcon src={brain} className="ai-icon" />
           </div>
           <div className="sample-questions-container">
-            <IonGrid>
-              <IonRow className="questions-row">
-                <IonCol className="question-col" onClick={showCard}>
+        
+              <div className="fl">
+              <div className="questions-row">
+                <div className="question-col" onClick={showCard}>
                   <div className="question1">
                     <IonIcon src={earthquake} className="icon" />
                     How to prepare for an earthquake?
                   </div>
-                </IonCol>
-                <IonCol className="question-col"  onClick={showCard}>
+                </div>
+                <div className="question-col"  onClick={showCard}>
                   <div className="question1">
                     <IonIcon src={flood} className="icon" />
                     What to do during a flood?
                   </div>
-                </IonCol>
-                <IonCol className="question-col"  onClick={showCard}>
+                </div>
+                <div className="question-col"  onClick={showCard}>
                   <div className="question1">
                     <IonIcon src={hurricane} className="icon" />
                     Safety tips for a hurricane?
                   </div>
-                </IonCol>
-                <IonCol className="question-col"  onClick={showCard}>
+                </div>
+                <div className="question-col"  onClick={showCard}>
                   <div className="question1">
                     <IonIcon src={fire} className="icon" />
                     How to stay safe during a wildfire?
                   </div>
-                </IonCol>
-              </IonRow>
-            </IonGrid>
+                </div>
+                </div>
+                </div>
+            
           </div>
         </div>: <AiMessageCard/>}
       </IonContent>

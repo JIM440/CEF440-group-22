@@ -3,8 +3,27 @@
 
 .community-header{
     width: 100%;
-    height: 50px;
+    height: 45px;
     padding: 10px;
     border-top: 1px solid rgba(190,190,190,.5);
     border-bottom: 1px solid rgba(190,190,190,.5);
+    display: flex;
+    gap: 1rem;
+}
+
+.community-header .CHI{
+    height: 35px;
+   
+}
+
+.community-header .CHI.active{
+    border-bottom: 4px solid var(--ion);
+}
+
+.CHI .icon{
+    font-size: 23px;
+}
+
+.CHI .icon.active{
+    color: var(--ion-color-primary);
 }

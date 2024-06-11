@@ -39,6 +39,11 @@
 	--ion-tab-bar-background: #fdfdfd;
 	--ion-color-contrast-trans: #30303028;
 	--ion-item-background: #fbfbfb;
+	--ion-background-color-ch-ss: #c2c0c0;
+	--ion-color-ch-ss: #fff;
+	--ion-text-color-step-800: #fff;
+	--ion: #1f1e1e;
+
 }
 * {
 	font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif !important;

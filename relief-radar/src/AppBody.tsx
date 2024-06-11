@@ -28,6 +28,7 @@ import { useState, useEffect } from "react";
 import { Redirect, Route, useLocation, useHistory } from "react-router-dom";
 import ChatBot from "./pages/ChatBot/ChatBot";
 import WeatherDetailPage from "./pages/WeatherDetailPage/WeatherDetailPage";
+import ChatSession from "./pages/Community/chatsessionpage/ChatSession";
 
 interface ContainerProps {
 	locale: string;
@@ -95,6 +96,9 @@ const AppBody: React.FC<ContainerProps> = ({locale, setLocale}) => {
 					</Route>
 					<Route path="/community/foruminfo" exact={true}>
 						<ForumInfo/>
+					</Route>
+					<Route path="/community/chatsessionpage" exact={true}>
+						<ChatSession/>
 					</Route>
 					<Route path="/chatbot" exact={true}>
 						<ChatBot/>
