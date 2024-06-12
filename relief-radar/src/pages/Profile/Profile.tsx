@@ -7,6 +7,7 @@ import {
   IonHeader,
   IonIcon,
   IonInput,
+  IonLabel,
   IonPage,
   IonText,
   IonTitle,
@@ -219,11 +220,11 @@ const Profile: React.FC<ContainerProps> = () => {
 
         <IonButton
           mode="ios"
-          className="ion-margin-top"
           expand="block"
           color="primary"
+          className='ion-margin-top primary-button'
         >
-          Volunteer
+          <IonLabel>Volunteer</IonLabel>
           <IonIcon icon={handLeft} slot="end" />
         </IonButton>
         

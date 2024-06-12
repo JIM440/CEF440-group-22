@@ -18,9 +18,8 @@ const Alerts: React.FC = () => {
   return (
     <IonPage>
       <IonHeader class="ion-no-border">
-        <BackBtn title='Alerts' />
-
-        <IonToolbar color="clear">
+        <BackBtn title="Alerts" />
+        <IonToolbar color="clear" style={{ paddingLeft: '10px' }}>
           <IonSegment mode="ios" color="light" scrollable={true} value="all">
             <IonSegmentButton value="all">
               <IonLabel>All</IonLabel>
@@ -43,14 +42,12 @@ const Alerts: React.FC = () => {
             <IonSegmentButton value="eruption">
               <IonLabel>Eruption</IonLabel>
             </IonSegmentButton>
-
           </IonSegment>
         </IonToolbar>
       </IonHeader>
 
       <IonContent className="ion-padding">
-        
-        <div className="alerts-container">
+        <div className="alerts-container" style={{ marginTop: '-10px' }}>
           <div className="alert-box">
             <div className="status-time">
               <span className="status ongoing">Ongoing</span>

@@ -8,7 +8,7 @@ interface BackBtnProps {
 
 const BackBtn: React.FC<BackBtnProps> = ({ title, onClick }) => {
   return (
-    <IonHeader>
+    <IonHeader class='ion-no-border'>
       <IonToolbar>
         <IonButtons slot="start">
           {onClick ? (
