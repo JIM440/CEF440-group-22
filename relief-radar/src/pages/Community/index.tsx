@@ -20,8 +20,11 @@ import HeaderAvatar from "../../components/Avatar";
 import { FormattedMessage } from "react-intl";
 import ForumSessionCard from "../../components/ForumSessionCard/ForumSessionCard";
 
+import home from '../../assets/icons/home.svg'
 import genericForum from '../../assets/icons/genericForum.svg'
+import chatsession from '../../assets/icons/chatsession.svg'
 import './Community.css'
+import { useHistory } from "react-router";
 
 const disasterForums = [
   {
@@ -50,41 +53,59 @@ const disasterForums = [
   },
 ];
 
-const CommunityPage = () => (
-	<IonPage>
-		<IonHeader class="ion-no-border">
-			<IonToolbar>
-				<IonButtons slot="start">
-					<IonMenuButton>
-						<IonIcon src={menuIcon}></IonIcon>
-					</IonMenuButton>
-				</IonButtons>
-				<IonTitle>
-					<FormattedMessage id="Community" />
-				</IonTitle>
-				<HeaderAvatar />
-				<IonButtons slot="end" className="notification">
-					<IonButton>
-						<IonIcon src={notificationIcon}></IonIcon>
-						<IonBadge class="dot-badge">.</IonBadge>
-					</IonButton>
-				</IonButtons>
-			</IonToolbar>
-		</IonHeader>
-		<IonContent>
-			<div className="community-header">
-				icons
-			</div>
+
+
+function CommunityPage() {
+const navigateTo = useHistory();
+
+function gotoChatSessionPage() {
+	navigateTo.push('/community/chatsessionpage');
+}
+
+	return (
+		<IonPage>
+			<IonHeader class="ion-no-border">
+				<IonToolbar>
+					<IonButtons slot="start">
+						<IonMenuButton>
+							<IonIcon src={menuIcon}></IonIcon>
+						</IonMenuButton>
+					</IonButtons>
+					<IonTitle>
+						<FormattedMessage id="Community" />
+					</IonTitle>
+					<HeaderAvatar />
+					<IonButtons slot="end" className="notification">
+						<IonButton>
+							<IonIcon src={notificationIcon}></IonIcon>
+							<IonBadge class="dot-badge">.</IonBadge>
+						</IonButton>
+					</IonButtons>
+				</IonToolbar>
+			</IonHeader>
+			<IonContent>
+				<div className="community-header">
+				
+					<div className="CHI active"><IonIcon src={home} className="icon active" /></div>
+					<div className="CHI"><IonIcon src={genericForum} className="icon" /></div>
+					<div className="CHI"><IonIcon src={chatsession} className="icon" onClick={gotoChatSessionPage} /></div>
+				
+				</div>
  
-			{
-				disasterForums.map((forum,i) => (
-					<ForumSessionCard key={i} group_name={forum.group_name} date={forum.date} last_text={forum.last_text} icon={ forum.icon} />
-				))
-			}
+				{
+					disasterForums.map((forum, i) => (
+						<ForumSessionCard key={i} group_name={forum.group_name} date={forum.date} last_text={forum.last_text} icon={forum.icon} />
+					))
+				}
+
+				<div className="add-button">
+					<IonIcon/>
+				</div>
 			
-			<ChatBotButton />
-		</IonContent>
-	</IonPage>
-);
+				<ChatBotButton />
+			</IonContent>
+		</IonPage>
+	)
+};
 
 export default CommunityPage;

@@ -134,10 +134,7 @@ ion-segment-button.ios::part(native) {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* padding: 3px; */
   border-radius: 100%;
-  /* border: 1px solid #383838; */
-  width: fit-content;
 }
 
 .alerts-icon-container {

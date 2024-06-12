@@ -22,6 +22,8 @@ import HeaderAvatar from "../../components/Avatar";
 
 import { FormattedMessage } from "react-intl";
 
+import map from '../../assets/images/map.jpg'
+
 const MapPage = () => (
 	<IonPage>
 		<IonHeader class="ion-no-border">
@@ -42,25 +44,7 @@ const MapPage = () => (
 			</IonToolbar>
 		</IonHeader>
 		<IonContent>
-			<div
-				style={{
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "center",
-					height: "100%",
-				}}>
-				<div id="container">
-					<strong>GeoSpatial Data and Mapping</strong>
-					<p>
-						Explore{" "}
-						<a
-							target="_blank"
-							rel="noopener noreferrer"
-							href="https://ionicframework.com/docs/components">
-							UI Components
-						</a>
-					</p>
-				</div>
+			<div><img style={{objectFit: 'cover', position: 'relative', bottom: '150px'}} width='1000px' height='1000px' src={map} alt="" />
 			</div>
 			<ChatBotButton />
 		</IonContent>

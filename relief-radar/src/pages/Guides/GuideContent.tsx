@@ -1,18 +1,14 @@
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonSegment, IonSegmentButton, IonLabel, IonTitle, IonToolbar, IonText } from '@ionic/react';
 import React from 'react';
 import fireGuide from '../../assets/images/fire-guide.png'
+import BackBtn from '../ResponderPanel/HeaderBack';
 
 const GuideContent: React.FC = () => {
 
     return (
         <IonPage>
             <IonHeader class='ion-no-border'>
-                <IonToolbar color='clear'>
-                    <IonButtons>
-                        <IonBackButton></IonBackButton>
-                    </IonButtons>
-                    <IonTitle>Fire Safety Manual</IonTitle>
-                </IonToolbar>
+                <BackBtn title='Fire Safety Manual' />
 
                 <IonToolbar color='clear'>
                 <IonSegment mode='md' color='light' value='before'>

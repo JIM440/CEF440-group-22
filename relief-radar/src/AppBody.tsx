@@ -20,13 +20,10 @@ import CommunityChatPage from './pages/Community/CommunityChatPage/CommunityChat
 import ForumInfo from './pages/Community/ForumInfo/ForumInfo';
 import HomePage from './pages/Home/index';
 import ReportPage from './pages/Emergency/index';
+import AuthenticationPage from './pages/Auth';
 import SettingPage from './pages/SideMenuPages/settings/settings';
 import { FormattedMessage } from 'react-intl';
 
-import { useState, useEffect } from 'react';
-import { Redirect, Route, useLocation, useHistory } from 'react-router-dom';
-import ChatBot from './pages/ChatBot/ChatBot';
-import WeatherDetailPage from './pages/WeatherDetailPage/WeatherDetailPage';
 import GuideList from './pages/Guides/Guides';
 import GuideContent from './pages/Guides/GuideContent';
 import Profile from './pages/Profile/Profile';
@@ -36,6 +33,16 @@ import ValidateDisaster from './pages/ResponderPanel/ValidateAlert';
 import UpdateDisasterStatus from './pages/ResponderPanel/UpdateAlertStatus';
 import Alerts from './pages/Alerts/Alerts';
 import ReportUpdate from './pages/ResponderPanel/ReportUpdate';
+import Anouncements from './pages/ResponderPanel/Anouncements';
+import TheShit from './pages/Anouncement/AnounceTheShir';
+
+import { useState, useEffect } from 'react';
+import { Redirect, Route, useLocation, useHistory } from 'react-router-dom';
+import ChatBot from './pages/ChatBot/ChatBot';
+import WeatherDetailPage from './pages/WeatherDetailPage/WeatherDetailPage';
+import ChatSession from './pages/Community/chatsessionpage/ChatSession';
+import EmergencyCall from './pages/Emergency/EmergencyCall';
+import ReportDisasterPage from './pages/Emergency/ReportDisaster';
 
 interface ContainerProps {
   locale: string;
@@ -84,6 +91,12 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
       <IonTabs>
         <IonRouterOutlet id="main">
           <Route path="/" exact={true}>
+            <Redirect to="/index/language" />
+          </Route>
+          <Route path="/index/language" exact={true}>
+            <AuthenticationPage setLocale={setLocale} locale={locale} />
+          </Route>
+          <Route path="/" exact={true}>
             <Redirect to="/tabs/home" />
           </Route>
           <Route path="/tabs/home" exact={true}>
@@ -103,6 +116,9 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
           </Route>
           <Route path="/community/foruminfo" exact={true}>
             <ForumInfo />
+          </Route>
+          <Route path="/community/chatsessionpage" exact={true}>
+            <ChatSession />
           </Route>
           <Route path="/chatbot" exact={true}>
             <ChatBot />
@@ -127,15 +143,37 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
             <GuideContent />
           </Route>
           {/* profile */}
-          <Route path="/menu/profile/" component={Profile} exact={true}/>
-          <Route path="/menu/profile/edit" component={EditProfile} exact={true}/>
+          <Route path="/menu/profile/" component={Profile} exact={true} />
+          <Route
+            path="/menu/profile/edit"
+            component={EditProfile}
+            exact={true}
+          />
           <Route path="/alerts" component={Alerts} exact={true} />
+          <Route path="/user/anouncements" component={TheShit} exact={true} />
+          <Route path="/anouncements/y" component={TheShit} exact={true} />
           {/*  responderpages*/}
           {/*  responderpages*/}
-          <Route path='/alerts/updates' component={ReportUpdate} exact={true} />
-		  <Route path='/responder/alerts' component={ResPonderAlerts} exact={true}/>
-      <Route path='/responder/alerts/pending' component={ValidateDisaster} exact={true}/>
-      <Route path='/responder/alerts/reported' component={UpdateDisasterStatus} exact={true}/>
+          <Route path="/alerts/updates" component={ReportUpdate} exact={true} />
+          <Route path="/anouncements" component={Anouncements} exact={true} />
+          <Route path="/anouncements/x" component={Anouncements} exact={true} />
+          <Route
+            path="/responder/alerts"
+            component={ResPonderAlerts}
+            exact={true}
+          />
+          <Route
+            path="/responder/alerts/pending"
+            component={ValidateDisaster}
+            exact={true}
+          />
+          <Route
+            path="/responder/alerts/reported"
+            component={UpdateDisasterStatus}
+            exact={true} />
+
+			<Route path='/emergency/call' component={EmergencyCall} exact={true}       />
+			<Route path='/emergency/report' component={ReportDisasterPage} exact={true} />
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom" className={hideTabBar ? 'hide-tab-bar' : ''}>

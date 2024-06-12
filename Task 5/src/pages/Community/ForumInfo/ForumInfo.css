@@ -1,0 +1,104 @@
+.group-number {
+    width: 100%;
+    height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 18.5px;
+    gap: 5px;
+}
+
+
+.group-number .icon {
+    font-size: 58px;
+    color: var(--ion-color-primary);
+}
+
+.creation-info {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.creation-info .item {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid rgb(214, 214, 216);
+    font-size: 18px;
+    gap: 5px;
+}
+
+.group-members {
+    padding: 10px;
+    font-size: 17.8px;
+}
+
+.item p {
+    font-size: 16px;
+}
+
+.member-list {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+
+
+.pop-up{
+    color: white;
+}
+
+
+
+
+
+
+/* person card */
+.person-card-container {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 9px;
+}
+
+.person-card-container .person-name-initials {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    color: #fff;
+    background-color: var(--ion-color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.person-fullname-location{
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+    gap: 3px;
+}
+.person-fullname-location .fullname{
+    font-size: 18px;
+    color: var(--ion-color-contrast);
+    font-weight: 600;
+}
+
+.person-fullname-location .location{
+    font-size: 16.5px;
+     color: rgba(190, 190, 190, 1);
+}
+
+.ET{
+    padding: 10px;
+}

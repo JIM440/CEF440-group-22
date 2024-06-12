@@ -18,6 +18,7 @@ import {
   import flood from '../../assets/images/flood.png';
   import './Guides.css'
 import { chevronForward } from 'ionicons/icons';
+import BackBtn from '../ResponderPanel/HeaderBack';
   
   const GuideList: React.FC = () => {
     const router = useIonRouter();
@@ -64,12 +65,7 @@ import { chevronForward } from 'ionicons/icons';
     return (
       <IonPage>
         <IonHeader class="ion-no-border">
-          <IonToolbar color="clear">
-            <IonButtons>
-              <IonBackButton></IonBackButton>
-            </IonButtons>
-            <IonTitle>Guides</IonTitle>
-          </IonToolbar>
+          <BackBtn title='Guides' />
         </IonHeader>
   
         <IonContent className="ion-padding">
