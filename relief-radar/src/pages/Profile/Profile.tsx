@@ -1,7 +1,5 @@
 import {
-  IonBackButton,
   IonButton,
-  IonButtons,
   IonCheckbox,
   IonContent,
   IonHeader,
@@ -9,9 +7,7 @@ import {
   IonInput,
   IonLabel,
   IonPage,
-  IonText,
-  IonTitle,
-  IonToolbar,
+  IonText
 } from '@ionic/react';
 import {
   handLeft,
@@ -24,6 +20,7 @@ import React, { useState } from 'react';
 import { History } from 'history';
 import avatar from '../../assets/images/avatar.jpeg';
 import './Profile.css';
+import { chevronDown } from 'ionicons/icons';
 import BackBtn from '../ResponderPanel/HeaderBack';
 
 interface ContainerProps {
@@ -84,21 +81,7 @@ const Profile: React.FC<ContainerProps> = () => {
           </div>
           <div className="location-text">
             <span>Preferred Locations</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="none"
-                stroke="#333333"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="m6 9l6 6l6-6"
-              />
-            </svg>
+            <IonIcon icon={chevronDown} />
           </div>
         </div>
 

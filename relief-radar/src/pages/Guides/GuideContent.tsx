@@ -14,6 +14,7 @@ import {
 import React, { useState } from 'react';
 import fireGuide from '../../assets/images/fire-guide.png';
 import BackBtn from '../ResponderPanel/HeaderBack';
+import type1 from '../../assets/images/flood-occurred2.jpg'
 
 const GuideContent: React.FC = () => {
   const [segment, setSegment] = useState('before');
@@ -25,7 +26,7 @@ const GuideContent: React.FC = () => {
           <IonSegment
             mode="md"
             color="light"
-            value="before"
+            value={segment}
             onIonChange={(event: CustomEvent) => {
               setSegment(event.detail.value);
             }}
@@ -43,7 +44,7 @@ const GuideContent: React.FC = () => {
         </IonToolbar>
       </IonHeader>
 
-      <IonContent className="ion-padding">
+      <IonContent class='ion-padding'>
         <div className={segment === 'before' ? '' : 'display-none'}>
           <div className="intro-container">
             <img src={fireGuide} alt="" />
@@ -92,7 +93,17 @@ const GuideContent: React.FC = () => {
           </IonText>
         </div>
 
-        <div className={segment === 'during' ? '' : 'display-none'}>During</div>
+        <div className={segment === 'during' ? '' : 'display-none'}>
+          <img src={type1} alt="" width='100%' height='300px' style={{objectFit: 'cover', borderRadius: '8px'}} />
+          <p>1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus nemo facilis repellat!</p>
+          <p>2. Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus nemo facilis repellat!</p>
+          <p>3. Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus nemo facilis repellat!</p>
+          <p>4. Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus nemo facilis repellat!</p>
+          <p>1. Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus nemo facilis repellat!</p>
+          <p>2. Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus nemo facilis repellat!</p>
+          <p>3. Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus nemo facilis repellat!</p>
+          <p>4. Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus nemo facilis repellat!</p>
+        </div>
 
         <div className={segment === 'after' ? '' : 'display-none'}>
           After shit
