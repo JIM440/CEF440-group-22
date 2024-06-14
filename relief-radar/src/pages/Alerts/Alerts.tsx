@@ -130,7 +130,7 @@ const Alerts: React.FC = () => {
         <IonToolbar color="clear" style={{ paddingLeft: '10px' }}>
           <IonSegment
             color="light"
-            mode='ios'
+            mode="ios"
             scrollable={true}
             value={disasterName}
             onIonChange={(event: CustomEvent) => {
@@ -168,9 +168,7 @@ const Alerts: React.FC = () => {
             return (
               (disasterName === 'all' ||
                 Alert.disasterType.toLowerCase() ===
-                  disasterName.toLowerCase()) && (
-                <AlertCard Alert={Alert} />
-              )
+                  disasterName.toLowerCase()) && <AlertCard Alert={Alert} />
             );
           })}
         </div>
