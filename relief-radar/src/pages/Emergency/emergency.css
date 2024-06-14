@@ -1,0 +1,185 @@
+ul.progress-tracker {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0px;
+}
+
+.progress-tracker-container {
+  width: 100%;
+  margin-top: 80px;
+  counter-reset: step;
+}
+
+.progress-tracker li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 14px;
+}
+
+.progress-tracker li::before {
+  content: counter(step);
+  counter-increment: step;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 3px solid var(--ion-color-primary);
+  color: var(--ion-color-primary);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  z-index: 2;
+  background-color: var(--ion-background-color);
+}
+
+.location-form-container ion-button {
+  color: var(--white-color);
+}
+
+.progress-tracker::after {
+  content: '';
+  width: calc(66.67% + 40px);
+  height: 5px;
+  background: linear-gradient(
+    to left,
+    var(--divider-background),
+    var(--divider-background)
+  );
+  position: absolute;
+  z-index: 1;
+  border-radius: 8px;
+  left: 50%;
+  top: 126px;
+  transform: translateX(-50%);
+}
+
+.progress-tracker.fill-50:after {
+  background: linear-gradient(
+    to right,
+    var(--ion-color-primary) 50%,
+    var(--divider-background) 50%,
+    var(--divider-background)
+  );
+}
+
+.progress-tracker.fill-100:after {
+  background: linear-gradient(
+    to right,
+    var(--ion-color-primary),
+    var(--ion-color-primary)
+  );
+}
+
+li.active-tracker::before {
+  background: var(--ion-color-primary);
+  color: var(--white-color);
+  font-size: 20px;
+}
+
+li.active-tracker {
+  color: var(--ion-color-primary);
+}
+
+.location-form-container,
+.disaster-form-container,
+.evidence-form-container {
+  padding: 10px 26px;
+  margin-top: 50px;
+  min-width: 100vw;
+  min-height: 500px;
+}
+
+.location-form-container .location-manual {
+  margin-top: 10px;
+}
+
+.gps-location-button {
+  margin-top: 15px;
+  --background: transparent;
+  color: var(--ion-color-primary) !important;
+}
+
+.proceed-button-onboard {
+  margin-top: 50px;
+  width: 100%;
+}
+
+.main-swiper-container-report-wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  transform: translateX(0vw);
+  transition: 0.4s;
+}
+
+.move-to-second {
+  transform: translateX(-100vw);
+  transition: 0.4s;
+}
+
+.move-to-third {
+  transform: translateX(-200vw);
+  transition: 0.4s;
+}
+
+.main-swiper-container-report {
+  overflow-x: hidden;
+}
+
+.report-main-container ion-select {
+  min-height: 56px;
+  --border-width: 1.5px;
+  --border-radius: 14px;
+}
+
+.textarea-fill-outline.sc-ion-textarea-md-h {
+  --border-radius: 14px;
+  --border-width: 1.5px;
+}
+
+.disaster-form-container .button-container,
+.evidence-form-container .button-container {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button-container ion-button.previous-button {
+  border: 1.5px solid var(--ion-color-contrast-trans);
+  border-radius: 14px;
+  --background: var(--ion-item-background);
+}
+
+.button-container ion-button.previous-button ion-label {
+  color: var(--ion-color-contrast);
+}
+
+.button-container .previous-button ion-icon {
+  margin-left: 0;
+  margin-right: 10px;
+  color: var(--ion-color-contrast);
+}
+
+.evidence-form-container img {
+  border-radius: 14px;
+  border: 1.5px solid var(--ion-color-contrast-trans);
+}
+
+.evidence-form-container .warning-text {
+  border: 2px solid var(--ion-color-primary);
+  color: var(--ion-color-primary);
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background-color: var(--divider-background);
+}
