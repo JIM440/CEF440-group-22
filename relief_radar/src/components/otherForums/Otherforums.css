@@ -1,0 +1,70 @@
+.group-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
+  margin: 14px;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.group-initials {
+  background-color: var(--ion-color-primary);
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.group-date {
+  color: #666;
+  font-size: 14px;
+}
+
+.group-name {
+  font-size: 19px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.group-description {
+  color: #666;
+  font-size: 14.7px;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+  line-height: 1.5em;
+  max-height: 3em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.group-more {
+  display: flex;
+  align-items: center;
+  color: var(--ion-color-primary);
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  /* justify-content: end; */
+}
+
+.group-more span {
+  margin-right: 8px;
+}
+
+.group-more ion-icon {
+  font-size: 20px;
+}

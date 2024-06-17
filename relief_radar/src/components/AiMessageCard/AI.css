@@ -4,7 +4,7 @@
     padding: 20px 10px 5px 10px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 15px;
 
 
 }
@@ -14,24 +14,40 @@
     display: inline;
     font-size: 17.3px;
     border-radius: 5px;
+    line-height: 1.3rem;
     background-color: var(--ion-item-background);
     align-self: flex-end;
 }
 
-.Ai {
+.Ai{
+    width: 100%;
     display: flex;
-    align-items: start;
-    gap: 8px;
+    gap: 5px;
 }
 
-.Ai .icon {
-    font-size: 24px;
-    padding-top:12px ;
+ .Ai .icon {
+    width:35px;
+    height: 35px;
+    border-radius: 50%;
+    background: var(--ion-color-primary);
+    color: #fdfdfd;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.Ai .icon ion-icon{
+    font-size: 20px;
+}
+
 
 .Ai p {
-    padding: 10px;
+    margin: 0px;
+    max-width: 350px;
     font-size: 17.3px;
+    padding: 10px 15px;
     border-radius: 5px;
-    background-color:  #6db7fd43;
-}
+    line-height: 1.4rem;
+    background-color: rgba(var(--ion-color-primary-rgb), 0.14);
+} 

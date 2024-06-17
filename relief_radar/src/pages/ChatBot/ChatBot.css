@@ -202,7 +202,7 @@ ion-footer {
   background: var(--ion-item-background);
   min-height: 50px;
   overflow: hidden;
-  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
   border-radius: 25px;
   padding: 5px 20px;
   gap: 8px;

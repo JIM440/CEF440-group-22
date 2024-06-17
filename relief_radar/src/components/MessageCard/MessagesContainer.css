@@ -15,7 +15,9 @@
   border: none;
   padding: 5px 10px;
 }
-
+.true .message-container-ionitem{
+  margin-top: -35px;
+}
 .message-container-ionitem {
   display: flex;
   gap: 10px;
@@ -37,6 +39,17 @@
   justify-content: center;
   align-items: center;
   margin-top: -0.02px;
+}
+.previoustrue p {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  color: #fff;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -5px;
 }
 
 .actual-content {
@@ -65,4 +78,9 @@
 .actual-content-message {
   font-size: 16px;
   color:  var(--ion-color-contrast);
+  line-height: 1.3rem;
+}
+
+.hidden{
+  display: none;
 }
