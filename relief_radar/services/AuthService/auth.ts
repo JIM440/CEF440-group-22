@@ -9,7 +9,7 @@ const signInEmailandPassword = async (email: string, password: string) => {
   }
 };
 
-const signInWithGoogle = async (email: string, password: string) => {
+const signInWithGoogle = async () => {
   try {
     await signInWithPopup(auth, googleProvider);
   } catch (error) {
@@ -18,4 +18,4 @@ const signInWithGoogle = async (email: string, password: string) => {
 };
 
 
-export { signInEmailandPassword, signInWithPopup };
+export { signInEmailandPassword, signInWithGoogle };

@@ -30,6 +30,9 @@ import "./Community.css";
 import { useHistory } from "react-router";
 import Anouncements from "../ResponderPanel/Nont";
 import OtherForums from "../../components/otherForums/OtherForums";
+import { createForum } from '../../../services/controllers/forum'
+
+import { serverTimestamp } from "firebase/firestore";
 
 const disasterForums = [
   {
@@ -136,6 +139,26 @@ const disasterManagementGroups = [
   },
 ];
 
+interface ForumInfo {
+  name: string;
+  description: string;
+  author: string;
+  timestamp: Date;
+  members: {
+    id: string;
+    membername: string;
+    role: boolean;
+  }[];
+  messages: {
+    id: string;
+    content: string;
+    timestamp: Date;
+    author: string;
+    repliedto: string;
+  }[];
+}
+
+
 function CommunityPage() {
   const navigateTo = useHistory();
   const [selectedSegment, setSelectedSegment] = useState<string>("first");
@@ -149,6 +172,41 @@ function CommunityPage() {
     navigateTo.push("/community/chatsessionpage");
   }
 
+  const chatRoom:ForumInfo = {
+  name: "Sample Chat Room",
+  description: "This is a sample chat room",
+  author: "john_doe",
+  timestamp: new Date(),
+  members: [
+    { id: "user1", membername: "John Doe", role: true },
+    { id: "user2", membername: "Jane Smith", role: false }
+  ],
+  messages: [
+    {
+      id: "msg1",
+      content: "Hello, world!",
+      timestamp: new Date(),
+      author: "john_doe",
+      repliedto: ""
+    },
+    {
+      id: "msg2",
+      content: "Hi, John!",
+      timestamp: new Date(),
+      author: "jane_smith",
+      repliedto: "msg1"
+    }
+  ]
+};
+
+   const handleCreateForum = async () => {
+    try {
+      await createForum('forum', chatRoom);
+      console.log('Forum created successfully');
+    } catch (error) {
+      console.error('Error creating forum:', error);
+    }
+  };
   return (
     <IonPage>
       <IonHeader class="ion-no-border">
@@ -246,7 +304,12 @@ function CommunityPage() {
               </div>
           </>
         )}
-        {selectedSegment === "third" && <p>Content for the third segment.</p>}
+        {selectedSegment === "third" && <p>
+          <button onClick={handleCreateForum}>
+            add forum
+        </button>
+          
+        </p>}
         {selectedSegment === "four" && <p>content for the fourth segment</p>}
 
         <div className="add-button">
