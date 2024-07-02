@@ -30,7 +30,6 @@ import "./Community.css";
 import { useHistory } from "react-router";
 import Anouncements from "../ResponderPanel/Nont";
 import OtherForums from "../../components/otherForums/OtherForums";
-import { createForum } from '../../../services/controllers/forum'
 
 import { serverTimestamp } from "firebase/firestore";
 
@@ -158,7 +157,30 @@ interface ForumInfo {
   }[];
 }
 
+interface DisasterContentSection {
+  image: string;
+  introductory_text: string;
+  content: string;
+}
 
+interface DisasterGuide {
+  id: string;
+  disaster: string;
+  content: {
+    before: DisasterContentSection;
+    during: DisasterContentSection;
+    after: DisasterContentSection;
+  };
+}
+
+import { handleCreateAnnouncement } from '../../../services/controllers/announcement'
+import { handleCreateUser,getAllUserVolunteers,getUsersInLosAngeles, updateUserLocation,deleteUser } from '../../../services/controllers/users'
+import { handleCreateResponder } from '../../../services/controllers/responders'
+import { handleCreateHelpRequest } from '../../../services/controllers/help_request.'
+import { createForum,getAllForums } from '../../../services/controllers/forum'
+import { handleCreateGuide} from '../../../services/controllers/Guides'
+
+import { handleCreateIncident } from '../../../services/controllers/incidents'
 function CommunityPage() {
   const navigateTo = useHistory();
   const [selectedSegment, setSelectedSegment] = useState<string>("first");
@@ -197,14 +219,45 @@ function CommunityPage() {
       repliedto: "msg1"
     }
   ]
+  };
+  
+  const disasterGuide: DisasterGuide = {
+  id: "unique-identifier-001",
+  disaster: "earthquake",
+  content: {
+    before: {
+      image: "path/to/before-image.jpg",
+      introductory_text: "What to do before an earthquake strikes:",
+      content: "Ensure your home is earthquake-resistant. Secure heavy furniture and have an emergency kit ready."
+    },
+    during: {
+      image: "path/to/during-image.jpg",
+      introductory_text: "What to do during an earthquake:",
+      content: "Drop, Cover, and Hold On. Stay indoors until the shaking stops and it is safe to exit."
+    },
+    after: {
+      image: "path/to/after-image.jpg",
+      introductory_text: "What to do after an earthquake:",
+      content: "Check yourself and others for injuries. Be prepared for aftershocks and follow official updates."
+    }
+  }
 };
 
+
    const handleCreateForum = async () => {
-    try {
-      await createForum('forum', chatRoom);
-      console.log('Forum created successfully');
+     try {
+      // await handleCreateAnnouncement()
+      // await handleCreateHelpRequest()
+      // await handleCreateIncident()
+      // await handleCreateResponder()
+       // await handleCreateUser()
+       //  await handleCreateGuide()
+       
+       const data = await deleteUser()
+       console.log(data);
+    
     } catch (error) {
-      console.error('Error creating forum:', error);
+      console.error('Error creating collections:', error);
     }
   };
   return (
@@ -323,3 +376,5 @@ function CommunityPage() {
 }
 
 export default CommunityPage;
+
+

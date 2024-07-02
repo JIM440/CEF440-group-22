@@ -34,7 +34,7 @@ const MapModal: React.FC<ContainerProps> = ({ data }) => {
   
 
   return (
-    
+    <></>
   );
 };
 

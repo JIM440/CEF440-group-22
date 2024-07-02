@@ -13,6 +13,8 @@ import {
   IonNavLink,
   useIonRouter,
 } from "@ionic/react";
+import React from 'react';
+
 
 import { chevronForward } from "ionicons/icons";
 

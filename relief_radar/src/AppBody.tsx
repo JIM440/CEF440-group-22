@@ -8,6 +8,8 @@ import {
   IonLabel,
   IonBadge,
 } from "@ionic/react";
+import React from 'react';
+
 
 import { home, map } from "ionicons/icons";
 import reportIcon from "./assets/icons/emergency.svg";

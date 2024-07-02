@@ -1,19 +1,38 @@
+import { Timestamp } from "mongodb";
 import { db } from "../../config/firebase";
 import { addDoc, collection, getDocs, deleteDoc, updateDoc ,DocumentData, DocumentReference, serverTimestamp} from "firebase/firestore";
 
 
-interface ForumInfo {
-    name: string;
-    description: string;
-    author: string;
-    timestamp: typeof serverTimestamp;
-    members: { id: string, membername: string, role: boolean }[];
-    messages: {id:string, content: string , timestamp: Date, author: string, repliedto: string }[]
+interface HelpRequest {
+  id: string;
+  location: string;
+  content: string;
+  mediaEvidence?: string[]; 
+  disasterType: string;
+  time: Date; 
+  userId: string;
 }
 
-export const createForum = async (collectionName: string, forumInfo: ForumInfo): Promise<DocumentReference>  => {
+const helpRequest: HelpRequest = {
+  id: "help-request-123",
+  location: "123 Main St, Springfield",
+  content: "Need assistance with evacuation due to rising flood waters.",
+  mediaEvidence: ["path/to/image1.jpg", "path/to/image2.jpg"], 
+  disasterType: "flood",
+  time: new Date(), 
+  userId: "user-456"
+};
+
+
+
+
+
+const createHelp_Request = async (collectionName: string, helpInfo:HelpRequest): Promise<DocumentReference>  => {
     try {
-        const result = await addDoc(collection(db, collectionName), forumInfo)
+      const result = await addDoc(collection(db, collectionName), {
+        ...helpInfo,
+        timestamp:serverTimestamp()
+      })
         return result
     } catch (error) {
         console.error(error)
@@ -21,16 +40,15 @@ export const createForum = async (collectionName: string, forumInfo: ForumInfo):
     }
 }
 
-export const getAllForums = async (collectionName: string): Promise<DocumentData[]> => {
-  try {
-    const {docs} = await getDocs(collection(db, collectionName));
-    const data = docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
-    return data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-};
+
+ const handleCreateHelpRequest = async () => {
+    try {
+      await createHelp_Request('help-request',helpRequest );
+      console.log('help created successfully');
+    } catch (error) {
+      console.error('Error creating forum:', error);
+    }
+  };
+
+
+export {createHelp_Request,handleCreateHelpRequest}

@@ -13,7 +13,10 @@ interface ForumInfo {
 
 const createForum = async (collectionName: string, forumInfo: ForumInfo): Promise<DocumentReference>  => {
     try {
-        const result = await addDoc(collection(db, collectionName), forumInfo)
+        const result = await addDoc(collection(db, collectionName), {
+      ...forumInfo,
+      timestamp: serverTimestamp()
+    })
         return result
     } catch (error) {
         console.error(error)
