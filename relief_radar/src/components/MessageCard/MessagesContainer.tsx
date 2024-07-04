@@ -1,15 +1,28 @@
-import React, { useState } from "react";
+import React, { useState,useRef,useEffect } from "react";
 import "./MessagesContainer.css";
 
 type messageContainerProp = {
-  name: string,
-  time: string,
-  message: string,
-  date: string,
+  name: string;
+  time: string;
+  message: string;
+  date: string;
+  previousperson: boolean;
 };
 
-function MessagesContainer({ name, time, message, date }: messageContainerProp) {
+function MessagesContainer({
+  name,
+  time,
+  message,
+  date,
+  previousperson,
+}: messageContainerProp) {
   const [showDate, setShowDate] = useState(false);
+
+  const messageCardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    messageCardRef.current?.scrollIntoView({behavior:"smooth" , block:"end"})
+  },[message])
 
   function setInitialsOfName(name: string): string {
     const wordsOfName = name.split(" ");
@@ -25,25 +38,57 @@ function MessagesContainer({ name, time, message, date }: messageContainerProp) 
   }
 
   return (
-    <div className="message-container">
-      {showDate ? <div className="date"> {date}</div> : null}
-      <div className="message-container-ionlist">
-        <div className="message-container-ionitem">
-          <div className="name-initials">
-            <p>{setInitialsOfName(name)}</p>
-          </div>
-          <div className="actual-content">
-            <div className="actual-content-credential">
-              <div className="sender-name">{name}</div>
-              <div className="time-sent">{time}</div>
-            </div>
-            <div className="actual-content-message">
-              {message}
+    <>
+      {previousperson ? (
+        <div className="message-container true" ref={messageCardRef}>
+          {showDate ? <div className="date"> {date}</div> : null}
+          <div className="message-container-ionlist">
+            <div className="message-container-ionitem">
+              {previousperson ? (
+                <div className="name-initials previoustrue">
+                  <p> </p>
+                </div>
+              ) : (
+                <div className="name-initials ">
+                  <p>{setInitialsOfName(name)}</p>
+                </div>
+              )}
+              <div className="actual-content">
+                <div className="actual-content-credential">
+                  {previousperson ? (
+                    <div className="sender-name"> </div>
+                  ) : (
+                    <div className="sender-name">{name}</div>
+                  )}
+                  <div className="time-sent">{time}</div>
+                </div>
+                <div className="actual-content-message">{message}</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div className="message-container" ref={messageCardRef} >
+          {showDate ? <div className="date"> {date}</div> : null}
+          <div className="message-container-ionlist">
+            <div className="message-container-ionitem">
+              <div className="name-initials ">
+                <p>{setInitialsOfName(name)}</p>
+              </div>
+
+              <div className="actual-content">
+                <div className="actual-content-credential">
+                  <div className="sender-name">{name}</div>
+
+                  <div className="time-sent">{time}</div>
+                </div>
+                <div className="actual-content-message">{message}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

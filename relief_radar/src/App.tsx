@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { IonApp, setupIonicReact } from "@ionic/react";
 
 import { IonReactRouter } from "@ionic/react-router";

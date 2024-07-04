@@ -1,5 +1,6 @@
 import { IonAvatar, useIonRouter } from "@ionic/react";
 import avatarImage from "../assets/images/avatar1.jpg";
+import React from 'react';
 
 
 function HeaderAvatar() {

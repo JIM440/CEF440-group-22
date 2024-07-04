@@ -1,62 +1,80 @@
-import React from "react";
+import React, { useRef,useEffect } from "react";
 import "./AI.css";
 import { IonIcon } from "@ionic/react";
-import brain from "../../assets/icons/Brain.svg";
+import chatbot from "../../assets/icons/chatbot.svg";
 
-const messages = [
-  {
-    sender: "Person",
-    content: "What should I do during an earthquake?",
-  },
-  {
-    sender: "AI",
-    content: "Drop, cover, and hold on. Stay indoors and away from windows.",
-  },
-  {
-    sender: "Person",
-    content: "What if I'm outside when it happens?",
-  },
-  {
-    sender: "AI",
-    content: "Move to an open area away from buildings and trees.",
-  },
-  {
-    sender: "Person",
-    content: "How can I prepare beforehand?",
-  },
-  {
-    sender: "AI",
-    content:
-      "Secure heavy items, have an emergency kit, and create a family plan.",
-  },
-  {
-    sender: "Person",
-    content: "What should be in the emergency kit?",
-  },
-  {
-    sender: "AI",
-    content:
-      "Water, food, flashlight, batteries, first aid supplies, and important documents.",
-  },
-];
+type ChatMessage = {
+  role: "user" | "model";
+  parts: { text: string }[];
+};
 
-function AiMessageCard() {
+type AiMessageCardProps = {
+  skeleton: boolean;
+  chats: ChatMessage[];
+};
+
+const AiMessageCard: React.FC<AiMessageCardProps> = ({ chats, skeleton }) => {
+  const AiCardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    AiCardRef.current?.scrollIntoView({ behavior: "smooth", block:'end'});
+  }, [chats]);
+
+  const renderXterWise = (text: string) => {
+    const xterArray = text.split("");
+    const displayArray = xterArray.filter((xter) => {
+      return xter !== "*";
+    });
+
+    return displayArray;
+  };
+
+  const formatText = (text: string): string => {
+  // Replace double asterisks with <b> tags for bold text
+  text = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+
+    //replacing asterisks with <br/>
+    text = text.split('*').join('<br/>');
+    
+  // Replace double hashes at the beginning with <h2> tags for headings
+  text = text.replace(/^##(.*?)$/gm, '<h2>$1</h2>');
+
+  return text;
+};
+
+
   return (
-    <div className="mesage-card-container">
-      {messages.map((message, index) => {
-        if (message.sender === "Person") {
-          return <span key={index} className="person">{message.content}</span>;
+    <div className="message-card-container" key={Math.random()*10000} ref={AiCardRef}>
+      {chats.map((chat, index) => {
+        if (chat.role === "user") {
+          return (
+            <>
+              <span key={Math.random()*10000} className="person">
+                {chat.parts[0].text}
+              </span>
+              {skeleton && (
+                <div key={Math.random()*10000} className="Ai">
+                  <div className="icon">
+                    <IonIcon src={chatbot} />
+                  </div>
+                  <p className="skeleton"></p>
+                </div>
+              )}
+            </>
+          );
         } else {
           return (
-            <div key={index} className="Ai">
-              <IonIcon src={brain} className="icon" />
-                  <p>{ message.content}</p>
+            <div key={Math.random()*10000} className="Ai">
+              <div className="icon">
+                <IonIcon src={chatbot} />
+              </div>
+              <p dangerouslySetInnerHTML={{ __html: formatText(chat.parts[0].text) }}></p>
             </div>
           );
         }
       })}
     </div>
   );
-}
+};
 
 export default AiMessageCard;

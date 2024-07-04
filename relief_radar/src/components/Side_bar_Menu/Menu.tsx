@@ -11,6 +11,8 @@ import {
   IonChip,
   useIonRouter,
 } from "@ionic/react";
+import React from 'react';
+
 
 import profile from '../../assets/icons/profile.svg'
 import guide from "../../assets/icons/guide.svg";

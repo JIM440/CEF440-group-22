@@ -5,6 +5,7 @@
     width: 100%;
     height: 45px;
     padding: 10px;
+    border-bottom: 1px solid #bebebe80;
     display: flex;
     gap: 1rem;
 }
@@ -20,8 +21,48 @@
 
 .CHI .icon{
     font-size: 23px;
+    
 }
 
 .CHI .icon.active{
     color: var(--ion-color-primary);
 }
+
+.community-segment{
+    padding: 0px 80px 0px 0px;
+    border-bottom: 1px solid rgba(169, 180, 190,.1);
+    margin-bottom: 10px;
+}
+
+.community-segment ion-segment-button{
+    width: 50%;
+}
+
+.community-segment .icon{
+    color: var(--ion-color-contrast);
+}
+
+.groups-container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.info-group{
+    display: flex;
+    flex-direction: column;
+}
+
+.text-nogroups-joined{
+    max-width:250px ;
+    text-align: center;
+    align-self: center;
+    color: #999;
+} 
+
+.recommend{
+    margin: 0;
+    padding: 10px 14px;
+    font-size: 25px;
+}
+
