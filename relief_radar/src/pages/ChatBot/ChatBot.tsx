@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import "./ChatBot.css";
 import {
   IonHeader,
@@ -43,7 +43,7 @@ function ChatBot() {
   const [showMessageCard, setShowMessageCard] = useState(true);
   const [showskeleton, setShowSkeloton] = useState(Boolean);
 
-  const [question, setQuestion] = useState("");
+  const [question, setQuestion] = useState<string>("");
   const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
   const history = useHistory();
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -58,12 +58,17 @@ function ChatBot() {
     setQuestion(question);
   };
 
+  useEffect(() => {
+    console.log(question)
+  },[question])
 
 
   const generateAnswer = async () => {
     setShowSkeloton(true)
     const msg = question;
 
+    console.log(question, 'msg', msg)
+    
     setChatHistory((prevChatHistory) => [
       ...prevChatHistory,
       {
@@ -119,7 +124,7 @@ function ChatBot() {
             </div>
             <div className="chatbot-prompt-section">
               <IonLabel>Ask any disaster related question</IonLabel>
-              {question}
+       
             </div>
             <div className="sample-questions-container">
               <div className="fl">
@@ -164,9 +169,8 @@ function ChatBot() {
             <div className="prompt-action">
               <IonInput
                 placeholder="Type your message"
-                clearInput
                 value={question}
-                onIonChange={(e: any) => setQuestion(e.target.value)}
+                onIonInput={(e: any) => setQuestion(e.detail.value!)}
               />
               <IonIcon src={microphone} />
             </div>

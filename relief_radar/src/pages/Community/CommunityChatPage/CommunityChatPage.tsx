@@ -304,9 +304,6 @@ function CommunityChatPage() {
             <div className="prompt-action">
               <IonInput
                 placeholder="Type your message"
-                clearInput
-                onFocus={() => console.log("Input focused")}
-                onBlur={() => console.log("Input blurred")}
               />
               <IonIcon src={attachment}></IonIcon>
             </div>

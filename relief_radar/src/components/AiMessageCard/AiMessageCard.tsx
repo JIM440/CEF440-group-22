@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef,useEffect } from "react";
 import "./AI.css";
 import { IonIcon } from "@ionic/react";
 import chatbot from "../../assets/icons/chatbot.svg";
@@ -14,27 +14,46 @@ type AiMessageCardProps = {
 };
 
 const AiMessageCard: React.FC<AiMessageCardProps> = ({ chats, skeleton }) => {
+  const AiCardRef = useRef<HTMLDivElement>(null);
 
-    const renderXterWise = (text: string)  => {
-    const xterArray = text.split('');
-    const displayArray = xterArray.filter(xter => {
-      return xter !== '*'
-    })
+  useEffect(() => {
+    AiCardRef.current?.scrollIntoView({ behavior: "smooth", block:'end'});
+  }, [chats]);
+
+  const renderXterWise = (text: string) => {
+    const xterArray = text.split("");
+    const displayArray = xterArray.filter((xter) => {
+      return xter !== "*";
+    });
 
     return displayArray;
-  }
-  
+  };
+
+  const formatText = (text: string): string => {
+  // Replace double asterisks with <b> tags for bold text
+  text = text.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+
+    //replacing asterisks with <br/>
+    text = text.split('*').join('<br/>');
+    
+  // Replace double hashes at the beginning with <h2> tags for headings
+  text = text.replace(/^##(.*?)$/gm, '<h2>$1</h2>');
+
+  return text;
+};
+
+
   return (
-    <div className="message-card-container">
+    <div className="message-card-container" key={Math.random()*10000} ref={AiCardRef}>
       {chats.map((chat, index) => {
         if (chat.role === "user") {
           return (
             <>
-              <span key={index} className="person">
+              <span key={Math.random()*10000} className="person">
                 {chat.parts[0].text}
               </span>
               {skeleton && (
-                <div key={index} className="Ai">
+                <div key={Math.random()*10000} className="Ai">
                   <div className="icon">
                     <IonIcon src={chatbot} />
                   </div>
@@ -45,11 +64,11 @@ const AiMessageCard: React.FC<AiMessageCardProps> = ({ chats, skeleton }) => {
           );
         } else {
           return (
-            <div key={index} className="Ai">
+            <div key={Math.random()*10000} className="Ai">
               <div className="icon">
                 <IonIcon src={chatbot} />
               </div>
-              <p>{ renderXterWise(chat.parts[0].text )}</p>
+              <p dangerouslySetInnerHTML={{ __html: formatText(chat.parts[0].text) }}></p>
             </div>
           );
         }

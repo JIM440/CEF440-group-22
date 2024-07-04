@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useRef,useEffect } from "react";
 import "./MessagesContainer.css";
 
 type messageContainerProp = {
@@ -18,6 +18,12 @@ function MessagesContainer({
 }: messageContainerProp) {
   const [showDate, setShowDate] = useState(false);
 
+  const messageCardRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    messageCardRef.current?.scrollIntoView({behavior:"smooth" , block:"end"})
+  },[message])
+
   function setInitialsOfName(name: string): string {
     const wordsOfName = name.split(" ");
     const initials = wordsOfName[0][0] + wordsOfName[1][0];
@@ -34,7 +40,7 @@ function MessagesContainer({
   return (
     <>
       {previousperson ? (
-        <div className="message-container true">
+        <div className="message-container true" ref={messageCardRef}>
           {showDate ? <div className="date"> {date}</div> : null}
           <div className="message-container-ionlist">
             <div className="message-container-ionitem">
@@ -62,7 +68,7 @@ function MessagesContainer({
           </div>
         </div>
       ) : (
-        <div className="message-container">
+        <div className="message-container" ref={messageCardRef} >
           {showDate ? <div className="date"> {date}</div> : null}
           <div className="message-container-ionlist">
             <div className="message-container-ionitem">
