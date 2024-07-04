@@ -11,10 +11,11 @@ import {
   IonInput,
   IonIcon,
   IonLabel,
+  IonPage
 } from "@ionic/react";
 
 import backIcon from "../../assets/icons/back.svg";
-import { logInOutline} from "ionicons/icons";
+import { logInOutline } from "ionicons/icons";
 import appleIcon from "../../assets/icons/appleIcon.svg";
 import googleIcon from "../../assets/icons/googleIcon.svg";
 import loginIllustration from "./../../assets/images/Login-illustration.png";
@@ -29,9 +30,14 @@ function LoginPage() {
   };
 
   return (
-    <>
+    <IonPage>
       <IonHeader className="ion-no-border">
-        <BackBtn title='Login' />
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton></IonBackButton>
+          </IonButtons>
+          <IonTitle>Login</IonTitle>
+        </IonToolbar>
       </IonHeader>
 
       <IonContent>
@@ -42,7 +48,6 @@ function LoginPage() {
               mode="md"
               label="Username"
               type="text"
-              placeholder="John Doe"
               labelPlacement="floating"
               fill="outline"
             ></IonInput>
@@ -51,7 +56,6 @@ function LoginPage() {
               label="Password"
               labelPlacement="floating"
               fill="outline"
-              placeholder="Password"
               type="password"
               className="password-field"
             ></IonInput>
@@ -63,7 +67,6 @@ function LoginPage() {
               routerLink="/tabs/home"
             >
               Login
-              <IonIcon icon={logInOutline} slot="end" />
             </IonButton>
             <p className="signup-link-container">
               Don't have an account?
@@ -108,7 +111,7 @@ function LoginPage() {
           </form>
         </div>
       </IonContent>
-    </>
+    </IonPage>
   );
 }
 

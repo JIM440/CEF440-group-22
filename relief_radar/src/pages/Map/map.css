@@ -1,0 +1,64 @@
+.main-map-body{
+  z-index: 0 !important;
+}
+
+ion-modal.map-modal {
+  bottom: 71px;
+  --background: transparent;
+}
+
+ion-modal.map-modal ion-content {
+  --background: transparent;
+}
+
+div.map-disaster-info {
+  position: relative;
+  width: max(95%, 300px);
+  top: unset;
+  left: unset;
+  bottom: unset;
+  right: unset;
+  transform: none;
+  background: var(--ion-background-color);
+  border: 1.5px solid var(--ion-color-contrast-trans-map)
+}
+
+div.map-disaster-info * {
+  font-weight: 400;
+}
+
+.disaster-type-location.map-disaster-info {
+  min-width: max(95%, 300px);
+  gap: 15px;
+  height: fit-content;
+  padding: 20px;
+}
+
+.disaster-type-location.map-disaster-info h3 {
+  margin: 0;
+  color: var(--ion-color-contrast);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.map-modal-content-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+ion-modal[shadow-root="modal-handle"] > button.modal-handle {
+  background-color: var(--modal-handle-color);
+  /* Add other styling rules here */
+}
+
+.fadeMap {
+  opacity: 0.8;
+}
+
+.fadeContent.main-map-body ion-content {
+  --background: var(--ion-color-contrast-trans);
+}

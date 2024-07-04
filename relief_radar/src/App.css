@@ -1,22 +1,39 @@
-@import url("https://fonts.cdnfonts.com/css/sf-pro-display");
-
-/*
+/*@import url("https://fonts.cdnfonts.com/css/sf-pro-display");
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 */
 
-:root[data-theme="dark"].ios {
-  --divider-background: #0d0d0d;
+@font-face {
+  font-family: "UI-font";
+  src: url("./assets/font/SF-Pro-Rounded-Regular.otf") format("opentype");
+  font-weight: 400;
 }
 
-:root[data-theme="dark"].md {
-  --divider-background: #1f1f1f;
+@font-face {
+  font-family: "UI-font";
+  src: url("./assets/font/SF-Pro-Rounded-Medium.otf") format("opentype");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "UI-font";
+  src: url("./assets/font/SF-Pro-Rounded-Semibold.otf") format("opentype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "UI-font-number";
+  src: url("./assets/font/SF-Pro-Display-Bold.otf") format("opentype");
+  font-weight: 600;
+}
+
+:root[data-theme="dark"] {
+  --divider-background: #303030;
 }
 
 :root[data-theme="dark"] {
   --ion-color-primary: #2785dd;
-  --test-color: ;
   --black-color: #000000;
   --white-color: #ffffff;
   --notification-color: #d33f2c;
@@ -24,11 +41,15 @@
   --ion-color-contrast: #cdcdcd;
   --ion-segment-indicator-checked-border-radius: 10px;
   --ion-color-contrast-trans: #fdfdfd28;
+  --ion-color-contrast-trans-map: #fdfdfd28;
+  --map-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  --map-zoom-in-icon: url("./assets/icons/dark-plus.svg");
+  --map-zoom-out-icon: url("./assets/icons/dark-minus.svg");
 }
 :root[data-theme="light"] {
   --ion-color-primary: #1e7fdb;
   --ion-color: #f4f5f8;
-  --ion-color-contrast: #303030;
+  --ion-color-contrast: #404040;
   --ion-color-shade: #d7d8da;
   --ion-color-tint: #f5f6f9;
   --divider-background: rgba(var(--ion-color-primary-rgb), 0.14);
@@ -43,12 +64,24 @@
   --ion-background-color-ch-ss: #c2c0c0;
   --ion-color-ch-ss: #fff;
   --ion-text-color-step-800: #fff;
-  --ion: #1f1e1e;
+  --map-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+  --map-zoom-in-icon: url("./assets/icons/light-plus.svg");
+  --map-zoom-out-icon: url("./assets/icons/light-minus.svg");
+  --white-border-color: #D7D8DD;
 }
 * {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif !important;
+  font-family: -apple-system, BlinkMacSystemFont, "UI-font", sans-serif !important;
   box-sizing: border-box !important;
-  font-weight: 500;
+  scrollbar-width: 0;
+  font-weight: 400;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+.ion-page{
+  --background: var(--ion-background-color)
 }
 
 a {
@@ -66,7 +99,7 @@ ion-title.md {
 }
 
 ion-title {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 ion-menu-button.md ion-icon {
@@ -90,7 +123,6 @@ ion-tab-bar {
     rgba(17, 17, 26, 0.1) 0px 8px 24px,
     rgba(17, 17, 26, 0.1) 0px 16px 56px
   );
-  border-radius: 8px 8px 0 0;
 }
 
 ion-tab-button ion-icon {
@@ -131,6 +163,7 @@ ion-tab-button.tab-selected {
 
 ion-tab-button ion-label {
   font-size: 13px;
+  font-weight: 500;
 }
 
 ion-badge {
@@ -156,6 +189,11 @@ ion-menu ion-content {
 
 ion-tab-bar.hide-tab-bar {
   display: none;
+}
+
+ion-button {
+  --background-hover: inherit;
+  --background-activated: inherit;
 }
 
 ion-button.back-button ion-icon {
@@ -258,7 +296,8 @@ ion-buttons.notification .pulse-container:after {
   }
 }
 
-.sc-ion-buttons-md-s ion-button:not(.button-round), .sc-ion-buttons-ios-s ion-button:not(.button-round) {
+.sc-ion-buttons-md-s ion-button:not(.button-round),
+.sc-ion-buttons-ios-s ion-button:not(.button-round) {
   width: 60px;
   height: 50px;
 }
@@ -281,10 +320,57 @@ ion-fab-button.primary-button {
   );
 }
 
-.header-md{
+.mapboxgl-ctrl-attrib.mapboxgl-compact,
+a.mapboxgl-ctrl-logo {
+  display: none;
+}
+
+.mapboxgl-ctrl-top-right {
+  top: 10%;
+}
+
+.mapboxgl-ctrl-group:not(:empty) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  box-shadow: none;
+  min-height: 90px;
+  height: 90px;
+  border-radius: 10px;
+  width: 40px;
+  background-color: var(--ion-background-color);
+  border: 1.5px solid var(--ion-color-contrast-trans-map);
+}
+
+.mapboxgl-ctrl-group:not(:empty) > * {
+  height: 100%;
+}
+
+.mapboxgl-ctrl button:not(:disabled):hover {
+  background-color: transparent;
+}
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-zoom-out .mapboxgl-ctrl-icon {
+  background-image: var(--map-zoom-out-icon);
+}
+
+.mapboxgl-ctrl button.mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon {
+  background-image: var(--map-zoom-in-icon);
+}
+
+.mapboxgl-ctrl button .mapboxgl-ctrl-icon {
+  background-size: 24px;
+}
+
+.header-md {
   box-shadow: none;
   -webkit-box-shadow: none;
-  -moz-box-shadow: none
+  -moz-box-shadow: none;
+}
+
+.input-fill-outline.sc-ion-input-md-h{
+  --border-color: var(--white-border-color, var(--ion-color-contrast-trans));
 }
 
 @media screen and (max-width: 350px) {

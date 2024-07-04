@@ -57,7 +57,7 @@ ion-header.ios {
 
 .salutation ion-label {
   color: var(--ion-color-primary);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 ion-avatar {
@@ -101,8 +101,8 @@ ion-avatar.ios {
   color: #fdfdfde4;
   width: 100%;
   letter-spacing: unset !important;
-  letter-spacing: 0.05em;
   font-weight: 600;
+  font-family: "UI-font-number", sans-serif !important;
 }
 
 .temperature > span {
@@ -195,6 +195,10 @@ ion-avatar.ios {
   border-radius: 10px;
 }
 
+ion-segment-button ion-label{
+  font-weight: 500;
+}
+
 .disaster_alert_info .segment-container {
   width: 100%;
   margin-top: 20px;
@@ -210,11 +214,11 @@ ion-avatar.ios {
   min-width: 100%;
 }
 
-.disaster_alert_info ion-segment-button.md::part(native){
+.disaster_alert_info ion-segment-button.md::part(native) {
   color: var(--ion-color-contrast);
 }
 
-.disaster_alert_info .segment-button-checked.md::part(native){
+.disaster_alert_info .segment-button-checked.md::part(native) {
   color: var(--ion-color-primary);
 }
 
@@ -256,7 +260,7 @@ ion-avatar.ios {
   gap: 10px;
 }
 
-.truncate-weather-location{
+.truncate-weather-location {
   max-width: 150px;
   white-space: nowrap;
   overflow: hidden;

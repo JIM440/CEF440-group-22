@@ -29,6 +29,8 @@ import ReportPage from "./pages/Emergency/index";
 import AuthenticationPage from "./pages/Auth";
 import SettingPage from "./pages/SideMenuPages/settings/settings";
 import { FormattedMessage } from "react-intl";
+import LoginPage from "./pages/Auth/Login";
+import WelcomeScreen from "./pages/Auth/welcome";
 
 import GuideList from "./pages/Guides/Guides";
 import GuideContent from "./pages/Guides/GuideContent";
@@ -101,6 +103,12 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
           </Route>
           <Route path="/index/language" exact={true}>
             <AuthenticationPage setLocale={setLocale} locale={locale} />
+          </Route>
+          <Route path="/index/login" exact={true}>
+            <LoginPage />
+          </Route>
+          <Route path="/index/welcome" exact={true}>
+            <WelcomeScreen />
           </Route>
           <Route path="/" exact={true}>
             <Redirect to="/index/language" />
@@ -189,11 +197,20 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
             component={ReportDisasterPage}
             exact={true}
           />
+          <Route
+            path="/weather/detail"
+            component={WeatherDetailPage}
+            exact={true}
+          />
         </IonRouterOutlet>
 
         <IonTabBar slot="bottom" className={hideTabBar ? "hide-tab-bar" : ""}>
           <IonTabButton tab="home" href="/tabs/home">
-            <IonIcon icon={(location.pathname == "/tabs/home")?homeIconActive:homeIcon} />
+            <IonIcon
+              icon={
+                location.pathname == "/tabs/home" ? homeIconActive : homeIcon
+              }
+            />
             <IonLabel>
               <FormattedMessage id="Home" />
             </IonLabel>

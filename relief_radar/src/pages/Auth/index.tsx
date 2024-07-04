@@ -3,17 +3,20 @@ import { IonNav, IonPage } from "@ionic/react";
 
 import LanguagePage from "./Language";
 
-import "./Auth.css"
+import "./Auth.css";
 
 interface ContainerProps {
-    setLocale: Function;
-    locale: string
+  setLocale: Function;
+  locale: string;
 }
 
-const AuthenticationPage: React.FC<ContainerProps> = ({ locale, setLocale }) => {
+const AuthenticationPage: React.FC<ContainerProps> = ({
+  locale,
+  setLocale,
+}) => {
   return (
     <IonPage className="main-authen-body">
-          <IonNav root={() => <LanguagePage setLocale={setLocale} locale={locale} />}></IonNav>
+      <LanguagePage setLocale={setLocale} locale={locale} />
     </IonPage>
   );
 };

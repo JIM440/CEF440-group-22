@@ -71,10 +71,6 @@ ion-modal ion-item {
   --border-radius: 25px;
 }
 
-ion-modal {
-  --height: auto;
-}
-
 ion-radio::part(container) {
   width: 30px;
   height: 30px;

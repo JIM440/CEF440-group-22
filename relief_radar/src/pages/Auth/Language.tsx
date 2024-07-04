@@ -15,7 +15,7 @@ import EnglishIcon from "../../assets/icons/CifGb.svg";
 import FrenchIcon from "../../assets/icons/CifFr.svg";
 import LanguageImage from "../../assets/images/Language.webp";
 
-import LoginPage from "./Login";
+import WelcomeScreen from "./welcome";
 
 import { useEffect } from "react";
 
@@ -63,12 +63,9 @@ const LanguagePage: React.FC<ContainerProps> = ({ locale, setLocale }) => {
           </div>
         </div>
         <div className="button-container">
-          <IonNavLink routerDirection="forward" component={() => <LoginPage />}>
-            <IonButton mode="ios" className="language-procceed-button primary-button">
+            <IonButton mode="ios" className="language-procceed-button primary-button" routerLink="/index/welcome">
               <IonLabel>Continue</IonLabel>
-              <IonIcon src={chevronForward}></IonIcon>
             </IonButton>
-          </IonNavLink>
         </div>
       </div>
     </IonContent>

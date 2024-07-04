@@ -32,13 +32,28 @@ ion-button ion-icon {
   align-items: center;
 }
 
-.main-language-body .image-explanation .explanation,
-.main-login-container {
+.main-language-body .image-explanation .explanation {
   padding: 15px 0px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.main-login-container{
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main-login-container .primary-button{
+  height: 50px;
+}
+
+.main-login-container img{
+  width: 90%;
+  margin: auto;
 }
 
 .main-language-body .image-explanation .explanation p {
@@ -101,9 +116,8 @@ form ion-button {
 }
 
 .alternate-login-button {
-  --background: var(--ion-item-background);
-  border: 1px solid var(--ion-color-contrast-trans);
-  border-radius: 14px;
+  --background: #30303008;
+  border: none;
 }
 
 .main-login-container .password-field {
@@ -115,8 +129,8 @@ form ion-button {
 }
 
 .main-login-container .alternate-login-button ion-icon {
-  width: 25px;
-  height: 25px;
+  width: 24px;
+  height: 24px;
   margin: 0px;
   margin-right: 15px;
   color: var(--ion-color-contrast);
@@ -132,7 +146,7 @@ form ion-button {
   margin-bottom: 25px;
 }
 
- .login-divider span{
+.login-divider span {
   background: var(--ion-background-color);
   position: absolute;
   z-index: 1;
@@ -161,7 +175,7 @@ form ion-button {
   color: var(--ion-color-primary);
   height: max-content;
   width: max-content;
-  font-size: 17px;
+  font-size: 16px;
   margin-left: 5px;
 }
 
@@ -171,4 +185,54 @@ form ion-button {
   margin-bottom: 30px;
   text-align: center;
   letter-spacing: 0.04rem;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: linear-gradient(
+    143deg,
+    var(--ion-color-primary) 0%,
+    #004d95 100%
+  );
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.get-started-action-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-fill-outline.input-label-placement-stacked.sc-ion-input-md-h
+  .label-text-wrapper.sc-ion-input-md,
+.input-fill-outline.input-label-placement-floating.sc-ion-input-md-h
+  .label-text-wrapper.sc-ion-input-md {
+  top: -2.5px;
+}
+
+.input-fill-outline.sc-ion-input-md-h .input-outline-container.sc-ion-input-md {
+  height: 50px;
+  border-radius: 8px;
+}
+
+.get-started-login {
+}
+
+.get-started-signup {
 }

@@ -102,6 +102,7 @@ export const fetchWeatherData = async (
     const data = await response.json();
     localStorage.setItem("current_weather", JSON.stringify(data));
   } catch (error) {
+    localStorage.setItem("current_weather", JSON.stringify(errorWeatherValue));
     console.error("Error:", error);
   }
   callBack(JSON.parse(localStorage.getItem("current_weather")!));

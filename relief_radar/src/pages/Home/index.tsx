@@ -195,7 +195,12 @@ const HomePage: React.FC<ContainerProps> = (locale) => {
             </div>
           </div>
 
-          <div className="weather-section">
+          <div
+            className="weather-section"
+            onClick={() => {
+              router.push("/weather/detail");
+            }}
+          >
             <div className="weather-illustrator">
               <div className="weather-detail">
                 <div className="date">
