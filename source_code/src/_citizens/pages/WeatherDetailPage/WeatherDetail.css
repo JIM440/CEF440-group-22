@@ -1,0 +1,132 @@
+
+
+.top-blue-section{
+    width: 100%;
+    border-bottom-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
+    
+    background: linear-gradient(
+		143deg,
+		var(--ion-color-primary) 0%,
+		#004d95 100%
+	);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 10px;
+    gap: 10px;
+    color: #fdfdfd;
+}
+.top-blue-section .place-detail{
+    font-size: 19px;
+    font-weight: 600;
+    letter-spacing: .7px;
+    padding: 2px;
+    margin: 2px;
+}
+
+.top-blue-section .date-details{
+    word-spacing: 1px;
+    color: var(--ion-color-shade);
+    font-size: 13px;
+}
+
+.top-blue-section .temperature-detail{
+    text-align: center;
+}
+
+.temperature-detail .temp-short-description{
+    letter-spacing: 1px;
+    font-size: 17px;
+    margin-left: -5px;
+}
+.temperature-detail .actual-temperature{
+    display: flex;
+    gap: 2px;
+    align-items: end;
+}
+.actual-temperature div {
+    font-size: 45px;
+}
+.actual-temperature span{
+    height: 20px;
+    width: 20px;
+    font-size: 20px;
+    margin-top: -4px;
+}
+.other-climate-details {
+    display: flex;
+    width: 95%;
+    border-radius: 30px;
+    padding: 10px;
+    background-color: #0b4063;
+    margin-top: 20px;
+    font-size: 13px;
+}
+
+.other-climate-details .weather-details{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+    padding: 5px;
+}
+
+.weather-details .icon{
+    font-size: 22px;
+}
+
+.weather-details:nth-child(1){
+}
+.weather-details:nth-child(2){
+}
+
+.time-icon-part{
+    width: 100%;
+    height: 16vh;
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+      overflow: auto; 
+  scrollbar-width: none; 
+}
+
+.time-icon-part::-webkit-scrollbar {
+  display: none; 
+}
+
+.time-icon-part .time-icon{
+    width: 75px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--ion-color-contrast);
+}
+
+.time-icon .icon{
+    font-size: 23px;
+    color: var(--ion-color-contrast);
+    font-size: x-large;
+}
+
+.top-blue-section .weather-image {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 180px;
+    margin-top: 25px;
+}
+
+
+.top-blue-section .temperature{
+    font-size: 65px;
+}
