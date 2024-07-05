@@ -41,6 +41,7 @@ import GuideContent from "./_citizens/pages/Guides/GuideContent";
 import Profile from "./_citizens/pages/Profile/Profile";
 import EditProfile from "./_citizens/pages/Profile/EditProfile";
 import Alerts from "./_citizens/pages/Alerts/Alerts";
+import LoginType from "./_citizens/pages/Auth/LoginType";
 
 import ChatBot from "./_citizens/pages/ChatBot/ChatBot";
 import WeatherDetailPage from "./_citizens/pages/WeatherDetailPage/WeatherDetailPage";
@@ -56,6 +57,8 @@ import ResponderProfile from "./_responders/pages/profile/ResponderProfile";
 import ResponderValidateDisaster from "./_responders/pages/alerts/ResponderValidateAlert";
 import ResponderReportUpdate from "./_responders/pages/alerts/ResponderReportUpdate";
 import ResponderUpdateDisasterStatus from "./_responders/pages/alerts/ResponderUpdateAlertStatus";
+import ResponderLogin from "./_citizens/pages/Auth/ResponderLogin";
+import ResponderAccountApplication from "./_citizens/pages/Auth/ResponderAccountApply";
 
 // ================================ responder pages ================================
 
@@ -124,6 +127,9 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
           <Route path="/index/welcome" exact={true}>
               <WelcomeScreen/>
           </Route>
+          <Route path="/index/logintype" exact={true}>
+              <LoginType />
+          </Route>
           <Route path="/tabs/home" exact={true}>
             <HomePage locale={locale} />
           </Route>
@@ -189,6 +195,8 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
           ================================
           ================================ */}
 
+<Route path='/index/responder/login' exact={true} component={ResponderLogin} />
+<Route path='/index/responder/apply' exact={true} component={ResponderAccountApplication} />
           <Route
             path="/responder/tabs/home"
             component={ResponderHome}
