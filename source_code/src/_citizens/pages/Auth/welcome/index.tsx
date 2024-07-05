@@ -37,7 +37,7 @@ const WelcomeScreen: React.FC = () => {
         <IonButton
           mode="ios"
           className="welcome-control-button"
-          routerLink="/index/login"
+          routerLink="/index/logintype"
         >
           <IonLabel className="label"> Skip</IonLabel>
           <IonIcon src={chevronForward}></IonIcon>
