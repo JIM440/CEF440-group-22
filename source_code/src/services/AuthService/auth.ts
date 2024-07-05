@@ -13,8 +13,8 @@ interface User {
   language: string;
   photo: string;
   role: string;
-  locations: string[];
-  forums: string[];
+  locations?: string[];
+  forums?: string[];
 }
 
 
