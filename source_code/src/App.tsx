@@ -27,6 +27,7 @@ import "@ionic/react/css/text-transformation.css";
 import "@ionic/react/css/flex-utils.css";
 import "@ionic/react/css/display.css";
 import "./App.css";
+import { userContext, User } from './context/UserContext';
 
 /**
  * Ionic Dark Mode
@@ -47,6 +48,19 @@ const App: React.FC = () => {
 	const language = (localStorage.getItem("prefered_language")=="English"?LOCALES.ENGLISH:LOCALES.FRENCH)!;
 	const [locale, setLocale] = useState(language);
 
+    const [user, setUser] = useState<User>(() => {
+        const userStored = localStorage.getItem('user');
+        if (userStored) {
+            return JSON.parse(userStored);
+        } else {
+            return {};
+        }
+    });
+
+	   useEffect(() => {
+          localStorage.setItem('user', JSON.stringify(user));
+       }, [user]);
+
 	useEffect(()=>{
 		const prefered_Lang = locale=="en-US"?"English":"French";
 		localStorage.setItem("prefered_language",prefered_Lang);
@@ -57,11 +71,13 @@ const App: React.FC = () => {
 			messages={messages[locale]}
 			locale={locale}
 			defaultLocale={LOCALES.ENGLISH}>
+			<userContext.Provider value={{user,setUser}}>
 			<IonApp>
 				<IonReactRouter>
 					<AppBody locale={locale} setLocale={setLocale} />
 				</IonReactRouter>
-			</IonApp>
+				</IonApp>
+				</userContext.Provider>
 		</IntlProvider>
 	);
 };
