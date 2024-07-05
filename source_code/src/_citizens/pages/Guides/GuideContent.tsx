@@ -41,31 +41,24 @@ import eruption_before from '../../../assets/images/guides/eruption/before.jpg';
 import eruption_during from '../../../assets/images/guides/eruption/during.webp';
 import eruption_after from '../../../assets/images/guides/eruption/after.jpg';
 
-const GuideContent: React.FC = () => {
-  const { id } = useParams();
+interface DisasterContentSection {
+  image: string;
+  intro: string;
+  content: string;
+}
 
-  const [segment, setSegment] = useState('before');
+interface DisasterGuide {
+  name: string;
+  id: number;
+  before: DisasterContentSection;
+  during: DisasterContentSection;
+  after: DisasterContentSection;
+}
 
-  const formatText = (text: string): React.ReactNode => {
-    // Split text into segments based on ' / '
-    const segments = text.split(' / ');
-  
-    // Map each segment to JSX elements with <br> tags
-    const formattedText = segments.map((segment, index) => (
-      <React.Fragment key={index}>
-        {index > 0 && (<><br />- </>)}
-        {segment}
-      </React.Fragment>
-    ));
-  
-    return formattedText;
-  };
-  
-
-  const DisasterGuides = [
+  const DisasterGuides: DisasterGuide[] = [
     {
       name: 'fire',
-      id: '1',
+      id: 1,
       before: {
         intro:
           'Preparation is crucial in mitigating the impact of a fire. Taking proactive steps to prevent fires and prepare for emergencies can significantly enhance your safety and readiness.',
@@ -214,6 +207,29 @@ const GuideContent: React.FC = () => {
     },
   ];
 
+const GuideContent: React.FC = () => {
+  const { id } = useParams();
+
+  const [segment, setSegment] = useState('before');
+
+  const formatText = (text: string): React.ReactNode => {
+    // Split text into segments based on ' / '
+    const segments = text.split(' / ');
+  
+    // Map each segment to JSX elements with <br> tags
+    const formattedText = segments.map((segment, index) => (
+      <React.Fragment key={index}>
+        {index > 0 && (<><br />- </>)}
+        {segment}
+      </React.Fragment>
+    ));
+  
+    return formattedText;
+  };
+  
+
+
+
   const guideArray = DisasterGuides.filter((guide) => guide.name === id);
   const guide = guideArray[0];
 
@@ -280,3 +296,4 @@ const GuideContent: React.FC = () => {
 };
 
 export default GuideContent;
+export {DisasterGuides}

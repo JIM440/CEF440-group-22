@@ -41,6 +41,8 @@ const users = [
   }
 ];
 
+import { handleCreateGuide } from '../../../services/controllers/Guide';
+
 const ResponderCommunity: React.FC = () => {
 
     const {user,setUser} = useContext(userContext)
@@ -48,10 +50,9 @@ const ResponderCommunity: React.FC = () => {
 
     const registerUser = async () => {
         try {
-            await createUser(users[2])
+            await handleCreateGuide();
             console.log('successs');
 
-            setUser(users[1])
         } catch (error) {
             console.error(error)
         }
