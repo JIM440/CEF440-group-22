@@ -55,10 +55,12 @@
   gap: 2rem;
   background-color: var(--ion-background-color);
 }
+
 .fl {
   display: flex;
   align-items: center;
 }
+
 .questions-row {
   display: flex;
   flex-wrap: wrap;
