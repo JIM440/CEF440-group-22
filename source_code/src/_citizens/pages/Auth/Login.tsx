@@ -49,7 +49,7 @@ function LoginPage() {
               type="text"
               labelPlacement="floating"
               fill="outline"
-            ></IonInput>
+            />
             <IonInput
               mode="md"
               label="Password"
@@ -57,7 +57,7 @@ function LoginPage() {
               fill="outline"
               type="password"
               className="password-field"
-            ></IonInput>
+            />
             <IonButton
               className="ion-margin-top primary-button proceed-language"
               type="submit"
