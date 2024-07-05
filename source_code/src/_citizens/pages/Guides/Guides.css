@@ -33,12 +33,14 @@
   align-items: center;
   background-color: var(--ion-bg-white);
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+  min-height: 180px;
 }
 
 .guide-list-card .guide-content {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
 .guide-list-card button {
@@ -67,11 +69,9 @@
 
 .intro-container .text p {
   font-size: 14px;
-  /* color: #313131; */
 }
 
 .intro-container .text h3 {
-  /* color: #222222; */
   font-size: 18px;
 }
 
