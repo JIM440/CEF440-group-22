@@ -14,11 +14,10 @@ import {
   IonPage
 } from "@ionic/react";
 
-import backIcon from "../../assets/icons/back.svg";
 import { logInOutline } from "ionicons/icons";
-import appleIcon from "../../assets/icons/appleIcon.svg";
-import googleIcon from "../../assets/icons/googleIcon.svg";
-import loginIllustration from "./../../assets/images/Login-illustration.png";
+import appleIcon from "../../../assets/icons/appleIcon.svg";
+import googleIcon from "../../../assets/icons/googleIcon.svg";
+import loginIllustration from "./../../../assets/images/Login-illustration.png";
 
 import SignUpPage from "./SignUp";
 import BackBtn from "../../../components/HeaderBack";

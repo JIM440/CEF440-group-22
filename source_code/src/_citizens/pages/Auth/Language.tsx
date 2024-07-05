@@ -33,7 +33,7 @@ const LanguagePage: React.FC<ContainerProps> = ({ locale, setLocale }) => {
             <img src={LanguageImage} alt="language" />
             <div className="explanation">
               <h1>Choose your language</h1>
-              <p>Select you prefered language below for use within the app</p>
+              <p>Select your prefered language below for use within the app</p>
             </div>
           </div>
           <div className="language-section">
@@ -63,9 +63,13 @@ const LanguagePage: React.FC<ContainerProps> = ({ locale, setLocale }) => {
           </div>
         </div>
         <div className="button-container">
-            <IonButton mode="ios" className="language-procceed-button primary-button" routerLink="/index/welcome">
-              <IonLabel>Continue</IonLabel>
-            </IonButton>
+          <IonButton
+            mode="ios"
+            className="language-procceed-button primary-button"
+            routerLink="/index/welcome"
+          >
+            <IonLabel>Continue</IonLabel>
+          </IonButton>
         </div>
       </div>
     </IonContent>

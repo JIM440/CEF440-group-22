@@ -1,7 +1,7 @@
 import { IonButton } from "@ionic/react";
 import React from "react";
 
-import illustration from "../../../../assets/images/keep-calm.png";
+import illustration from "../../../../../assets/images/keep-calm.png";
 
 interface ContainerProps {
   nextClick: Function;

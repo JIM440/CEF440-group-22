@@ -12,7 +12,7 @@ import "../Auth.css";
 import "./welcome.css";
 
 import { chevronForward } from "ionicons/icons";
-import logo from "../../../assets/images/logo-white.svg";
+import logo from "../../../../assets/images/logo-white.svg";
 
 import GetStartedScreen from "./welcome_pages/GetStarted";
 import WelcomeScreen2 from "./welcome_pages/Welcome_screen_2";
@@ -34,7 +34,11 @@ const WelcomeScreen: React.FC = () => {
           <img className="welcome-logo" src={logo} />
           <span>ReliefRadar</span>
         </div>
-        <IonButton mode="ios" className="welcome-control-button" routerLink="/index/login">
+        <IonButton
+          mode="ios"
+          className="welcome-control-button"
+          routerLink="/index/login"
+        >
           <IonLabel className="label"> Skip</IonLabel>
           <IonIcon src={chevronForward}></IonIcon>
         </IonButton>

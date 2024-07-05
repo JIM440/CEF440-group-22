@@ -1,7 +1,7 @@
 import { IonButton, IonIcon, IonHeader, IonBackButton } from "@ionic/react";
 import React from "react";
 
-import illustration from "../../../../assets/images/join_community.png";
+import illustration from "../../../../../assets/images/join_community.png";
 
 const GetStartedScreen: React.FC = () => {
   return (

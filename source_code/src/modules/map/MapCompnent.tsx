@@ -1,29 +1,28 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
-import {
-  APIProvider,
-  Map,
-  MapCameraChangedEvent,
-} from "@vis.gl/react-google-maps";
+import Map, {NavigationControl} from "react-map-gl";
+import "mapbox-gl/dist/mapbox-gl.css";
 
-const MapDisplay = () => (
-  <APIProvider
-    apiKey={"AIzaSyBkHVQJaf2VOkiJo-W6NSiS-yxL2oWsdKo"}
-    onLoad={() => console.log("Maps API has loaded.")}
-  >
+const MapComponent: React.FC = () => {
+  return (
     <Map
-      defaultZoom={13}
-      defaultCenter={{ lat: -33.860664, lng: 151.208138 }}
-      onCameraChanged={(ev: MapCameraChangedEvent) =>
-        console.log(
-          "camera changed:",
-          ev.detail.center,
-          "zoom:",
-          ev.detail.zoom
-        )
+      mapLib={import("mapbox-gl")}
+      initialViewState={{
+        longitude: 9.29,
+        latitude: 4.156,
+        zoom: 16,
+      }}
+      style={{ width: "100%", height: "100%" }}
+      mapStyle={
+        (localStorage.getItem("colorScheme")=="light")
+          ? "mapbox://styles/enow-myke3/clxh2wdvi007g01qmfiwgh5q3"
+          : "mapbox://styles/enow-myke3/clxioqfta009v01qmbr6he2dj"
       }
-    ></Map>
-  </APIProvider>
-);
+      mapboxAccessToken="pk.eyJ1IjoiZW5vdy1teWtlMyIsImEiOiJjbHhoMmowN2MxYWY4MnFxemNhYXk1bzA1In0.8tS9OAHUDgH43qMsOM0cww"
+    >
+      <div style={{ position: "absolute", top: 50, left: 20 }}>
+        <NavigationControl showCompass={false} />
+      </div>
+    </Map>
+  );
+};
 
-export default MapDisplay;
+export default MapComponent;
