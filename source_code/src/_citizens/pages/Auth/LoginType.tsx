@@ -17,7 +17,7 @@ const LoginType: React.FC = () => {
                         <h2>Relief Radar</h2>
                     </div>
                     <div className='role-container'>
-                    <h3>Please Select your role</h3>
+                    <h3>Please Select your role:</h3>
                     <p>"Citizen" if seeking assistance during a disaster or "Responder" if providing emergency response support and access relevant resources.</p>
                     </div>
             <div className='btn-logintype-container'>

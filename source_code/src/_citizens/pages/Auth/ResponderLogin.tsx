@@ -5,12 +5,9 @@ import {
   IonButton,
   IonHeader,
   IonContent,
-  IonNavLink,
   IonToolbar,
   IonTitle,
   IonInput,
-  IonIcon,
-  IonLabel,
   IonPage,
   useIonRouter
 } from "@ionic/react";
@@ -57,7 +54,7 @@ function ResponderLogin() {
               type="submit"
               expand="block"
               mode="ios"
-              routerLink="/tabs/home"
+              routerLink="/responder/tabs/home"
             >
               Login
             </IonButton>
@@ -65,11 +62,12 @@ function ResponderLogin() {
               Don't have an account?
                 <button onClick={()=>{
                     router.push("/index/responder/apply")
-                }} className="sign-up-link">Apply</button>
+                }} className="sign-up-link">Apply for one</button>
             </p>
           </form>
         </div>
       </IonContent>
+      
     </IonPage>
   );
 }
