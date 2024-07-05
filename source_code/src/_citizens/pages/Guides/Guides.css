@@ -29,7 +29,6 @@
 }
 
 .guide-list-card {
-  background-color: transparent;
   align-items: center;
   background-color: var(--ion-bg-white);
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
