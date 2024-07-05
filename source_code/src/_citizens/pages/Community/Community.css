@@ -1,68 +1,69 @@
-
-
-
-.community-header{
-    width: 100%;
-    height: 45px;
-    padding: 10px;
-    border-bottom: 1px solid #bebebe80;
-    display: flex;
-    gap: 1rem;
+.community-header {
+  width: 100%;
+  height: 45px;
+  padding: 10px;
+  border-bottom: 1px solid #bebebe80;
+  display: flex;
+  gap: 1rem;
 }
 
-.community-header .CHI{
-    height: 35px;
-   
+.community-header .CHI {
+  height: 35px;
 }
 
-.community-header .CHI.active{
-    border-bottom: 4px solid var(--ion);
+.community-header .CHI.active {
+  border-bottom: 4px solid var(--ion);
 }
 
-.CHI .icon{
-    font-size: 23px;
-    
+.CHI .icon {
+  font-size: 23px;
 }
 
-.CHI .icon.active{
-    color: var(--ion-color-primary);
+.CHI .icon.active {
+  color: var(--ion-color-primary);
 }
 
-.community-segment{
-    padding: 0px 80px 0px 0px;
-    border-bottom: 1px solid rgba(169, 180, 190,.1);
-    margin-bottom: 10px;
+.community-segment {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(169, 180, 190, 0.1);
+  margin-bottom: 10px;
 }
 
-.community-segment ion-segment-button{
-    width: 50%;
+.community-segment ion-segment-button {
+  width: 50%;
 }
 
-.community-segment .icon{
-    color: var(--ion-color-contrast);
+.community-segment ion-segment-button.md::part(indicator) {
+  height: 4px;
+  background-color: var(--ion-color-primary);
 }
 
-.groups-container{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.community-segment .icon {
+  color: var(--ion-color-contrast);
+  font-size: 20px;
+  background-color: transparent;
 }
 
-.info-group{
-    display: flex;
-    flex-direction: column;
+.groups-container {
+  display: flex;
+  flex-direction: column;
 }
 
-.text-nogroups-joined{
-    max-width:250px ;
-    text-align: center;
-    align-self: center;
-    color: #999;
-} 
-
-.recommend{
-    margin: 0;
-    padding: 10px 14px;
-    font-size: 25px;
+.info-group {
+  display: flex;
+  flex-direction: column;
 }
 
+.text-nogroups-joined {
+  max-width: 250px;
+  text-align: center;
+  align-self: center;
+  color: #999;
+}
+
+.recommend {
+  margin: 0;
+  padding: 10px 14px;
+  font-size: 25px;
+}

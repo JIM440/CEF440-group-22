@@ -1,6 +1,7 @@
 import { IonButton, IonContent, IonFooter, IonHeader, IonPage, useIonRouter } from '@ionic/react';
 import React from 'react';
 import BackBtn from '../../../components/HeaderBack';
+import './Announcements.css'
 
 const TheShit: React.FC = () => {
 
@@ -73,11 +74,9 @@ const TheShit: React.FC = () => {
             </IonHeader>
             
             <IonContent className="ion-padding">
-               <div className="message-container" style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+               <div className="message-container">
              { messages.map((message, index) => (
-              <div key={message.id} className="message" style={{
-                borderRadius: '10px', backgroundColor: '#e6f2fd', padding: '0.8rem'
-              }}>
+              <div key={message.id} className="message">
                 <p style={{margin: '0px', marginBottom: '10px'}}>{message.content}</p>
               </div>
               ))}

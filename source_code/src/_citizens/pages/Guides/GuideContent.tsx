@@ -53,7 +53,7 @@ const GuideContent: React.FC = () => {
     // Map each segment to JSX elements with <br> tags
     const formattedText = segments.map((segment, index) => (
       <React.Fragment key={index}>
-        {index > 0 && (<><br />- </>)}
+        {index > 0 && (<><br /><br /> - &nbsp;&nbsp;</>)}
         {segment}
       </React.Fragment>
     ));
@@ -78,7 +78,7 @@ const GuideContent: React.FC = () => {
           'During a fire, quick and informed action is crucial to safeguard lives and property. Understanding and following proper procedures can make a significant difference in the outcome.',
         image: fire_during,
         content:
-          ' /	If you discover a fire, alert others nearby and activate the nearest fire alarm if available. / Leave the building immediately through the nearest safe exit, closing doors behind you to slow the spread of smoke and fire. / If smoke is present, stay low to the ground where the air is cleaner and cover your nose and mouth with a cloth to avoid inhaling smoke. / Use fire extinguishers only if you are trained to do so and if the fire is small and contained. Otherwise, prioritize evacuation and alerting emergency services.',
+          ' / If you discover a fire, alert others nearby and activate the nearest fire alarm if available. / Leave the building immediately through the nearest safe exit, closing doors behind you to slow the spread of smoke and fire. / If smoke is present, stay low to the ground where the air is cleaner and cover your nose and mouth with a cloth to avoid inhaling smoke. / Use fire extinguishers only if you are trained to do so and if the fire is small and contained. Otherwise, prioritize evacuation and alerting emergency services.',
       },
       after: {
         intro:
@@ -110,7 +110,7 @@ const GuideContent: React.FC = () => {
           'Recovering from a tornado involves assessing damage, addressing immediate needs, and beginning the process of rebuilding. This phase requires careful planning and support.',
         image: tornado_after,
         content:
-          "- Check yourself and others for injuries and administer first aid as needed. Seek medical attention for serious injuries. / Assess your home or property for damage, taking photos or videos for insurance claims. / Contact your insurance provider to file a claim and get guidance on necessary repairs or temporary housing options. / Follow local authorities' instructions and avoid damaged areas until they have been deemed safe.",
+          " / Check yourself and others for injuries and administer first aid as needed. Seek medical attention for serious injuries. / Assess your home or property for damage, taking photos or videos for insurance claims. / Contact your insurance provider to file a claim and get guidance on necessary repairs or temporary housing options. / Follow local authorities' instructions and avoid damaged areas until they have been deemed safe.",
       },
     },
     {
@@ -121,7 +121,7 @@ const GuideContent: React.FC = () => {
           'Preparing for a volcanic eruption involves understanding the risks and taking proactive measures to protect lives and property.',
         image: eruption_before,
         content:
-          "Stay informed about the volcano's activity through official sources such as geological surveys and local authorities. / Develop and practice an evacuation plan that includes multiple evacuation routes and designated meeting points. / Prepare an emergency kit with essentials like non-perishable food, water, medications, flashlights, and batteries. / Identify shelters or safe locations where you can seek refuge in case of evacuation.",
+          " / Stay informed about the volcano's activity through official sources such as geological surveys and local authorities. / Develop and practice an evacuation plan that includes multiple evacuation routes and designated meeting points. / Prepare an emergency kit with essentials like non-perishable food, water, medications, flashlights, and batteries. / Identify shelters or safe locations where you can seek refuge in case of evacuation.",
       },
       during: {
         intro:
@@ -135,7 +135,7 @@ const GuideContent: React.FC = () => {
           'Recovering from a volcanic eruption involves assessing damage, supporting affected communities, and planning for long-term recovery.',
         image: eruption_after,
         content:
-          ' / o	Assess damage to infrastructure, homes, and agriculture, and document losses for insurance claims. / Assist displaced persons by providing shelter, food, medical care, and psychosocial support as needed. / Collaborate with local authorities and relief agencies to coordinate cleanup efforts and restore essential services. / Plan for long-term recovery and mitigation measures to enhance community resilience against future eruptions.',
+          ' / Assess damage to infrastructure, homes, and agriculture, and document losses for insurance claims. / Assist displaced persons by providing shelter, food, medical care, and psychosocial support as needed. / Collaborate with local authorities and relief agencies to coordinate cleanup efforts and restore essential services. / Plan for long-term recovery and mitigation measures to enhance community resilience against future eruptions.',
       },
     },
     {
@@ -184,7 +184,7 @@ const GuideContent: React.FC = () => {
           'Recovering from a flood involves assessing damage, supporting affected communities, and planning for long-term recovery and resilience.',
         image: flood_after,
         content:
-          ' / o	Assess damage to your home, property, and vehicles. Take photos or videos to document losses for insurance claims. / Avoid contact with floodwaters, which may be contaminated with sewage, chemicals, or debris. / Dispose of damaged items responsibly and begin cleanup and disinfection procedures to prevent mold and other health hazards. / Work with local authorities, relief agencies, and insurers to access assistance programs and resources for recovery efforts.',
+          ' /	Assess damage to your home, property, and vehicles. Take photos or videos to document losses for insurance claims. / Avoid contact with floodwaters, which may be contaminated with sewage, chemicals, or debris. / Dispose of damaged items responsibly and begin cleanup and disinfection procedures to prevent mold and other health hazards. / Work with local authorities, relief agencies, and insurers to access assistance programs and resources for recovery efforts.',
       },
     },
     {
@@ -195,21 +195,21 @@ const GuideContent: React.FC = () => {
           'Preparing for an earthquake involves understanding seismic risks and taking proactive measures to protect lives, reduce damage, and ensure resilience.',
         image: earthquake_before,
         content:
-          ' / o	Identify safe spots in each room of your home or workplace, such as under sturdy furniture or against interior walls away from windows. / Secure heavy furniture and appliances to walls or floors using flexible straps or brackets to prevent them from toppling during shaking. / Create a family emergency plan that includes communication methods, meeting points, and emergency contacts. / Prepare an emergency kit with essentials such as non-perishable food, water, medications, flashlight, batteries, and first aid supplies.',
+          ' / Identify safe spots in each room of your home or workplace, such as under sturdy furniture or against interior walls away from windows. / Secure heavy furniture and appliances to walls or floors using flexible straps or brackets to prevent them from toppling during shaking. / Create a family emergency plan that includes communication methods, meeting points, and emergency contacts. / Prepare an emergency kit with essentials such as non-perishable food, water, medications, flashlight, batteries, and first aid supplies.',
       },
       during: {
         intro:
           'During an earthquake, quick and decisive actions to protect yourself and others can save lives and minimize injuries.',
         image: earthquake_during,
         content:
-          ' / o	Drop to the ground, take cover under a sturdy piece of furniture (like a table or desk), and hold on until the shaking stops. / Stay indoors until the shaking subsides and it is safe to exit. Most injuries during earthquakes occur when people try to move during shaking. / If outdoors, move to an open area away from buildings, trees, streetlights, and utility wires. / If driving, pull over to a safe area away from overpasses, bridges, and buildings. Stay inside your vehicle until the shaking stops.',
+          ' / Drop to the ground, take cover under a sturdy piece of furniture (like a table or desk), and hold on until the shaking stops. / Stay indoors until the shaking subsides and it is safe to exit. Most injuries during earthquakes occur when people try to move during shaking. / If outdoors, move to an open area away from buildings, trees, streetlights, and utility wires. / If driving, pull over to a safe area away from overpasses, bridges, and buildings. Stay inside your vehicle until the shaking stops.',
       },
       after: {
         intro:
           'Recovering from an earthquake involves assessing damage, providing assistance to those in need, and planning for long-term recovery and resilience.',
         image: earthquake_after,
         content:
-          "Check yourself and others for injuries. Administer first aid and seek medical attention for serious injuries. / Assess your home or workplace for structural damage and potential hazards such as gas leaks or electrical issues. If you smell gas or suspect a leak, evacuate immediately and notify authorities. / Follow local authorities' instructions and evacuation orders. Be prepared for aftershocks, which can cause additional damage or collapse weakened structures. / Assist neighbors and community members who may need help. Participate in cleanup and recovery efforts to restore normalcy and support resilience.",
+          " / Check yourself and others for injuries. Administer first aid and seek medical attention for serious injuries. / Assess your home or workplace for structural damage and potential hazards such as gas leaks or electrical issues. If you smell gas or suspect a leak, evacuate immediately and notify authorities. / Follow local authorities' instructions and evacuation orders. Be prepared for aftershocks, which can cause additional damage or collapse weakened structures. / Assist neighbors and community members who may need help. Participate in cleanup and recovery efforts to restore normalcy and support resilience.",
       },
     },
   ];
@@ -245,7 +245,7 @@ const GuideContent: React.FC = () => {
 
       <IonContent class="ion-padding">
         {
-          <div>
+          <div className='guide-content-container'>
             <div className={segment === 'before' ? '' : 'display-none'}>
               <div className="intro-container">
                 <img src={guide.before.image} alt="" />
