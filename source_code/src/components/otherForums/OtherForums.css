@@ -1,8 +1,8 @@
 .group-card {
-  border: 1px solid #ddd;
+  background-color: var(--ion-bg-white);
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
-  margin: 14px;
+  margin: 14px 16px;
   padding: 10px 16px;
   display: flex;
   flex-direction: column;
@@ -20,12 +20,15 @@
   color: #fff;
   font-size: 24px;
   font-weight: bold;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+}
+.group-initials p {
+  font-size: 1rem;
 }
 
 .group-date {

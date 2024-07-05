@@ -240,6 +240,7 @@ import { createForum,getAllForums } from '../../../services/controllers/forum'
 import { handleCreateGuide} from '../../../services/controllers/Guide'
 
 import { handleCreateIncident } from '../../../services/controllers/incident'
+import '../Anouncement/Announcements.css'
 function CommunityPage() {
   const navigateTo = useHistory();
   const [selectedSegment, setSelectedSegment] = useState<string>("first");
@@ -343,7 +344,7 @@ function CommunityPage() {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <IonSegment
+        <IonSegment mode='md'
           value={selectedSegment}
           onIonChange={handleSegmentChange}
           className="community-segment"
@@ -426,11 +427,9 @@ function CommunityPage() {
         </p>}
         {selectedSegment === "four" && (
               <IonContent className="ion-padding">
-               <div className="message-container" style={{display: 'flex', flexDirection: 'column', gap: '1rem'}}>
+               <div className="message-container">
              { messages.map((message, index) => (
-              <div key={message.id} className="message" style={{
-                borderRadius: '10px', backgroundColor: '#e6f2fd', padding: '0.8rem'
-              }}>
+              <div key={message.id} className="message">
                 <p style={{margin: '0px', marginBottom: '10px'}}>{message.content}</p>
               </div>
               ))}

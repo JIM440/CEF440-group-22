@@ -44,7 +44,7 @@
   --ion-color-contrast-trans-map: #fdfdfd28;
   --ion-bg-white: #303030;
   --ion-color-muted: #a1a1a1;
-  --ion-background-light: #619ed6;
+  --ion-background-light: #569ee2;
   --map-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   --map-zoom-in-icon: url('./assets/icons/dark-plus.svg');
   --map-zoom-out-icon: url('./assets/icons/dark-minus.svg');
@@ -68,7 +68,7 @@
   --ion-color-ch-ss: #fff;
   --ion-text-color-step-800: #fff;
   --ion-color-muted: #3f3f3f;
-  --ion-background-light: #1e80db6b;
+  --ion-background-light: #9acdfd6b;
   --ion-bg-white: #fff;
   --map-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
   --map-zoom-in-icon: url('./assets/icons/light-plus.svg');
@@ -90,6 +90,13 @@
 }
 
 .ion-page {
+  --background: var(--ion-background-color);
+}
+.ion-content {
+  --background: var(--ion-background-color);
+}
+
+:host(.ion-color) .toolbar-background {
   --background: var(--ion-background-color);
 }
 
