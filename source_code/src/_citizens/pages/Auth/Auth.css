@@ -266,7 +266,7 @@ form ion-button {
 }
 
 .role-container h3 {
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .login-type-container h3 {
@@ -281,7 +281,7 @@ form ion-button {
 .btn-logintype-container {
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
+  gap: 0.8rem;
   width: 100%;
 }
 

@@ -42,6 +42,7 @@ const users = [
 ];
 
 import { handleCreateGuide } from '../../../services/controllers/Guide';
+import AlertIcon from '../components/Alerts';
 
 const ResponderCommunity: React.FC = () => {
 
@@ -62,7 +63,8 @@ const ResponderCommunity: React.FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>Responder Community</IonTitle>
+                    <IonTitle>Community</IonTitle>
+                    <AlertIcon />
                 </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">

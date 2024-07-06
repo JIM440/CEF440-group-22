@@ -34,11 +34,11 @@ function ForumSessionCard({ group_name, date, last_text, icon }: cardOjectprops)
     return (
         <div className='FS-card-container' onClick={handleCardClick}>
             <div className="left-card">
-                {icon ? <IonIcon src={icon} className='gen-icon' /> : <div className='initials'>{ setInitialsOfName(group_name)}</div>}
+                {icon ? <div className='icon gen-icon'><IonIcon src={icon}  /></div> : <div className='initials'><p>{ setInitialsOfName(group_name)}</p></div>}
             </div>
             <div className="right-card">
                 <div className='name-date'>
-                    <div>{ nameChecker(group_name)}</div>
+                    <p className='group_name'>{ nameChecker(group_name)}</p>
                     <div>{ date}</div>
                 </div>
                 <div className="last-text">

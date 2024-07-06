@@ -59,6 +59,7 @@ import ResponderReportUpdate from "./_responders/pages/alerts/ResponderReportUpd
 import ResponderUpdateDisasterStatus from "./_responders/pages/alerts/ResponderUpdateAlertStatus";
 import ResponderLogin from "./_citizens/pages/Auth/ResponderLogin";
 import ResponderAccountApplication from "./_citizens/pages/Auth/ResponderAccountApply";
+import RequestHelp from "./_citizens/pages/Emergency/RequestHelp";
 
 // ================================ responder pages ================================
 
@@ -137,6 +138,9 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
           <Route path="/tabs/map" exact={true}>
             <MapPage />
           </Route>
+          <Route path='/emergency/call' exact={true} component={EmergencyCall} />
+          <Route path='/emergency/report' exact={true} component={ReportDisasterPage} />
+          <Route path='/emergency/help' exact={true} component={RequestHelp} />
           <Route path="/tabs/community" exact={true}>
             <CommunityPage />
           </Route>

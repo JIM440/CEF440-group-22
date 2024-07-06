@@ -56,14 +56,11 @@
 }
 
 .text-nogroups-joined {
-  max-width: 250px;
   text-align: center;
-  align-self: center;
   color: #999;
 }
 
 .recommend {
-  margin: 0;
-  padding: 10px 14px;
-  font-size: 25px;
+  margin: 20px 14px 10px;
+  font-size: 18px;
 }

@@ -4,6 +4,7 @@ import React from 'react';
 // assets
 import menuIcon from "../../../assets/icons/menu.svg";
 import notificationIcon from "../../../assets/icons/notification.svg";
+import AlertIcon from '../components/Alerts';
 
 const ResponderHome: React.FC = () => {
 
@@ -12,23 +13,8 @@ const ResponderHome: React.FC = () => {
         <IonPage>
                   <IonHeader class="ion-no-border">
         <IonToolbar>
-          <IonButtons slot="start">
-            <IonMenuButton>
-              <IonIcon src={menuIcon}></IonIcon>
-            </IonMenuButton>
-          </IonButtons>
           <IonTitle>Dashboard</IonTitle>
-          <IonButtons slot="end" className="notification">
-            <IonButton
-              onClick={() => {
-                router.push("/responder/alerts");
-              }}
-              mode="md"
-            >
-              <IonIcon src={notificationIcon}></IonIcon>
-              <div className="pulse-container"></div>
-            </IonButton>
-          </IonButtons>
+          <AlertIcon />
         </IonToolbar>
       </IonHeader>
             <IonContent className="ion-padding">

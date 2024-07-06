@@ -51,7 +51,7 @@ function ResponderLogin() {
             ></IonInput>
             <IonButton
               className="ion-margin-top primary-button proceed-language"
-              type="submit"
+              type="button"
               expand="block"
               mode="ios"
               routerLink="/responder/tabs/home"
@@ -60,7 +60,7 @@ function ResponderLogin() {
             </IonButton>
             <p className="signup-link-container"> 
               Don't have an account?
-                <button onClick={()=>{
+                <button type="button" onClick={()=>{
                     router.push("/index/responder/apply")
                 }} className="sign-up-link">Apply for one</button>
             </p>

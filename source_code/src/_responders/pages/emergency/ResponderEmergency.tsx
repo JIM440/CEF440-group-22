@@ -1,5 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import React from 'react';
+import AlertIcon from '../components/Alerts';
 
 const ResponderEmergency: React.FC = () => {
 
@@ -7,7 +8,8 @@ const ResponderEmergency: React.FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>Emergency Page</IonTitle>
+                    <IonTitle>Emergency</IonTitle>
+                    <AlertIcon />
                 </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">

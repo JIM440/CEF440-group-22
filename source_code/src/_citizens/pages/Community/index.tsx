@@ -16,7 +16,7 @@ import {
 } from "@ionic/react";
 import menuIcon from "../../../assets/icons/menu.svg";
 import notificationIcon from "../../../assets/icons/notification.svg";
-import announcement from "../../../assets/icons/announcement.svg";
+import announcement from "../../../assets/icons/announcements.svg";
 
 import ChatBotButton from "../../../components/Buttons/Ai_bot";
 import HeaderAvatar from "../../../components/Avatar";
@@ -34,6 +34,13 @@ import OtherForums from "../../../components/otherForums/OtherForums";
 import { serverTimestamp } from "firebase/firestore";
 
 const disasterForums = [
+  {
+    group_name: "Announcements",
+    date: "June 6",
+    last_text:
+      "We saved 3 girls from Buea Lanslide yesterday beside the mountain.",
+    icon: announcement,
+  },
   {
     group_name: "Mount Cameroon Evacuation Zone",
     date: "June 6",
@@ -241,6 +248,7 @@ import { handleCreateGuide} from '../../../services/controllers/Guide'
 
 import { handleCreateIncident } from '../../../services/controllers/incident'
 import '../Anouncement/Announcements.css'
+import AlertIcon from "../components/Alerts";
 function CommunityPage() {
   const navigateTo = useHistory();
   const [selectedSegment, setSelectedSegment] = useState<string>("first");
@@ -335,14 +343,11 @@ function CommunityPage() {
             <FormattedMessage id="Community" />
           </IonTitle>
           <HeaderAvatar />
-          <IonButtons slot="end" className="notification">
-            <IonButton>
-              <IonIcon src={notificationIcon}></IonIcon>
-              <div className="pulse-container"></div>
-            </IonButton>
-          </IonButtons>
+          <AlertIcon />
         </IonToolbar>
       </IonHeader>
+
+
       <IonContent>
         <IonSegment mode='md'
           value={selectedSegment}
@@ -427,19 +432,20 @@ function CommunityPage() {
         </p>}
         {selectedSegment === "four" && (
               <IonContent className="ion-padding">
-               <div className="message-container">
-             { messages.map((message, index) => (
-              <div key={message.id} className="message">
-                <p style={{margin: '0px', marginBottom: '10px'}}>{message.content}</p>
-              </div>
-              ))}
-                
-               </div>
-               <IonButton onClick={()=>{
-                router.push('/anouncements/y')
-               }}>
-                Go Back
-               </IonButton>
+               <div className='FS-card-container'>
+            <div className="left-card">
+                <div className='icon gen-icon'><IonIcon src={announcement}  /></div>
+            </div>
+            <div className="right-card">
+                <div className='name-date'>
+                    <p className='group_name'>Annoucements</p>
+                    <div>June 05</div>
+                </div>
+                <div className="last-text">
+                We saved 3 girls from Buea Lanslide yesterday beside the mountain.
+                </div>
+            </div>
+        </div>
                </IonContent>
         )}
 

@@ -46,7 +46,7 @@ ul.progress-tracker {
 }
 
 .progress-tracker::after {
-  content: "";
+  content: '';
   width: calc(66.67% + 40px);
   height: 5px;
   background: linear-gradient(
@@ -183,4 +183,22 @@ li.active-tracker {
   border-radius: 8px;
   margin-bottom: 20px;
   background-color: var(--divider-background);
+}
+
+/* emergency call */
+
+.emergency-call-container {
+  display: flex;
+  background-color: var(--ion-bg-white);
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.2rem;
+  border-radius: 10px;
+  padding: 10px 18px;
+}
+
+.emergency-call-container p {
+  font-size: '18px';
+  font-weight: 500;
 }
