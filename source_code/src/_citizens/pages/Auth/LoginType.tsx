@@ -10,6 +10,7 @@ import {
 } from '@ionic/react';
 import { chevronBack, chevronForward } from 'ionicons/icons';
 import React from 'react';
+import './Auth.css'
 
 import logo from '../../../assets/images/logo-white.svg';
 
@@ -46,7 +47,7 @@ const LoginType: React.FC = () => {
 
             <IonButton
               mode="ios"
-              className="welcome-signup "
+              className="welcome-signup primary-button"
               onClick={() => {
                 router.push('/index/login');
               }}

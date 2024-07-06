@@ -102,6 +102,9 @@
 .header-ios.ion-no-border ion-toolbar:last-of-type {
   background-color: var(--ion-background-color);
 }
+ion-header ion-toolbar:first-of-type {
+  background-color: var(--ion-background-color);
+}
 
 a {
   text-decoration: none;

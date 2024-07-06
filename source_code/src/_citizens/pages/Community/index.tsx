@@ -390,8 +390,7 @@ function CommunityPage() {
                 <>
                   <div className="info-group">
                   <div className="text-nogroups-joined">
-                    <p>You haven't joined any group yet,
-                      see suggestions below
+                    <p>You haven't joined any group yet
                     </p>
                   </div>
                   <div className="recommend">Recommended Groups</div></div>
@@ -431,7 +430,7 @@ function CommunityPage() {
           
         </p>}
         {selectedSegment === "four" && (
-              <IonContent className="ion-padding">
+              <IonContent className="">
                <div className='FS-card-container'>
             <div className="left-card">
                 <div className='icon gen-icon'><IonIcon src={announcement}  /></div>
@@ -439,7 +438,7 @@ function CommunityPage() {
             <div className="right-card">
                 <div className='name-date'>
                     <p className='group_name'>Annoucements</p>
-                    <div>June 05</div>
+                    <div>June 5</div>
                 </div>
                 <div className="last-text">
                 We saved 3 girls from Buea Lanslide yesterday beside the mountain.

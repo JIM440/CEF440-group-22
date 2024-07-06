@@ -21,7 +21,7 @@ const ResponderAccountApplication = () => {
           <IonButtons slot="start">
             <IonBackButton />
           </IonButtons>
-          <IonTitle>Apply to be a Responder</IonTitle>
+          <IonTitle>Responder Application</IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -82,7 +82,7 @@ const ResponderAccountApplication = () => {
               fill="outline"
             />
           </div>
-          <hr />
+          <hr className='hr-line' />
 
           {/* Credentials for Access */}
           <div>
@@ -102,7 +102,7 @@ const ResponderAccountApplication = () => {
               fill="outline"
             />
           </div>
-          <hr />
+          <hr className='hr-line' />
 
           {/* Verification Documents */}
           <div>
@@ -120,7 +120,7 @@ const ResponderAccountApplication = () => {
               <input type="file" accept=".pdf,.doc,.docx,.jpg,.png" />
             </div>
           </div>
-          <hr />
+          <hr className='hr-line' />
 
           {/* Consent and Agreement */}
           {/* <div>
@@ -137,14 +137,14 @@ const ResponderAccountApplication = () => {
               <input type="file" accept=".pdf,.doc,.docx,.jpg,.png" />
             </div>
           </div> 
-          <hr />*/}
+          <hr className='line' />*/}
 
           {/* Submit Button */}
           <IonButton
             mode="ios"
             expand="block"
             type="submit"
-            className="ion-margin-top"
+            className="ion-margin-top primary-button"
           >
             Submit Application
           </IonButton>

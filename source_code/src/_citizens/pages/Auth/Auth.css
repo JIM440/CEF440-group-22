@@ -230,12 +230,12 @@ form ion-button {
   height: 50px;
   border-radius: 8px;
 }
-
+/* 
 .get-started-login {
 }
 
 .get-started-signup {
-}
+} */
 
 /* login type */
 
@@ -320,4 +320,9 @@ form ion-button {
 
 .responder-account-application form > div > div input {
   margin-bottom: 16px;
+}
+
+hr.hr-line {
+  background-color: var(--ion-color-contrast);
+  height: 2px;
 }
