@@ -60,6 +60,7 @@ import ResponderUpdateDisasterStatus from "./_responders/pages/alerts/ResponderU
 import ResponderLogin from "./_citizens/pages/Auth/ResponderLogin";
 import ResponderAccountApplication from "./_citizens/pages/Auth/ResponderAccountApply";
 import RequestHelp from "./_citizens/pages/Emergency/RequestHelp";
+import AddAlertResponder from './_responders/pages/alerts/AddAlert'
 
 // ================================ responder pages ================================
 
@@ -199,11 +200,9 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
 
 <Route path='/index/responder/login' exact={true} component={ResponderLogin} />
 <Route path='/index/responder/apply' exact={true} component={ResponderAccountApplication} />
-          <Route
-            path="/responder/tabs/home"
-            component={ResponderHome}
-            exact={true}
-          />
+<Route path="/responder/tabs/home" exact={true}>
+            <ResponderHome locale={locale} />
+            </Route>
           <Route
             path="/responder/tabs/map"
             exact={true}
@@ -239,6 +238,11 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
             path="/responder/alerts/reportupdate"
             exact={true}
             component={ResponderReportUpdate}
+          />
+          <Route
+            path="/responder/alerts/new"
+            exact={true}
+            component={AddAlertResponder}
           />
           {/* profile */}
           <Route
@@ -351,7 +355,7 @@ Responder Tabs
                 }
               />
               <IonLabel>
-                <FormattedMessage id="Emergency" />
+                <FormattedMessage id="Help Requests" />
               </IonLabel>
             </IonTabButton>
 

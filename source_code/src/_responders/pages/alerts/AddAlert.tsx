@@ -23,10 +23,10 @@ import {
   IonSelectOption,
 } from "@ionic/react";
 
-import "./emergency.css";
+import "../../../_citizens/pages/Emergency/emergency.css";
 
 import backIcon from '../../../assets/icons/back.svg'
-import "../Page.css";
+import "../../../_citizens/pages/Page.css";
 
 import { FormattedMessage } from "react-intl";
 
@@ -36,7 +36,7 @@ import { chevronBack, chevronForward } from "ionicons/icons";
 import EarthqaukeImage from "../../../assets/images/earthaquake.jpg";
 import BackBtn from "../../../components/HeaderBack";
 
-const RequestHelp: React.FC = () => {
+const AddAlertResponder: React.FC = () => {
   const [step, setStep] = useState(0);
   const [previewImage, setPreviewImage] = useState('');
 
@@ -56,7 +56,7 @@ const RequestHelp: React.FC = () => {
   return (
     <IonPage className="report-main-container">
       <IonHeader class="ion-no-border">
-        <BackBtn title='Request Help' />
+        <BackBtn title='Add Alert' />
       </IonHeader>
 
       <IonContent fullscreen>
@@ -198,7 +198,7 @@ const RequestHelp: React.FC = () => {
                     setStep(step + 1);
                   }}
                 >
-                  <IonLabel>Submit Report</IonLabel>
+                  <IonLabel>Send Alert</IonLabel>
                 </IonButton>
               </div>
             </div>
@@ -209,4 +209,4 @@ const RequestHelp: React.FC = () => {
   );
 };
 
-export default RequestHelp;
+export default AddAlertResponder;

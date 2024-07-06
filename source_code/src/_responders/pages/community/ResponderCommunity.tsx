@@ -1,6 +1,7 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonIcon } from '@ionic/react';
 import React,{useContext} from 'react';
 
+import menuIcon from "../../../assets/icons/menu.svg";
 import { createUser } from '../../../services/AuthService/auth';
 import { userContext } from '../../../context/UserContext';
 
@@ -63,6 +64,11 @@ const ResponderCommunity: React.FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
+                <IonButtons slot="start">
+            <IonMenuButton>
+              <IonIcon src={menuIcon}></IonIcon>
+            </IonMenuButton>
+          </IonButtons>
                     <IonTitle>Community</IonTitle>
                     <AlertIcon />
                 </IonToolbar>

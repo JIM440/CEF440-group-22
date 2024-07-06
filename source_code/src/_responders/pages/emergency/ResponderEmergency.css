@@ -1,0 +1,45 @@
+.help-requests-container{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.help-requests-card {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px;
+    border-radius: 8px;
+    background-color: var(--ion-bg-white);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+}
+
+.user-details img {
+    width: 100%;
+    min-height: 140px;
+    background-color: #eee;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.user-details {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr 1fr;
+}
+
+.user-details h4{
+    color: var(--ion-color-primary);
+    font-weight: bold;
+}
+
+.user-details span {
+    font-size: 12px;
+    margin-top: -6px;
+    display: block;
+    color: var(--ion-color-muted);
+}
+
+.user-details .btn-link {
+    margin-left: -16px;
+    margin-top: -10px;
+}

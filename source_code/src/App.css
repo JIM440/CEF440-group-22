@@ -37,6 +37,7 @@
   --black-color: #000000;
   --white-color: #ffffff;
   --notification-color: #d33f2c;
+  --ion-input-border: #ffffff26;
   --divider-color: #1d6ab1;
   --ion-color-contrast: #cdcdcd;
   --ion-segment-indicator-checked-border-radius: 10px;
@@ -54,6 +55,7 @@
   --ion-color: #f4f5f8;
   --ion-color-contrast: #404040;
   --ion-color-shade: #d7d8da;
+  --ion-input-border: #00000054;
   --ion-color-tint: #f5f6f9;
   --divider-background: rgba(var(--ion-color-primary-rgb), 0.14);
   --black-color: #000000;

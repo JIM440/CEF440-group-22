@@ -36,8 +36,22 @@ import { chevronBack, chevronForward } from "ionicons/icons";
 import EarthqaukeImage from "../../../assets/images/earthaquake.jpg";
 import BackBtn from "../../../components/HeaderBack";
 
-const ReportDisasterPage: React.FC = () => {
+const ReportDisaster: React.FC = () => {
   const [step, setStep] = useState(0);
+  const [previewImage, setPreviewImage] = useState('');
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      setPreviewImage(reader.result);
+    };
+
+    if (file && file.type.startsWith('image/')) {
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
     <IonPage className="report-main-container">
@@ -156,7 +170,14 @@ const ReportDisasterPage: React.FC = () => {
                   it was not tempered with
                 </p>
               </div>
-              <img src={EarthqaukeImage} alt="image" />
+              <div className='image-select-report'>
+              <div className='selected-image'>
+              {previewImage && (
+                      <img src={previewImage} alt="author" />
+                    )}
+              </div>
+              <input type="file" name="" id="" accept="image/*" onChange={handleImageChange} />
+              </div>
               <div className="button-container">
                 <IonButton
                   mode="ios"
@@ -188,4 +209,4 @@ const ReportDisasterPage: React.FC = () => {
   );
 };
 
-export default ReportDisasterPage;
+export default ReportDisaster;
