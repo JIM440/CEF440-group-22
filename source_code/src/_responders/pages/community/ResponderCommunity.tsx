@@ -40,3 +40,13 @@ const ResponderCommunity: React.FC = () => {
 }
 
 export default ResponderCommunity;
+
+
+//     setUrlToUpload('');
+
+//     setStep(0);
+//   } catch (error) {
+//     console.log('Error reporting disaster:', error);
+//   }
+// };
+

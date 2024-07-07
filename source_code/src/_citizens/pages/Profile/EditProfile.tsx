@@ -11,13 +11,15 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import React from 'react';
+import React, { useContext} from 'react';
 import avatar from '../../../assets/images/avatar.jpeg';
 import './Profile.css';
 import { cameraOutline } from 'ionicons/icons';
 import BackBtn from '../../../components/HeaderBack';
+import { userContext } from '../../../context/UserContext';
 
 const EditProfile: React.FC = () => {
+  const {user,setUser} = useContext(userContext)
   return (
     <IonPage>
       <IonHeader class="ion-no-border">
@@ -37,7 +39,7 @@ const EditProfile: React.FC = () => {
           label="Full Name"
           placeholder="e.g. Jim Walcon"
           labelPlacement="floating"
-          value='Malcolm Shabazz'
+          value={user.name}
         />
         <IonInput
         type='email'
@@ -47,17 +49,18 @@ const EditProfile: React.FC = () => {
           label="Email"
           placeholder="e.g. jim@walcon.com"
           labelPlacement="floating"
-          value='malcolmx@gmail.com'
+          value={user.email}
         />
         <IonInput type='password' mode="md"
           fill="outline"
           label="Password"
           placeholder="12345@Yvs#"
           labelPlacement="floating"
-          value="12345@Yvs#">
+          value={user.password}
+          >
             <IonInputPasswordToggle color='dark' slot='end' />
         </IonInput>
-        <IonInput type='number' label='Phone Number' placeholder='123456789' value='098987565' labelPlacement="floating" fill='outline' mode='md' />
+        <IonInput type='number' label='Phone Number' placeholder={user.telephone} value={user.telephone} labelPlacement="floating" fill='outline' mode='md' />
         </form>
       </IonContent>
     </IonPage>

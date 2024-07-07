@@ -37,7 +37,8 @@ function LoginPage() {
   const DoLogin = (event: any) => {
     event.preventDefault();
     console.log("Logged In🙂");
-
+  }
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
