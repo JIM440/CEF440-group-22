@@ -39,25 +39,6 @@ interface DisasterGuide {
 }
 
 const GuideList: React.FC = () => {
-  const [guides, setGuides] = useState<DisasterGuide[]>([]);
-
-  useEffect(() => {
-    const fetchGuides = async () => {
-      try {
-        const data = await getAllGuides();
-        setGuides(data);
-      } catch (error) {
-        console.error("Error fetching guides:", error);
-      }
-    };
-
-    fetchGuides();
-  }, []);
-
-    useEffect(() => {
-    console.log('guides3', guides);
-    }, [guides]);
-  
   
   const router = useIonRouter();
   const Guides = [

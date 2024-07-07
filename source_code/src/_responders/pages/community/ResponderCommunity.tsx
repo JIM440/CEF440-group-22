@@ -5,10 +5,14 @@ import './Community.css'
 
 import menuIcon from "../../../assets/icons/menu.svg";
 import plus from '../../../assets/icons/plus.svg'
+
+
 import AlertIcon from '../components/Alerts';
 
 const ResponderCommunity: React.FC = () => {
   const router = useIonRouter()
+
+
     return (
         <IonPage>
             <IonHeader>
@@ -33,6 +37,6 @@ const ResponderCommunity: React.FC = () => {
         </div>
         </IonPage>
     );
-};
+}
 
 export default ResponderCommunity;
