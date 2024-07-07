@@ -8,9 +8,11 @@ import {
   IonButton,
   IonInput,
   IonProgressBar,
-  IonSegment,
-  IonSegmentButton,
+  IonLabel,
+  IonIcon
 } from '@ionic/react';
+import './RegistrationForm.css';
+import { chevronBack, chevronForward } from "ionicons/icons";
 
 const RegistrationForm: React.FC = () => {
   const [step, setStep] = useState(1);
@@ -102,20 +104,15 @@ const RegistrationForm: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent className="ion-padding">
-        <IonSegment value={step.toString()} className="ion-margin-bottom">
+        <div className="progress-bar-container">
           {steps.map((s) => (
-            <IonSegmentButton
-              key={s.number}
-              value={s.number.toString()}
-              disabled={s.number > step}
-            >
-              {s.number}
-              <br />
-              <span>{s.title}</span>
-            </IonSegmentButton>
+            <div key={s.number} className='progress-step'>
+              <div className={`step-number ${s.number === step || s.number < step ? 'active' : ''}`} ><p>{s.number}</p></div>
+              <div className="step-title">{s.title}</div>
+            </div>
           ))}
-        </IonSegment>
-        <IonProgressBar value={(step - 1) / 3}></IonProgressBar>
+          <IonProgressBar value={(step - 1) / 3} className="progress-bar"></IonProgressBar>
+        </div>
         {step === 1 && (
           <form>
             <IonInput
@@ -152,8 +149,8 @@ const RegistrationForm: React.FC = () => {
               className="ion-margin-top"
             />
             <div className="ion-text-center ion-margin-top">
-              <IonButton onClick={handleNextStep} disabled={!(fullName.trim() !== '') || !(username !== '') || !(password !== '')}>
-                Next
+              <IonButton className='btn' mode='ios' onClick={handleNextStep} disabled={!(fullName !== '') || !(username !== '') || !(password !== '')}>
+                Next <IonIcon icon={chevronForward} slot='end' />
               </IonButton>
             </div>
           </form>
@@ -182,12 +179,13 @@ const RegistrationForm: React.FC = () => {
               labelPlacement="floating"
               className="ion-margin-top"
             />
-            <div className="ion-text-center ion-margin-top">
-              <IonButton onClick={handlePrevStep} className="ion-margin-end">
-                Previous
-              </IonButton>
-              <IonButton onClick={handleNextStep} disabled={!(email !== '') || !(phone !== '')}>
-                Next
+            <div className="btn-container ion-text-center ion-margin-top">
+              <button onClick={handlePrevStep} className="btn-outlined ion-margin-end">
+                <IonIcon slot='start' icon={chevronBack} /><IonLabel>Previous</IonLabel>
+              </button>
+
+              <IonButton mode='ios' onClick={handleNextStep} disabled={!(email !== '' || !(phone !== ''))} className='btn'>
+                Next <IonIcon icon={chevronForward} slot='end' size='small' />
               </IonButton>
             </div>
           </form>
@@ -205,12 +203,13 @@ const RegistrationForm: React.FC = () => {
               labelPlacement="floating"
               className="ion-margin-top"
             />
-            <div className="ion-text-center ion-margin-top">
-              <IonButton onClick={handlePrevStep} className="ion-margin-end">
-                Previous
-              </IonButton>
-              <IonButton onClick={handleNextStep} disabled={!(location !== '')}>
-                Next
+            <div className="btn-container ion-text-center ion-margin-top">
+              <button onClick={handlePrevStep} className="btn-outlined ion-margin-end">
+                <IonIcon slot='start' icon={chevronBack} /><IonLabel>Previous</IonLabel>
+              </button>
+
+              <IonButton mode='ios' onClick={handleNextStep} disabled={!(location !== '')} className='btn'>
+                Next <IonIcon icon={chevronForward} slot='end' size='small' />
               </IonButton>
             </div>
           </form>
@@ -222,11 +221,14 @@ const RegistrationForm: React.FC = () => {
             <IonInput mode="md" value={email} disabled className="ion-margin-top" />
             <IonInput mode="md" value={phone} disabled className="ion-margin-top" />
             <IonInput mode="md" value={location} disabled className="ion-margin-top" />
-            <div className="ion-text-center ion-margin-top">
-              <IonButton onClick={handlePrevStep} className="ion-margin-end">
-                Previous
+            <div className="btn-container ion-text-center ion-margin-top">
+              <button onClick={handlePrevStep} className="btn-outlined ion-margin-end">
+                <IonIcon slot='start' icon={chevronBack} /><IonLabel>Previous</IonLabel>
+              </button>
+
+              <IonButton mode='ios' onClick={submitForm} className='btn'>
+                Submit <IonIcon icon={chevronForward} slot='end' size='small' />
               </IonButton>
-              <IonButton onClick={submitForm}>Submit</IonButton>
             </div>
           </div>
         )}
