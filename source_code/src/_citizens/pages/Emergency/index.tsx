@@ -12,27 +12,25 @@ import {
   IonLabel,
   IonNavLink,
   useIonRouter,
-} from "@ionic/react";
+} from '@ionic/react';
 import React from 'react';
 
+import { chevronForward } from 'ionicons/icons';
 
-import { chevronForward } from "ionicons/icons";
+import menuIcon from '../../../assets/icons/menu.svg';
+import notificationIcon from '../../../assets/icons/notification.svg';
+import EmergencyCall from '../../../assets/images/emergency-call.png';
+import ReportDisaster from '../../../assets/images/Report_Disaster.png';
+import RequestHelp from '../../../assets/images/help.png';
 
+import ChatBotButton from '../../../components/Buttons/Ai_bot';
+import HeaderAvatar from '../../../components/Avatar';
 
-import menuIcon from "../../../assets/icons/menu.svg";
-import notificationIcon from "../../../assets/icons/notification.svg";
-import EmergencyCall from "../../../assets/images/emergency-call.png";
-import ReportDisaster from "../../../assets/images/Report_Disaster.png";
-import RequestHelp from "../../../assets/images/help.png";
-
-import ChatBotButton from "../../../components/Buttons/Ai_bot";
-import HeaderAvatar from "../../../components/Avatar";
-
-
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage } from 'react-intl';
+import AlertIcon from '../components/Alerts';
 
 const ReportPage = () => {
-  const router = useIonRouter()
+  const router = useIonRouter();
   return (
     <IonPage>
       <IonHeader class="ion-no-border">
@@ -46,12 +44,7 @@ const ReportPage = () => {
             <FormattedMessage id="Emergency" />
           </IonTitle>
           <HeaderAvatar />
-          <IonButtons slot="end" className="notification">
-            <IonButton>
-              <IonIcon src={notificationIcon}></IonIcon>
-              <div className="pulse-container"></div>
-            </IonButton>
-          </IonButtons>
+          <AlertIcon />
         </IonToolbar>
       </IonHeader>
 
@@ -66,7 +59,7 @@ const ReportPage = () => {
               <p className="explanatory-text">Call an emergency number</p>
               <IonButton
                 onClick={() => {
-                  router.push("/emergency/call");
+                  router.push('/emergency/call');
                 }}
                 color="primary"
                 fill="clear"
@@ -102,7 +95,12 @@ const ReportPage = () => {
             <div className="option-name-explanation">
               <h2>Request help</h2>
               <p className="explanatory-text">Send out a distress signal</p>
-              <IonButton color="primary" fill="clear" mode="ios">
+              <IonButton
+                color="primary"
+                fill="clear"
+                mode="ios"
+                routerLink="/emergency/help"
+              >
                 <IonLabel>Proceed</IonLabel>
                 <IonIcon src={chevronForward} />
               </IonButton>
@@ -112,6 +110,7 @@ const ReportPage = () => {
         <ChatBotButton />
       </IonContent>
     </IonPage>
-  );};
+  );
+};
 
 export default ReportPage;

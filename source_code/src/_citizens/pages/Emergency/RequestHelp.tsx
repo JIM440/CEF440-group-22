@@ -36,7 +36,7 @@ import { chevronBack, chevronForward } from "ionicons/icons";
 import EarthqaukeImage from "../../../assets/images/earthaquake.jpg";
 import BackBtn from "../../../components/HeaderBack";
 
-const ReportDisaster: React.FC = () => {
+const RequestHelp: React.FC = () => {
   const [step, setStep] = useState(0);
   const [previewImage, setPreviewImage] = useState('');
 
@@ -56,7 +56,7 @@ const ReportDisaster: React.FC = () => {
   return (
     <IonPage className="report-main-container">
       <IonHeader class="ion-no-border">
-        <BackBtn title='Report Disaster' />
+        <BackBtn title='Request Help' />
       </IonHeader>
 
       <IonContent fullscreen>
@@ -209,4 +209,4 @@ const ReportDisaster: React.FC = () => {
   );
 };
 
-export default ReportDisaster;
+export default RequestHelp;

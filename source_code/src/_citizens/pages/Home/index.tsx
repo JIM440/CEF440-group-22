@@ -18,7 +18,6 @@ import {
 } from "@ionic/react";
 
 import menuIcon from "../../../assets/icons/menu.svg";
-import notificationIcon from "../../../assets/icons/notification.svg";
 import locationIcon from "../../../assets/icons/location.svg";
 import { chevronDown } from "ionicons/icons";
 
@@ -35,6 +34,8 @@ import {
 } from "../../../modules/weather/weather";
 
 import { FormattedMessage } from "react-intl";
+
+import AlertIcon from "../components/Alerts";
 
 import React, { useState, useEffect, useRef, useContext } from "react";
 import { userContext } from "../../../context/UserContext";
@@ -149,17 +150,7 @@ const HomePage: React.FC<ContainerProps> = (locale) => {
             </IonMenuButton>
           </IonButtons>
           <IonTitle>Dashboard</IonTitle>
-          <IonButtons slot="end" className="notification">
-            <IonButton
-              onClick={() => {
-                router.push("/alerts");
-              }}
-              mode="md"
-            >
-              <IonIcon src={notificationIcon}></IonIcon>
-              <div className="pulse-container"></div>
-            </IonButton>
-          </IonButtons>
+          <AlertIcon />
         </IonToolbar>
       </IonHeader>
       <IonContent>

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import {
   IonContent,
+  IonModal,
   IonPage,
   IonHeader,
+  IonLabel,
   IonToolbar,
   IonMenuButton,
   IonButtons,
@@ -16,7 +18,7 @@ import {
 } from "@ionic/react";
 import menuIcon from "../../../assets/icons/menu.svg";
 import notificationIcon from "../../../assets/icons/notification.svg";
-import announcement from "../../../assets/icons/announcement.svg";
+import announcement from "../../../assets/icons/announcements.svg";
 
 import ChatBotButton from "../../../components/Buttons/Ai_bot";
 import HeaderAvatar from "../../../components/Avatar";
@@ -34,6 +36,13 @@ import OtherForums from "../../../components/otherForums/OtherForums";
 import { serverTimestamp } from "firebase/firestore";
 
 const disasterForums = [
+  {
+    group_name: "Announcements",
+    date: "June 6",
+    last_text:
+      "We saved 3 girls from Buea Lanslide yesterday beside the mountain.",
+    icon: announcement,
+  },
   {
     group_name: "Mount Cameroon Evacuation Zone",
     date: "June 6",
@@ -241,10 +250,27 @@ import { handleCreateGuide} from '../../../services/controllers/Guide'
 
 import { handleCreateIncident } from '../../../services/controllers/incident'
 import '../Anouncement/Announcements.css'
+import AlertIcon from "../components/Alerts";
 function CommunityPage() {
   const navigateTo = useHistory();
   const [selectedSegment, setSelectedSegment] = useState<string>("first");
   const [showCommunities, setShowCommunities] = useState<boolean>(false);
+
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null)
+
+  const openModal = (item) => {
+    console.log(item)
+    setSelectedItem(item);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedItem(null);
+  };
+
 
   const handleSegmentChange = (event: CustomEvent) => {
     setSelectedSegment(event.detail.value);
@@ -335,14 +361,11 @@ function CommunityPage() {
             <FormattedMessage id="Community" />
           </IonTitle>
           <HeaderAvatar />
-          <IonButtons slot="end" className="notification">
-            <IonButton>
-              <IonIcon src={notificationIcon}></IonIcon>
-              <div className="pulse-container"></div>
-            </IonButton>
-          </IonButtons>
+          <AlertIcon />
         </IonToolbar>
       </IonHeader>
+
+
       <IonContent>
         <IonSegment mode='md'
           value={selectedSegment}
@@ -385,21 +408,44 @@ function CommunityPage() {
                 <>
                   <div className="info-group">
                   <div className="text-nogroups-joined">
-                    <p>You haven't joined any group yet,
-                      see suggestions below
+                    <p>You haven't joined any group yet
                     </p>
                   </div>
-                  <div className="recommend">Recommended Groups</div></div>
+                  <hr style={{backgroundColor: 'var(--ion-color-contrast)'}} />
+                  <div className="recommend">Communities you can join</div></div>
                 <div className="groups-container">
-                  {disasterManagementGroups.map((group, index) => (
+                  {disasterManagementGroups.map((group, index) => (<>
                     <OtherForums
                       key={index}
                       name={group.name}
                       date={group.date}
                       description={group.description}
+                      onClick={()=>{openModal(group)}}
                     />
+                </>
                   ))}
                 </div>
+
+                {showModal && selectedItem && <IonModal isOpen={showModal} onDidDismiss={closeModal}
+          trigger="open-modal"
+          initialBreakpoint={0.6}
+          breakpoints={[0, 0.25, 0.5, 0.6, 0.75]}
+          handleBehavior="cycle"
+        >
+          <IonContent className="ion-padding ">
+            <div className="ion-margin-top modal-content-community">
+              <div className='intials'>FM</div>
+              <h3>{selectedItem.name}</h3>
+              <div className='members'>
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 18v-1a5 5 0 0 1 5-5v0a5 5 0 0 1 5 5v1M1 18v-1a3 3 0 0 1 3-3v0m19 4v-1a3 3 0 0 0-3-3v0m-8-2a3 3 0 1 0 0-6a3 3 0 0 0 0 6m-8 2a2 2 0 1 0 0-4a2 2 0 0 0 0 4m16 0a2 2 0 1 0 0-4a2 2 0 0 0 0 4"/></svg>
+              <span>139 Members</span>
+              </div>
+              <p>{selectedItem.description}</p>
+              <span>A responder must approve your request to join this community</span>
+              <IonButton mode='ios' className='primary-button' expand='block'>Join Group</IonButton>
+            </div>
+          </IonContent>
+        </IonModal>}
               </>
             )}
           </div>
@@ -417,6 +463,7 @@ function CommunityPage() {
                   />
                 ))}
               </div>
+             
           </>
         )}
         {selectedSegment === "third" && <p>
@@ -425,21 +472,23 @@ function CommunityPage() {
         </button>
           
         </p>}
+        
         {selectedSegment === "four" && (
-              <IonContent className="ion-padding">
-               <div className="message-container">
-             { messages.map((message, index) => (
-              <div key={message.id} className="message">
-                <p style={{margin: '0px', marginBottom: '10px'}}>{message.content}</p>
-              </div>
-              ))}
-                
-               </div>
-               <IonButton onClick={()=>{
-                router.push('/anouncements/y')
-               }}>
-                Go Back
-               </IonButton>
+              <IonContent className="">
+               <div className='FS-card-container' onClick={()=>{router.push('/community/announcements/content')}}>
+            <div className="left-card">
+                <div className='icon gen-icon'><IonIcon src={announcement}  /></div>
+            </div>
+            <div className="right-card">
+                <div className='name-date'>
+                    <p className='group_name'>Annoucements</p>
+                    <div>June 5</div>
+                </div>
+                <div className="last-text">
+                We saved 3 girls from Buea Lanslide yesterday beside the mountain.
+                </div>
+            </div>
+        </div>
                </IonContent>
         )}
 
