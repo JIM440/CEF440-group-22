@@ -63,6 +63,7 @@ import RequestHelp from "./_citizens/pages/Emergency/RequestHelp";
 import HelpRequestDetail from "./_responders/pages/emergency/HelpRequestsDetail";
 import AddAlertResponder from './_responders/pages/alerts/AddAlert'
 import SignUpPage from "./_citizens/pages/Auth/SignUp";
+import Announcements from "./_citizens/pages/Anouncement/Announcements";
 
 // ================================ responder pages ================================
 
@@ -152,6 +153,9 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
           </Route>
           <Route path="/community/chatpage" exact={true}>
             <CommunityChatPage />
+          </Route>
+          <Route path="/community/announcements/content" exact={true}>
+            <Announcements />
           </Route>
           <Route path="/community/foruminfo" exact={true}>
             <ForumInfo />

@@ -256,7 +256,20 @@ function CommunityPage() {
   const [selectedSegment, setSelectedSegment] = useState<string>("first");
   const [showCommunities, setShowCommunities] = useState<boolean>(false);
 
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null)
+
+  const openModal = (item) => {
+    console.log(item)
+    setSelectedItem(item);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedItem(null);
+  };
 
 
   const handleSegmentChange = (event: CustomEvent) => {
@@ -398,7 +411,7 @@ function CommunityPage() {
                     <p>You haven't joined any group yet
                     </p>
                   </div>
-                  <hr />
+                  <hr style={{backgroundColor: 'var(--ion-color-contrast)'}} />
                   <div className="recommend">Communities you can join</div></div>
                 <div className="groups-container">
                   {disasterManagementGroups.map((group, index) => (<>
@@ -407,22 +420,32 @@ function CommunityPage() {
                       name={group.name}
                       date={group.date}
                       description={group.description}
-                      onClick={()=>{setIsOpen(true)}}
+                      onClick={()=>{openModal(group)}}
                     />
-                <IonModal isOpen={isOpen}
-          trigger="open-modal"
-          initialBreakpoint={0.25}
-          breakpoints={[0, 0.25, 0.5, 0.75]}
-          handleBehavior="cycle"
-        >
-          <IonContent className="ion-padding">
-            <div className="ion-margin-top">
-              <IonLabel>{group.name}</IonLabel>
-            </div>
-          </IonContent>
-        </IonModal></>
+                </>
                   ))}
                 </div>
+
+                {showModal && selectedItem && <IonModal isOpen={showModal} onDidDismiss={closeModal}
+          trigger="open-modal"
+          initialBreakpoint={0.6}
+          breakpoints={[0, 0.25, 0.5, 0.6, 0.75]}
+          handleBehavior="cycle"
+        >
+          <IonContent className="ion-padding ">
+            <div className="ion-margin-top modal-content-community">
+              <div className='intials'>FM</div>
+              <h3>{selectedItem.name}</h3>
+              <div className='members'>
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 18v-1a5 5 0 0 1 5-5v0a5 5 0 0 1 5 5v1M1 18v-1a3 3 0 0 1 3-3v0m19 4v-1a3 3 0 0 0-3-3v0m-8-2a3 3 0 1 0 0-6a3 3 0 0 0 0 6m-8 2a2 2 0 1 0 0-4a2 2 0 0 0 0 4m16 0a2 2 0 1 0 0-4a2 2 0 0 0 0 4"/></svg>
+              <span>139 Members</span>
+              </div>
+              <p>{selectedItem.description}</p>
+              <span>A responder must approve your request to join this community</span>
+              <IonButton mode='ios' className='primary-button' expand='block'>Join Group</IonButton>
+            </div>
+          </IonContent>
+        </IonModal>}
               </>
             )}
           </div>
@@ -440,18 +463,7 @@ function CommunityPage() {
                   />
                 ))}
               </div>
-              <IonModal isOpen={isOpen}
-          trigger="open-modal"
-          initialBreakpoint={0.25}
-          breakpoints={[0, 0.25, 0.5, 0.75]}
-          handleBehavior="cycle"
-        >
-          <IonContent className="ion-padding">
-            <div className="ion-margin-top">
-              <IonLabel>{name}</IonLabel>
-            </div>
-          </IonContent>
-        </IonModal>
+             
           </>
         )}
         {selectedSegment === "third" && <p>
@@ -460,9 +472,10 @@ function CommunityPage() {
         </button>
           
         </p>}
+        
         {selectedSegment === "four" && (
               <IonContent className="">
-               <div className='FS-card-container'>
+               <div className='FS-card-container' onClick={()=>{router.push('/community/announcements/content')}}>
             <div className="left-card">
                 <div className='icon gen-icon'><IonIcon src={announcement}  /></div>
             </div>

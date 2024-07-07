@@ -1,21 +1,38 @@
-import React, { useState } from 'react';
+import React, {useState} from "react";
+import { Geolocation } from '@capacitor/geolocation';
 import {
   IonContent,
   IonHeader,
   IonPage,
   IonTitle,
   IonToolbar,
+  IonBackButton,
   IonButton,
+  IonButtons,
   IonInput,
   IonProgressBar,
   IonLabel,
-  IonIcon
+  IonIcon, useIonRouter
 } from '@ionic/react';
 import './RegistrationForm.css';
 import { chevronBack, chevronForward } from "ionicons/icons";
 
 const RegistrationForm: React.FC = () => {
+  const router = useIonRouter()
   const [step, setStep] = useState(1);
+
+  const getLocation = async () => {
+    try {
+      const position = await Geolocation.getCurrentPosition();
+      setLocation(position.coords);
+      setError(null);
+    } catch (e) {
+      setError(e.message);
+    }
+  };
+
+
+const [error, setError] = useState<string | null>(null);
 
   const [fullName, setFullName] = useState('');
   const [username, setUsername] = useState('');
@@ -39,6 +56,7 @@ const RegistrationForm: React.FC = () => {
   ];
 
   const handleNextStep = () => {
+    console.log('clicked')
     switch (step) {
       case 1:
         if (validateStep1()) {
@@ -85,29 +103,30 @@ const RegistrationForm: React.FC = () => {
   };
 
   const validateStep3 = () => {
-    const locationValid = location.trim() !== '';
-    setLocationValid(locationValid);
-    return locationValid;
+    return 'hi';
   };
 
   const submitForm = () => {
     // Handle form submission logic
     console.log('Form submitted');
+    router.push('/tabs/home')
     // Optionally, reset state or navigate to success page
   };
 
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonTitle>Registration Form</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+      <IonToolbar>
+          <IonButtons slot="start">
+            <IonBackButton></IonBackButton>
+          </IonButtons>
+          <IonTitle>Register</IonTitle>
+        </IonToolbar>      </IonHeader>
       <IonContent className="ion-padding">
         <div className="progress-bar-container">
           {steps.map((s) => (
-            <div key={s.number} className='progress-step'>
-              <div className={`step-number ${s.number === step || s.number < step ? 'active' : ''}`} ><p>{s.number}</p></div>
+            <div key={s.number} className={`progress-step ${s.number === step || s.number < step ? 'active' : ''}`}>
+              <div className='step-number'><p>{s.number}</p></div>
               <div className="step-title">{s.title}</div>
             </div>
           ))}
@@ -117,6 +136,7 @@ const RegistrationForm: React.FC = () => {
           <form>
             <IonInput
               mode="md"
+              label='Full Name'
               type="text"
               value={fullName}
               placeholder="Full Name"
@@ -128,6 +148,7 @@ const RegistrationForm: React.FC = () => {
             />
             <IonInput
               mode="md"
+              label='UserName'
               type="text"
               value={username}
               placeholder="Username"
@@ -139,6 +160,7 @@ const RegistrationForm: React.FC = () => {
             />
             <IonInput
               mode="md"
+              label='Password'
               type="password"
               value={password}
               placeholder="Password"
@@ -159,6 +181,7 @@ const RegistrationForm: React.FC = () => {
           <form>
             <IonInput
               mode="md"
+              label='Email'
               type="email"
               value={email}
               placeholder="Email Address"
@@ -170,7 +193,8 @@ const RegistrationForm: React.FC = () => {
             />
             <IonInput
               mode="md"
-              type="tel"
+              label='Phone Number'
+              type="number"
               value={phone}
               placeholder="Phone Number"
               onIonInput={(e: any) => setPhone(e.target.value)}
@@ -184,7 +208,7 @@ const RegistrationForm: React.FC = () => {
                 <IonIcon slot='start' icon={chevronBack} /><IonLabel>Previous</IonLabel>
               </button>
 
-              <IonButton mode='ios' onClick={handleNextStep} disabled={!(email !== '' || !(phone !== ''))} className='btn'>
+              <IonButton mode='ios' onClick={handleNextStep} disabled={!(email !== '') || !(phone !== '')} className='btn'>
                 Next <IonIcon icon={chevronForward} slot='end' size='small' />
               </IonButton>
             </div>
@@ -194,8 +218,9 @@ const RegistrationForm: React.FC = () => {
           <form>
             <IonInput
               mode="md"
+              label='Location'
               type="text"
-              value={location}
+              value={location.latitude}
               placeholder="Location"
               onIonInput={(e: any) => setLocation(e.target.value)}
               required
@@ -203,12 +228,21 @@ const RegistrationForm: React.FC = () => {
               labelPlacement="floating"
               className="ion-margin-top"
             />
+            {console.log(location)}
+            <IonButton onClick={getLocation} fill='clear'>Get My Current Location</IonButton>
+  {location && (
+    <div>
+      <p>Latitude: {location.latitude}</p>
+      <p>Longitude: {location.longitude}</p>
+    </div>
+  )}
+
             <div className="btn-container ion-text-center ion-margin-top">
               <button onClick={handlePrevStep} className="btn-outlined ion-margin-end">
                 <IonIcon slot='start' icon={chevronBack} /><IonLabel>Previous</IonLabel>
               </button>
 
-              <IonButton mode='ios' onClick={handleNextStep} disabled={!(location !== '')} className='btn'>
+              <IonButton mode='ios' onClick={handleNextStep} className='btn'>
                 Next <IonIcon icon={chevronForward} slot='end' size='small' />
               </IonButton>
             </div>
@@ -217,10 +251,14 @@ const RegistrationForm: React.FC = () => {
         {step === 4 && (
           <div>
             <p className="ion-text-center">Please review your information:</p>
-            <IonInput mode="md" value={fullName} disabled className="ion-margin-top" />
-            <IonInput mode="md" value={email} disabled className="ion-margin-top" />
-            <IonInput mode="md" value={phone} disabled className="ion-margin-top" />
-            <IonInput mode="md" value={location} disabled className="ion-margin-top" />
+            <IonInput mode="md"
+            label='Full Name:' value={fullName} disabled className="ion-margin-top" />
+            <IonInput mode="md"
+            label='Email:' value={email} disabled className="ion-margin-top" />
+            <IonInput mode="md"
+            label='Phone Number:' value={phone} disabled className="ion-margin-top" />
+            <IonInput mode="md"
+            label='Location:' value={location} disabled className="ion-margin-top" />
             <div className="btn-container ion-text-center ion-margin-top">
               <button onClick={handlePrevStep} className="btn-outlined ion-margin-end">
                 <IonIcon slot='start' icon={chevronBack} /><IonLabel>Previous</IonLabel>
