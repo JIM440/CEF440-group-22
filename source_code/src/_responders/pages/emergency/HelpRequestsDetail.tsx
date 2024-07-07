@@ -22,7 +22,7 @@ import {
         <IonHeader class='ion-no-border'>
           <BackBtn title='Fire Incident' />
         </IonHeader>
-        <IonContent>
+        <IonContent className='ion-padding-bottom'>
           <div className="intro-image-report">
           <img style={{
               objectFit: 'cover'
@@ -89,7 +89,7 @@ import {
               <br />
               Stay safe, Buea!
             </p>
-          <IonButton mode='ios' expand="block">Mark as Done <IonIcon slot='end' icon={check} /></IonButton>
+          <IonButton mode='ios' expand="block" className='primary-button'>Mark as Done</IonButton>
           </div>
 
         </IonContent>

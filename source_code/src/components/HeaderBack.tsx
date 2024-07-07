@@ -17,7 +17,7 @@ const BackBtn: React.FC<BackBtnProps> = ({ title, onClick }) => {
             <IonBackButton color='dark'>{title}</IonBackButton>
           )}
         </IonButtons>
-        <span style={{marginLeft: "25%", fontSize: '18px'}}>{title}</span>
+        <span style={{ marginLeft: '-24px', fontSize: '20px', fontWeight: '700', width: '100%', display: 'inline-block', textAlign: 'center'}}>{title}</span>
          </IonToolbar>
     </IonHeader>
   );
