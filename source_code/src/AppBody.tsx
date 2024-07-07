@@ -64,6 +64,7 @@ import HelpRequestDetail from "./_responders/pages/emergency/HelpRequestsDetail"
 import AddAlertResponder from './_responders/pages/alerts/AddAlert'
 import SignUpPage from "./_citizens/pages/Auth/SignUp";
 import Announcements from "./_citizens/pages/Anouncement/Announcements";
+import AddForum from "./_responders/pages/community/AddForum";
 
 // ================================ responder pages ================================
 
@@ -231,6 +232,11 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
             path="/responder/tabs/community"
             exact={true}
             component={ResponderCommunity}
+          />
+          <Route
+            path="/responder/forum/new"
+            exact={true}
+            component={AddForum}
           />
           {/* alerts */}
           <Route

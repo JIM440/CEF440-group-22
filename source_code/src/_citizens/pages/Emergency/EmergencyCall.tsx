@@ -10,15 +10,16 @@ import {
   IonCardTitle,
   IonButton,
 } from '@ionic/react';
-import React from 'react';
+import React, {useState} from 'react';
 import BackBtn from '../../../components/HeaderBack';
+import { PhoneCall } from 'capacitor-plugin-phone-call';
 import { call } from 'ionicons/icons';
 
 const EmergencyCall: React.FC = () => {
   const responders = [
     {
       name: 'Police',
-      number: '911', 
+      number: '911',
       icon: 'police-outline',
     },
     {
@@ -43,7 +44,7 @@ const EmergencyCall: React.FC = () => {
     },
     {
       name: 'Roadside Assistance',
-      number: "000",
+      number: '000',
       icon: 'car-outline',
     },
     {
@@ -58,6 +59,16 @@ const EmergencyCall: React.FC = () => {
     },
   ];
 
+
+  async function makePhoneCall(phoneNumber: string) {
+    try {
+      const response = await PhoneCall.makeCall({ phoneNumber });
+      console.log('Phone call initiated:', response);
+    } catch (error) {
+      console.error('Failed to make the phone call:', error);
+    }
+  }
+
   return (
     <IonPage>
       <IonHeader>
@@ -66,12 +77,11 @@ const EmergencyCall: React.FC = () => {
 
       <IonContent className="ion-padding">
         <div>
-          {responders.map((responder) => (
-            <div
-              style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+          {responders.map((responder, index) => (
+            <div key={index}
+              style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }} onClick={()=>{makePhoneCall(responder.number)}}
             >
-              <div          className="emergency-call-container"
-              >
+              <div className="emergency-call-container">
                 <p>
                   {responder.name} ({responder.number})
                 </p>

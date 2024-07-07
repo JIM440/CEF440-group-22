@@ -25,15 +25,11 @@ import {
 
 import "../../../_citizens/pages/Emergency/emergency.css";
 
-import backIcon from '../../../assets/icons/back.svg'
 import "../../../_citizens/pages/Page.css";
 
-import { FormattedMessage } from "react-intl";
-
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 import { chevronBack, chevronForward } from "ionicons/icons";
 
-import EarthqaukeImage from "../../../assets/images/earthaquake.jpg";
 import BackBtn from "../../../components/HeaderBack";
 
 const AddAlertResponder: React.FC = () => {

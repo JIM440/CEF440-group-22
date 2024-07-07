@@ -1,0 +1,20 @@
+.chat-room-container .chat-room-upcoming {
+  padding: 1rem 1rem 10px;
+  color: var(--ion-color-muted);
+}
+
+.chat-room-container .FS-card-container {
+  height: fit-content;
+  align-items: start;
+}
+
+.chat-room-container .FS-card-container .bottom {
+  display: flex;
+  gap: 2rem;
+  margin-top: -10px;
+}
+
+.chat-room-container .FS-card-container .bottom p {
+  font-size: 14px;
+  color: var(--ion-color-muted);
+}

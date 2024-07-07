@@ -415,3 +415,16 @@ a.mapboxgl-ctrl-logo {
     left: -5vw;
   }
 }
+
+.overlay-loader {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0px;
+  z-index: 4000;
+  background-color: rgba(255, 255, 255, 0.5);
+  left: 0;
+}

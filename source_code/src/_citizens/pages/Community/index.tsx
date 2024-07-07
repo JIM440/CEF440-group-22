@@ -251,6 +251,7 @@ import { handleCreateGuide} from '../../../services/controllers/Guide'
 import { handleCreateIncident } from '../../../services/controllers/incident'
 import '../Anouncement/Announcements.css'
 import AlertIcon from "../components/Alerts";
+import ChatRoom from "./chatRooms/Chatroom";
 function CommunityPage() {
   const navigateTo = useHistory();
   const [selectedSegment, setSelectedSegment] = useState<string>("first");
@@ -466,12 +467,7 @@ function CommunityPage() {
              
           </>
         )}
-        {selectedSegment === "third" && <p>
-          <button onClick={handleCreateForum}>
-            add forum
-        </button>
-          
-        </p>}
+        {selectedSegment === "third" && <ChatRoom /> }
         
         {selectedSegment === "four" && (
               <IonContent className="">
