@@ -36,7 +36,8 @@ import {
 
 import { FormattedMessage } from "react-intl";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { userContext } from "../../../context/UserContext";
 
 type JsonObject = {
   type: string;
@@ -90,6 +91,8 @@ const HomePage: React.FC<ContainerProps> = (locale) => {
       mapViewPoint: "../images/GoogleMap.webp",
     },
   ];
+
+  const {user} = useContext(userContext)
 
   const [currentSegment, setCurrentSegment] = useState<string>("ongoing");
 
@@ -168,7 +171,7 @@ const HomePage: React.FC<ContainerProps> = (locale) => {
             <div className="welcome-location">
               <span className="salutation">
                 <FormattedMessage id={greetingText} />,{" "}
-                <IonLabel>Alexander</IonLabel>
+                <IonLabel>{ user.email}</IonLabel>
               </span>
               <div className="location-changer">
                 <div className="location-icon">
