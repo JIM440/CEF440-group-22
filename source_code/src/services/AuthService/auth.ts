@@ -7,11 +7,12 @@ import { db } from '../../config/firebase';
 interface User {
   id?: string;
   name: string;
+  username: string;
   email: string;
   password: string;
   telephone: string;
   language: string;
-  photo: string;
+  photo?: string;
   role: string;
   locations?: string[];
   forums?: string[];
@@ -26,6 +27,7 @@ const createUser = async (userInfo: User): Promise<void> => {
       id: user.uid,
       email: user.email,
       name:userInfo.name,
+      username:userInfo.username,
       language: userInfo.language,
       photo: userInfo.photo,
       role: userInfo.role,
@@ -66,6 +68,7 @@ const handleCreateUser = async (): Promise<void> => {
   try {
     const user: User = {
       name: "Myke",
+      username: "Myke",
       email: "myke@gmail.com",
       password: "myke12345",
       telephone: "987-654-3210",

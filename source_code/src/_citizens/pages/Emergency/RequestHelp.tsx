@@ -1,57 +1,101 @@
-import React from 'react';
-
+import React, { useState,useContext } from 'react';
+import {ref,uploadBytes,getDownloadURL} from 'firebase/storage'
 import {
   IonButtons,
   IonContent,
   IonHeader,
   IonIcon,
-  IonBackButton,
-  IonMenuButton,
   IonPage,
   IonTitle,
   IonToolbar,
-  IonItem,
-  IonItemDivider,
   IonInput,
   IonLabel,
   IonButton,
-  IonToggle,
-  IonModal,
-  IonRadio,
   IonTextarea,
   IonSelect,
   IonSelectOption,
 } from "@ionic/react";
 
-import "./emergency.css";
-
-import backIcon from '../../../assets/icons/back.svg'
-import "../Page.css";
-
-import { FormattedMessage } from "react-intl";
-
-import { useEffect, useState, useRef } from "react";
+import '../Page.css'
+import './emergency.css'
 import { chevronBack, chevronForward } from "ionicons/icons";
-
-import EarthqaukeImage from "../../../assets/images/earthaquake.jpg";
 import BackBtn from "../../../components/HeaderBack";
+import { storage } from '../../../config/firebase';
+import { userContext } from '../../../context/UserContext';
+import { addDoc, collection, getDocs, deleteDoc, updateDoc ,DocumentData, DocumentReference, serverTimestamp} from "firebase/firestore";
+import { db } from '../../../config/firebase';
+
 
 const RequestHelp: React.FC = () => {
   const [step, setStep] = useState(0);
-  const [previewImage, setPreviewImage] = useState('');
+  const { user, setUser } = useContext(userContext);
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
+  const [telephone, setTelephone] = useState('');
+  const [location, setLocation] = useState('');
+  const [disasterType, setDisasterType] = useState('');
+  const [description, setDescription] = useState('');
+  const [evidenceFile, setEvidenceFile] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [urlToUpload, setUrlToUpload] = useState('')
 
-    reader.onload = () => {
-      setPreviewImage(reader.result);
-    };
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    setEvidenceFile(file);
+    if (file) {
+      setImageUrl(URL.createObjectURL(file));
 
-    if (file && file.type.startsWith('image/')) {
-      reader.readAsDataURL(file);
+      const imageRef = ref(storage, `reports-images/${new Date().toISOString()}`);
+      const data = await uploadBytes(imageRef, evidenceFile!);
+      const downloadUrl = await getDownloadURL(data.ref);
+      console.log(downloadUrl);
+      setUrlToUpload(downloadUrl);
+    } else {
+      setImageUrl(null);
     }
   };
+
+  const createHelp_Request = async (collectionName: string, reportInfo:object): Promise<DocumentReference>  => {
+    try {
+      const result = await addDoc(collection(db, collectionName), {
+        ...reportInfo,
+        timestamp:serverTimestamp()
+      })
+        return result
+    } catch (error) {
+        console.error(error)
+        throw error
+    }
+  }
+  
+
+ const submitReport = async () => {
+  const report = {
+    telephone,
+    location,
+    disasterType,
+    description,
+    image: urlToUpload,
+    userId: user.name,
+  };
+
+  try {
+    const result = await createHelp_Request('help-request', report);
+    console.log('success requesting for help')
+
+    setTelephone('');
+    setLocation('');
+    setDisasterType('');
+    setDescription('');
+    setEvidenceFile(null);
+    setImageUrl(null);
+    setUrlToUpload('');
+
+    setStep(0);
+  } catch (error) {
+    console.log('Error reporting disaster:', error);
+  }
+};
+
 
   return (
     <IonPage className="report-main-container">
@@ -61,24 +105,20 @@ const RequestHelp: React.FC = () => {
 
       <IonContent fullscreen>
         <div className="progress-tracker-container">
-          <ul
-            className={
-              (step == 2 ? "fill-100" : step == 1 ? "fill-50" : "") +
-              " progress-tracker"
-            }
-          >
+          <ul className={
+            (step === 2 ? "fill-100" : step === 1 ? "fill-50" : "") +
+            " progress-tracker"
+          }>
             <li className="active-tracker">Location</li>
             <li className={step >= 1 ? "active-tracker" : ""}>Disaster</li>
             <li className={step >= 2 ? "active-tracker" : ""}>Evidence</li>
           </ul>
         </div>
         <div className="main-swiper-container-report">
-          <div
-            className={
-              "main-swiper-container-report-wrapper " +
-              (step == 1 ? "move-to-second" : step == 2 ? "move-to-third" : "")
-            }
-          >
+          <div className={
+            "main-swiper-container-report-wrapper " +
+            (step === 1 ? "move-to-second" : step === 2 ? "move-to-third" : "")
+          }>
             <div className="location-form-container">
               <IonInput
                 mode="md"
@@ -87,6 +127,8 @@ const RequestHelp: React.FC = () => {
                 placeholder="+237 680959453"
                 labelPlacement="floating"
                 fill="outline"
+                value={telephone}
+                onIonInput={e => setTelephone(e.detail.value as string)}
               ></IonInput>
               <IonButton className="gps-location-button" mode="ios">
                 Use current location
@@ -103,6 +145,8 @@ const RequestHelp: React.FC = () => {
                 placeholder="UB south, Molyko, Buea"
                 type="text"
                 className="location-manual"
+                value={location}
+                onIonInput={e => setLocation(e.detail.value as string)}
               ></IonInput>
               <IonButton
                 mode="ios"
@@ -120,6 +164,8 @@ const RequestHelp: React.FC = () => {
                 label="Disaster type"
                 labelPlacement="floating"
                 fill="outline"
+                value={disasterType}
+                onIonChange={e => setDisasterType(e.detail.value as string)}
               >
                 <IonSelectOption value="Earthquake">Earthquake</IonSelectOption>
                 <IonSelectOption value="Fire">Fire</IonSelectOption>
@@ -137,6 +183,8 @@ const RequestHelp: React.FC = () => {
                 autoGrow={true}
                 autoCapitalize="sentence"
                 rows={10}
+                value={description}
+                onIonInput={e => setDescription(e.detail.value as string)}
               ></IonTextarea>
               <div className="button-container">
                 <IonButton
@@ -167,17 +215,16 @@ const RequestHelp: React.FC = () => {
               <div className="warning-text-container">
                 <p className="warning-text">
                   Ensure evidence is clear and of good quality. Also check that
-                  it was not tempered with
+                  it was not tampered with
                 </p>
               </div>
-              <div className='image-select-report'>
-              <div className='selected-image'>
-              {previewImage && (
-                      <img src={previewImage} alt="author" />
-                    )}
-              </div>
-              <input type="file" name="" id="" accept="image/*" onChange={handleImageChange} />
-              </div>
+
+              {imageUrl && <img src={imageUrl} alt="Evidence preview" />}
+              <input
+                type="file"
+                onChange={handleFileChange}
+              />           
+
               <div className="button-container">
                 <IonButton
                   mode="ios"
@@ -194,11 +241,9 @@ const RequestHelp: React.FC = () => {
                   mode="ios"
                   slot="end"
                   className="primary-button"
-                  onClick={() => {
-                    setStep(step + 1);
-                  }}
+                  onClick={submitReport}
                 >
-                  <IonLabel>Submit Report</IonLabel>
+                  <IonLabel >Submit Report</IonLabel>
                 </IonButton>
               </div>
             </div>
