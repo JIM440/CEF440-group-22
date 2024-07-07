@@ -16,12 +16,13 @@ import {
   openOutline,
   trashBinOutline,
 } from 'ionicons/icons';
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import { History } from 'history';
 import avatar from '../../../assets/images/avatar.jpeg';
 import './Profile.css';
 import { chevronDown } from 'ionicons/icons';
 import BackBtn from '../../../components/HeaderBack';
+import { userContext } from '../../../context/UserContext';
 
 interface ContainerProps {
   history: History;
@@ -34,6 +35,7 @@ interface ContainerProps {
 const Profile: React.FC<ContainerProps> = () => {
   const [displayPreferred, setDisplayPreferred] = useState(false)
   const [displayAddLocation, setDisplayAddLocation] = useState(false)
+  const {user,setUser} = useContext(userContext)
   const CloseAll = ()=>{
     setDisplayAddLocation(false)
     setDisplayPreferred(false)
@@ -55,9 +57,9 @@ const Profile: React.FC<ContainerProps> = () => {
               fontWeight: 700,
             }}
           >
-            Malcolm X Shabazz
+            {user.name}
           </h2>
-          <p>malcolmx@gmail.com</p>
+          <p>{user.email}</p>
         </IonText>
 
         {/* preferred locations */}
@@ -90,9 +92,10 @@ const Profile: React.FC<ContainerProps> = () => {
           <h4 className='muted'>Preferred Locations</h4>
           <hr />
           <button onClick={CloseAll} className="close"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="#333333" d="M6.4 19L5 17.6l5.6-5.6L5 6.4L6.4 5l5.6 5.6L17.6 5L19 6.4L13.4 12l5.6 5.6l-1.4 1.4l-5.6-5.6z"/></svg></button>
-          <div className="preferred-locations-list">
-            <div className="location-list-item">
-              <span>Buea, Cameroon</span>
+            <div className="preferred-locations-list">
+              {user.locations?.map(location => (
+                 <div className="location-list-item">
+              <span>{location},Cameroon</span>
               <div className="remove-preferred-loaction">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -107,38 +110,7 @@ const Profile: React.FC<ContainerProps> = () => {
                 </svg>
               </div>
             </div>
-            <div className="location-list-item">
-              <span>Douala, Cameroon</span>
-              <div className="remove-preferred-loaction">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 256 256"
-                >
-                  <path
-                    fill="#dc2626"
-                    d="M216 50h-42V40a22 22 0 0 0-22-22h-48a22 22 0 0 0-22 22v10H40a6 6 0 0 0 0 12h10v146a14 14 0 0 0 14 14h128a14 14 0 0 0 14-14V62h10a6 6 0 0 0 0-12M94 40a10 10 0 0 1 10-10h48a10 10 0 0 1 10 10v10H94Zm100 168a2 2 0 0 1-2 2H64a2 2 0 0 1-2-2V62h132Zm-84-104v64a6 6 0 0 1-12 0v-64a6 6 0 0 1 12 0m48 0v64a6 6 0 0 1-12 0v-64a6 6 0 0 1 12 0"
-                  />
-                </svg>
-              </div>
-            </div>
-            <div className="location-list-item">
-              <span>Buea, Cameroon</span>
-              <div className="remove-preferred-loaction">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 256 256"
-                >
-                  <path
-                    fill="#dc2626"
-                    d="M216 50h-42V40a22 22 0 0 0-22-22h-48a22 22 0 0 0-22 22v10H40a6 6 0 0 0 0 12h10v146a14 14 0 0 0 14 14h128a14 14 0 0 0 14-14V62h10a6 6 0 0 0 0-12M94 40a10 10 0 0 1 10-10h48a10 10 0 0 1 10 10v10H94Zm100 168a2 2 0 0 1-2 2H64a2 2 0 0 1-2-2V62h132Zm-84-104v64a6 6 0 0 1-12 0v-64a6 6 0 0 1 12 0m48 0v64a6 6 0 0 1-12 0v-64a6 6 0 0 1 12 0"
-                  />
-                </svg>
-              </div>
-            </div>
+              ))}
           </div>
 
           <button  onClick={
