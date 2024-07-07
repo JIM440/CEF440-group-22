@@ -80,8 +80,6 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
       : setShowResponderTab(false);
   }, [location]);
 
-  console.log(hideTabBar, showResponderTab);
-
   var history = useHistory();
 
   function setColorScheme(scheme: string) {
@@ -122,7 +120,7 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
             <Redirect to="/index/language" />
           </Route>
           <Route path="/index/welcome" exact={true}>
-              <WelcomeScreen/>
+            <WelcomeScreen />
           </Route>
           <Route path="/tabs/home" exact={true}>
             <HomePage locale={locale} />
@@ -236,7 +234,7 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
             exact={true}
             component={ResponderProfile}
           />
-          <Route path="/index/login" exact={true}  component={LoginPage}/>
+          <Route path="/index/login" exact={true} component={LoginPage} />
         </IonRouterOutlet>
 
         {/*================================

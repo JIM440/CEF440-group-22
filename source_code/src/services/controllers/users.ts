@@ -3,7 +3,7 @@ import { addDoc, collection, deleteDoc, doc, DocumentReference, getDocs, query, 
 
 // User Interface
 interface User {
-  id: string;
+  id?: string;
   name: string;
   email: string;
   password: string;
@@ -15,108 +15,97 @@ interface User {
   forums: string[];
 }
 
-
+// Sample user data
 const user: User = {
-  id: "user-001",
-  name: "Jane Doe",
-  email: "jane.doe@example.com",
-  password: "securepassword123",
-  telephone: "123-456-7890",
-  language: "English",
-  photo: "path/to/photo.jpg",
-  role: "volunteer",
-  locations: ["New York", "Los Angeles"],
-  forums: ["disaster-preparedness", "community-support"]
+  name: "John",
+  email: "fabricemokfembam@gmail.com",
+  password: "1234567890",
+  telephone: "987-654-3210",
+  language: "Spanish",
+  photo: "path/to/photo2.jpg",
+  role: "non-volunteer",
+  locations: ["Chicago", "New York"],
+  forums: ["disaster-recovery", "first-aid"]
 };
 
+// Function to fetch a user by ID
+const getUser = async (id: string): Promise<User> => {
+  const q0 = query(collection(db, 'users'), where('id', '==', id));
 
-
-
-
-
-//get all users that are volunteers
-const q = query(collection(db,'users'),where('role', '==','volunteer'))
-
-const getAllUserVolunteers = async () => {
   try {
-    const { docs } = await getDocs(q)
-    const result = docs.map(doc => (
-      {
-        id: doc.id,
-        ...doc.data()
-      }
-    ))
-    return result;
+    const { docs } = await getDocs(q0);
+    if (docs.length > 0) {
+      const docData = docs[0].data();
+      return { id: docs[0].id, ...docData } as User;
+    } else {
+      console.log(`No user found with ID: ${id}`);
+      throw console.error
+      
+    }
   } catch (error) {
-    console.error(error);
+    console.error('Error fetching user:', error);
+    throw error;
   }
-}
+};
 
-// Query to get all users with a location containing 'Los Angeles'
-const q2 = query(collection(db, 'users'), where('locations', 'array-contains', 'Los Angeles'));
+// Function to fetch all volunteer users
+const getAllUserVolunteers = async (): Promise<User[]> => {
+  const q = query(collection(db, 'users'), where('role', '==', 'volunteer'));
 
-const getUsersInLosAngeles = async () => {
+  try {
+    const { docs } = await getDocs(q);
+    const result = docs.map(doc => (
+      { id: doc.id, ...doc.data() }
+    ));
+    return result as User[];
+  } catch (error) {
+    console.error('Error fetching volunteers:', error);
+    throw error;
+  }
+};
+
+// Function to fetch users in Los Angeles
+const getUsersInLosAngeles = async (): Promise<User[]> => {
+  const q2 = query(collection(db, 'users'), where('locations', 'array-contains', 'Los Angeles'));
+
   try {
     const { docs } = await getDocs(q2);
-    const result = docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
-    return result;
+    const result = docs.map(doc => (
+      { id: doc.id, ...doc.data() }
+    ));
+    return result as User[];
   } catch (error) {
-    console.error(error);
+    console.error('Error fetching users in Los Angeles:', error);
     throw error;
   }
-}
+};
 
-// update location
-const docRef = doc(db,'users','UoLEDKswVOoXqCAZINI4')
+// Function to update a user's location
+const updateUserLocation = async (userId: string, newLocations: string[]): Promise<void> => {
+  const docRef = doc(db, 'users', userId);
 
-const updateUserLocation = async () => {
   try {
-    const updatedDoc = await updateDoc(docRef, {
-      locations:['Cameroon','Nigeria','Tchad']
+    await updateDoc(docRef, {
+      locations: newLocations
     });
-   
-    return updatedDoc;
+    console.log('User location updated successfully');
   } catch (error) {
-    console.error(error);
+    console.error('Error updating user location:', error);
     throw error;
   }
-}
+};
 
-// delete a user
-const docRef2 = doc(db,'users','Ai3jA0wtJfOZArhpsoRL')
+// Function to delete a user
+const deleteUser = async (userId: string): Promise<void> => {
+  const docRef = doc(db, 'users', userId);
 
-const deleteUser = async () => {
   try {
-    const deletedDoc = await deleteDoc(docRef2); 
-    return deletedDoc;
+    await deleteDoc(docRef);
+    console.log('User deleted successfully');
   } catch (error) {
-    console.error(error);
+    console.error('Error deleting user:', error);
     throw error;
   }
-}
+};
 
-
-
-
-
-
-
-
-
-
-
-
-// const handleCreateUser = async () => {
-//   try {
-//     await createUser('users', users[4]);
-//     console.log('User created successfully');
-//   } catch (error) {
-//     console.error('Error creating user:', error);
-//   }
-// };
-
-
-export {deleteUser,getAllUserVolunteers,getUsersInLosAngeles,updateUserLocation };
+export { deleteUser, getAllUserVolunteers, getUsersInLosAngeles, updateUserLocation, getUser };

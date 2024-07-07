@@ -13,35 +13,9 @@ interface User {
   language: string;
   photo: string;
   role: string;
-  locations: string[];
-  forums: string[];
+  locations?: string[];
+  forums?: string[];
 }
-
-
-const users: User[] = [
-  {
-    name: "Jane Doe",
-    email: "jane.doe@example.com",
-    password: "securepassword123",
-    telephone: "123-456-7890",
-    language: "English",
-    photo: "path/to/photo1.jpg",
-    role: "volunteer",
-    locations: ["New York", "Los Angeles"],
-    forums: ["disaster-preparedness", "community-support"]
-  },
-  {
-    name: "John Smith",
-    email: "john.smith@example.com",
-    password: "mypassword",
-    telephone: "987-654-3210",
-    language: "Spanish",
-    photo: "path/to/photo2.jpg",
-    role: "non-volunteer",
-    locations: ["Chicago", "New York"],
-    forums: ["disaster-recovery", "first-aid"]
-  }
-];
 
 const createUser = async (userInfo: User): Promise<void> => {
   try {
@@ -51,6 +25,7 @@ const createUser = async (userInfo: User): Promise<void> => {
     const userDoc = {
       id: user.uid,
       email: user.email,
+      name:userInfo.name,
       language: userInfo.language,
       photo: userInfo.photo,
       role: userInfo.role,
@@ -67,20 +42,44 @@ const createUser = async (userInfo: User): Promise<void> => {
   }
 };
 
-const signIn = async (email: string, password: string) => {
+const signIn = async (email: string, password: string): Promise<object> => {
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    console.log(email,'---',password)
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    console.log(userCredential.user)
+    return userCredential ;
   } catch (error) {
-    console.error(error);
+    console.error('Error during sign-in:', error);
+    return {};
   }
 };
 
-const signInWithGoogle = async () => {
+const signInWithGoogle = async (): Promise<void> => {
   try {
     await signInWithPopup(auth, googleProvider);
   } catch (error) {
-    console.error(error);
+    console.error('Error during Google sign-in:', error);
   }
 };
 
-export { createUser, signIn, signInWithGoogle };
+const handleCreateUser = async (): Promise<void> => {
+  try {
+    const user: User = {
+      name: "Myke",
+      email: "myke@gmail.com",
+      password: "myke12345",
+      telephone: "987-654-3210",
+      language: "Chinesse",
+      photo: "path/to/photo2.jpg",
+      role: "volunteer",
+      locations: ["China", "Cape Verde"],
+      forums: ["fake shit", "first-aid"]
+    };
+    await createUser(user);
+    console.log('User created successfully');
+  } catch (error) {
+    console.error('Error creating user:', error);
+  }
+};
+
+export { handleCreateUser, createUser, signIn, signInWithGoogle };
