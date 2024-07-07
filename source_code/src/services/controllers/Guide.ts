@@ -113,7 +113,7 @@ const deleteGuide = async () => {
 
 const handleCreateGuide = async () => {
   try {
-    await createGuide("guides", DisasterGuides[5]);
+    await createGuide("guides", DisasterGuides[0]);
     console.log("Guide created successfully");
   } catch (error) {
     console.error("Error creating Guide:", error);

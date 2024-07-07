@@ -4,7 +4,7 @@ import React,{useContext} from 'react';
 import menuIcon from "../../../assets/icons/menu.svg";
 import { createUser } from '../../../services/AuthService/auth';
 import { userContext } from '../../../context/UserContext';
-
+import { handleCreateUser } from '../../../services/AuthService/auth';
 
 const users = [
   {
@@ -52,7 +52,7 @@ const ResponderCommunity: React.FC = () => {
 
     const registerUser = async () => {
         try {
-            await handleCreateGuide();
+            await handleCreateUser();
             console.log('successs');
 
         } catch (error) {
