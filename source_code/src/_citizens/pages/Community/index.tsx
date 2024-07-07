@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import {
   IonContent,
+  IonModal,
   IonPage,
   IonHeader,
+  IonLabel,
   IonToolbar,
   IonMenuButton,
   IonButtons,
@@ -254,6 +256,9 @@ function CommunityPage() {
   const [selectedSegment, setSelectedSegment] = useState<string>("first");
   const [showCommunities, setShowCommunities] = useState<boolean>(false);
 
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
+
   const handleSegmentChange = (event: CustomEvent) => {
     setSelectedSegment(event.detail.value);
   };
@@ -393,15 +398,29 @@ function CommunityPage() {
                     <p>You haven't joined any group yet
                     </p>
                   </div>
-                  <div className="recommend">Recommended Groups</div></div>
+                  <hr />
+                  <div className="recommend">Communities you can join</div></div>
                 <div className="groups-container">
-                  {disasterManagementGroups.map((group, index) => (
+                  {disasterManagementGroups.map((group, index) => (<>
                     <OtherForums
                       key={index}
                       name={group.name}
                       date={group.date}
                       description={group.description}
+                      onClick={()=>{setIsOpen(true)}}
                     />
+                <IonModal isOpen={isOpen}
+          trigger="open-modal"
+          initialBreakpoint={0.25}
+          breakpoints={[0, 0.25, 0.5, 0.75]}
+          handleBehavior="cycle"
+        >
+          <IonContent className="ion-padding">
+            <div className="ion-margin-top">
+              <IonLabel>{group.name}</IonLabel>
+            </div>
+          </IonContent>
+        </IonModal></>
                   ))}
                 </div>
               </>
@@ -421,6 +440,18 @@ function CommunityPage() {
                   />
                 ))}
               </div>
+              <IonModal isOpen={isOpen}
+          trigger="open-modal"
+          initialBreakpoint={0.25}
+          breakpoints={[0, 0.25, 0.5, 0.75]}
+          handleBehavior="cycle"
+        >
+          <IonContent className="ion-padding">
+            <div className="ion-margin-top">
+              <IonLabel>{name}</IonLabel>
+            </div>
+          </IonContent>
+        </IonModal>
           </>
         )}
         {selectedSegment === "third" && <p>

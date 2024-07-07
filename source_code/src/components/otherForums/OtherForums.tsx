@@ -1,5 +1,5 @@
-import { IonContent, IonIcon, IonList } from "@ionic/react";
-import React from "react";
+import { IonContent, IonIcon, IonList, IonModal, IonButton, IonLabel } from "@ionic/react";
+import React, { useState } from "react";
 import "./OtherForums.css";
 import moreArrow from "../../assets/icons/moreArrow.svg";
 import { chevronForward } from "ionicons/icons";
@@ -8,9 +8,10 @@ interface OtherForumsProps {
     name: string;
     date: string;
     description: string;
+    onClick: any
 }
 
-const OtherForums: React.FC<OtherForumsProps>= ({name,date,description}) => {
+const OtherForums: React.FC<OtherForumsProps>= ({name,date,description, onClick}) => {
   return (
     <div className="group-card">
       <div className="group-header">
@@ -26,7 +27,7 @@ const OtherForums: React.FC<OtherForumsProps>= ({name,date,description}) => {
       <div className="group-description">
         {description}
       </div>
-       <div className="group-more">
+       <div id="open-modal" className="group-more" onClick={onClick}>
           <span>View More</span> 
           <IonIcon src={chevronForward} />
         </div>

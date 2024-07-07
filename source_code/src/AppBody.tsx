@@ -60,7 +60,9 @@ import ResponderUpdateDisasterStatus from "./_responders/pages/alerts/ResponderU
 import ResponderLogin from "./_citizens/pages/Auth/ResponderLogin";
 import ResponderAccountApplication from "./_citizens/pages/Auth/ResponderAccountApply";
 import RequestHelp from "./_citizens/pages/Emergency/RequestHelp";
+import HelpRequestDetail from "./_responders/pages/emergency/HelpRequestsDetail";
 import AddAlertResponder from './_responders/pages/alerts/AddAlert'
+import SignUpPage from "./_citizens/pages/Auth/SignUp";
 
 // ================================ responder pages ================================
 
@@ -129,6 +131,9 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
           </Route>
           <Route path="/index/logintype" exact={true}>
               <LoginType />
+          </Route>
+          <Route path="/index/register" exact={true}>
+              <SignUpPage />
           </Route>
           <Route path="/tabs/home" exact={true}>
             <HomePage locale={locale} />
@@ -212,6 +217,11 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
             path="/responder/tabs/emergency"
             exact={true}
             component={ResponderEmergency}
+          />
+          <Route
+            path="/responder/emergency/requests_detail"
+            exact={true}
+            component={HelpRequestDetail}
           />
           <Route
             path="/responder/tabs/community"

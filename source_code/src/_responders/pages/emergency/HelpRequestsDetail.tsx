@@ -1,7 +1,9 @@
 import {
     IonBackButton,
+    IonButton,
     IonContent,
     IonFooter,
+    IonIcon,
     IonHeader,
     IonPage,
     IonTitle,
@@ -10,6 +12,7 @@ import {
   } from '@ionic/react';
   import React from 'react';
   import floodOccur from '../../../assets/images/flood-occurred2.jpg';
+  import check from '../../../assets/icons/check.svg';
   import BackBtn from '../../../components/HeaderBack';
   
   const HelpRequestDetail: React.FC = () => {
@@ -23,16 +26,16 @@ import {
           <div className="intro-image-report">
           <img style={{
               objectFit: 'cover'
-          }} height='280px' src={floodOccur} />
+          }} height='280px' src='https://media.rnztools.nz/rnz/image/upload/s--1LyXokVX--/t_tohu-badge-twitter/v1717720104/4KOYK0Q_000_34UA4EC_jpg'/>
           </div>
           <div className="ion-padding-horizontal header-pending-content">
             <div className="row-1">
-              <h4>Fire</h4>
+              <h4>Elkanah The Levite</h4>
               <span>Buea, Cameroon</span>
             </div>
             <div className="row-2">
               <button className="btn-link">
-                <span>View on Map</span>
+                <span>See on Map</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -86,24 +89,10 @@ import {
               <br />
               Stay safe, Buea!
             </p>
+          <IonButton mode='ios' expand="block">Mark as Done <IonIcon slot='end' icon={check} /></IonButton>
           </div>
+
         </IonContent>
-        
-          <IonFooter mode='md'>
-          <div className="confirm-disaster">
-            <p style={{ textAlign: 'center' }}>Confirm  Disaster Occurrence</p>
-            <div className="btn-right-aligned">
-              <button className="cancel">Reject</button>
-              <button
-                onClick={() => {
-                  router.push('/responder/alerts/');
-                }}
-              >
-                Confirm
-              </button>
-            </div>
-          </div>
-          </IonFooter>
       </IonPage>
     );
   };

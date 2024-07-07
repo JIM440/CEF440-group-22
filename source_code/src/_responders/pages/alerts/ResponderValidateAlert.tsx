@@ -87,14 +87,12 @@ const ResponderValidateDisaster: React.FC = () => {
             Stay safe, Buea!
           </p>
         </div>
-      </IonContent>
       
-        <IonFooter mode='md'>
         <div className="confirm-disaster">
-          <p style={{ textAlign: 'center' }}>Confirm  Disaster Occurrence</p>
+          <h5>Confirm  Disaster Occurrence:</h5>
           <div className="btn-right-aligned">
-            <button className="cancel">Reject</button>
-            <button
+            <button className="cancel" style={{width: '100%'}}>Reject</button>
+            <button style={{width: '100%'}}
               onClick={() => {
                 router.push('/responder/alerts/');
               }}
@@ -103,7 +101,7 @@ const ResponderValidateDisaster: React.FC = () => {
             </button>
           </div>
         </div>
-        </IonFooter>
+      </IonContent>
     </IonPage>
   );
 };

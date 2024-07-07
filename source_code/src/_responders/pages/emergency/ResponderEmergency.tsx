@@ -39,62 +39,45 @@ import {
           <div className='help-requests-container'>
 
             <div className='help-requests-card'>
-                <div className='user-details'>
                 <img src='https://media.rnztools.nz/rnz/image/upload/s--1LyXokVX--/t_tohu-badge-twitter/v1717720104/4KOYK0Q_000_34UA4EC_jpg' />
-              <div>
-                <div><h4>James Aluba</h4>
-                <span>5mins ago</span></div>
-                <div className='btn-link'>
-                <IonButton mode='ios' fill='clear' slot='start' >
-              <IonLabel>View More</IonLabel>
-              <IonIcon src={chevronForward}></IonIcon>
-              </IonButton>
-              </div>
-
-              </div>
-                </div>
-              <p>I am trapped on the mountain in Buea beside the seconde hut, I need help getting down.</p>
-              
-            </div>
-
-            <div className='help-requests-card'>
                 <div className='user-details'>
-                <img src='https://www.shutterstock.com/image-photo/jakarta-feb-20-2021-public-260nw-1978011872.jpg' />
               <div>
-                <div><h4>James Aluba</h4>
+                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '-10px'}}><h4>James Aluba</h4>
                 <span>5mins ago</span></div>
+                  <p>I am trapped on the mountain in Buea beside the seconde hut, I need help getting down.</p>
                 <div className='btn-link'>
-                <IonButton mode='ios' fill='clear' slot='start' >
-              <IonLabel>View More</IonLabel>
+                <IonButton mode='ios' fill='clear' slot='start' onClick={()=>{
+                  router.push('/responder/emergency/requests_detail')
+                }} >
+              <IonLabel>View Details</IonLabel>
               <IonIcon src={chevronForward}></IonIcon>
               </IonButton>
               </div>
 
               </div>
                 </div>
-              <p>I am trapped on the mountain in Buea Cameroon I need help getting down.</p>
-              
-            </div>
-
-            <div className='help-requests-card'>
-                <div className='user-details'>
-                <img src='https://www.redcross.org/content/dam/redcross/about-us/news/2023/international-red-cross-volunteer-helps-those-affected-by-earthquake-in-turkey_03.jpg.img.jpeg' />
-              <div>
-                <div><h4>James Aluba</h4>
-                <span>5mins ago</span></div>
-                <div className='btn-link'>
-                <IonButton mode='ios' fill='clear' slot='start' >
-              <IonLabel>View More</IonLabel>
-              <IonIcon src={chevronForward}></IonIcon>
-              </IonButton>
-              </div>
-
-              </div>
-                </div>
-              <p>I am trapped on the mountain in Buea Cameroon I need help getting down.</p>
-              
             </div>
             
+            <div className='help-requests-card'>
+                <img src='https://www.redcross.org/content/dam/redcross/about-us/news/2023/international-red-cross-volunteer-helps-those-affected-by-earthquake-in-turkey_03.jpg.img.jpeg' />
+                <div className='user-details'>
+              <div>
+                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '-10px'}}><h4>James Aluba</h4>
+                <span>5mins ago</span></div>
+                  <p>I am trapped on the mountain in Buea beside the seconde hut, I need help getting down.</p>
+                <div className='btn-link'>
+                <IonButton mode='ios' fill='clear' slot='start' onClick={()=>{
+                  router.push('/responder/emergency/requests_detail')
+                }} >
+              <IonLabel>View Details</IonLabel>
+              <IonIcon src={chevronForward}></IonIcon>
+              </IonButton>
+              </div>
+
+              </div>
+                </div>
+            </div>
+
           </div>
         </IonContent>
       </IonPage>
