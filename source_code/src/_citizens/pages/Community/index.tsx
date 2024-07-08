@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import { db } from '../../../config/firebase';
-import { collection, onSnapshot, DocumentData } from 'firebase/firestore';
+import { useState, useEffect, useContext } from "react";
+import { db } from "../../../config/firebase";
+import { collection, onSnapshot, DocumentData } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion } from "firebase/firestore";
 import {
   IonContent,
   IonModal,
@@ -19,23 +20,18 @@ import {
   IonSegmentButton,
 } from "@ionic/react";
 import menuIcon from "../../../assets/icons/menu.svg";
-import notificationIcon from "../../../assets/icons/notification.svg";
 import announcement from "../../../assets/icons/announcements.svg";
-
 import ChatBotButton from "../../../components/Buttons/Ai_bot";
 import HeaderAvatar from "../../../components/Avatar";
-
 import { FormattedMessage } from "react-intl";
 import ForumSessionCard from "../../../components/ForumSessionCard/ForumSessionCard";
-
 import home from "../../../assets/icons/home.svg";
 import genericForum from "../../../assets/icons/genericForum.svg";
 import chatsession from "../../../assets/icons/chatsession.svg";
 import "./Community.css";
 import { useHistory } from "react-router";
 import OtherForums from "../../../components/otherForums/OtherForums";
-
-import { serverTimestamp } from "firebase/firestore";
+import { userContext } from "../../../context/UserContext";
 
 const disasterForums = [
   {
@@ -71,81 +67,6 @@ const disasterForums = [
     last_text:
       "Government distributing emergency food supplies to affected areas. ",
     icon: "",
-  },
-];
-
-const disasterManagementGroups = [
-  {
-    name: "Rescue Team",
-    date: "2024-06-14",
-    description:
-      "This group is responsible for rescuing individuals trapped in disaster zones.",
-  },
-  {
-    name: "Medical Aid",
-    date: "2024-06-14",
-    description:
-      "This group provides medical assistance to those affected by the disaster.",
-  },
-  {
-    name: "Supply Chain",
-    date: "2024-06-14",
-    description:
-      "This group manages the distribution of essential supplies to disaster-affected areas.",
-  },
-  {
-    name: "Communication Network",
-    date: "2024-06-14",
-    description:
-      "This group establishes and maintains communication channels during a disaster.",
-  },
-  {
-    name: "Shelter Coordination",
-    date: "2024-06-14",
-    description:
-      "This group coordinates the establishment of temporary shelters for displaced individuals.",
-  },
-  {
-    name: "Volunteer Management",
-    date: "2024-06-14",
-    description:
-      "This group recruits and manages volunteers for various disaster relief efforts.",
-  },
-  {
-    name: "Logistics Support",
-    date: "2024-06-14",
-    description:
-      "This group provides logistical support to ensure the smooth operation of relief efforts.",
-  },
-  {
-    name: "Damage Assessment",
-    date: "2024-06-14",
-    description:
-      "This group assesses the damage caused by the disaster and provides reports.",
-  },
-  {
-    name: "Public Information",
-    date: "2024-06-14",
-    description:
-      "This group disseminates important information to the public regarding the disaster and safety measures.",
-  },
-  {
-    name: "Mental Health",
-    date: "2024-06-14",
-    description:
-      "This group provides mental health support and counseling to disaster survivors.",
-  },
-  {
-    name: "Infrastructure Repair",
-    date: "2024-06-14",
-    description:
-      "This group focuses on repairing and rebuilding damaged infrastructure.",
-  },
-  {
-    name: "Financial Assistance",
-    date: "2024-06-14",
-    description:
-      "This group helps individuals and families apply for financial assistance post-disaster.",
   },
 ];
 
@@ -252,34 +173,77 @@ interface DisasterGuide {
 import "../Anouncement/Announcements.css";
 import AlertIcon from "../components/Alerts";
 import ChatRoom from "./chatRooms/Chatroom";
-
+import { updateForumMembers } from "../../../services/controllers/forum";
 
 function CommunityPage() {
-
-
   const navigateTo = useHistory();
   const [selectedSegment, setSelectedSegment] = useState<string>("first");
   const [showCommunities, setShowCommunities] = useState<boolean>(false);
   const [forums, setForums] = useState<DocumentData[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [joinedForums, setJoinedForums] = useState([]);
 
-    useEffect(() => {
-    const forumsCollection = collection(db, 'forums');
+  const { user, setUser } = useContext(userContext);
 
-    const unsubscribe = onSnapshot(forumsCollection, (snapshot) => {
-      const forumsData = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setForums(forumsData);
-      console.log(forumsData)
+  useEffect(() => {
+    const forumsCollection = collection(db, "forums");
+
+    const unsubscribe = onSnapshot(
+      forumsCollection,
+      (snapshot) => {
+        const forumsData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setForums(forumsData);
+        console.log(forumsData);
+      },
+      (error) => {
+        console.error("Error fetching forums:", error);
+      }
+    );
+
+    return () => unsubscribe();
+  }, ["forums"]);
+
+useEffect(() => {
+  if (user && user.id) {
+    const userDocRef = doc(db, "users", user.id);
+    const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        const userData = docSnapshot.data();
+        const userForums = userData.forums || []; // Handle cases where forums might be missing
+
+        // Filter forums based on userForums array
+        const filteredForums = forums.filter((forum) => userForums.includes(forum.email));
+        setJoinedForums(filteredForums);
+        console.log('joined forums',filteredForums)
+      } else {
+        console.log("User document does not exist.");
+      }
     }, (error) => {
-      console.error('Error fetching forums:', error);
+      console.error("Error fetching user document:", error);
     });
 
     return () => unsubscribe();
-  }, ['forums']);
+  }
+}, [user.id, forums]);
+
+
+  async function updateUserForum(user3: any, data: any): Promise<void> {
+    try {
+      const userDocRef = doc(db, "users", user3.id);
+
+      await updateDoc(userDocRef, {
+        forums: arrayUnion(data),
+      });
+
+      console.log(`Forum successfully added to user ${user3.email}`);
+    } catch (error) {
+      console.error("Error updating user forums:", error);
+    }
+  }
 
   const openModal = (item) => {
     console.log(item);
@@ -325,6 +289,17 @@ function CommunityPage() {
       },
     ],
   };
+
+  useEffect(() => {
+    user.forums?.length > 0 ? setShowCommunities(true) : setShowCommunities(false);
+
+    
+    // if (user && forums.length > 0) {
+    //   const userForums = forums.filter(forum => user.forums.includes(forum.id));
+    //   setJoinedForums(userForums);
+    // }
+   
+  }, [user, forums]);
 
   const router = useIonRouter();
   return (
@@ -387,7 +362,8 @@ function CommunityPage() {
               <>
                 <div className="info-group">
                   <div className="text-nogroups-joined">
-                    <p>You haven't joined any group yet</p>
+                      <p>You haven't joined any group yet</p>
+                    
                   </div>
                   <hr
                     style={{ backgroundColor: "#3f3f3f82" }}
@@ -395,7 +371,7 @@ function CommunityPage() {
                   <div className="recommend">Communities you can join</div>
                 </div>
                 <div className="groups-container">
-                  {disasterManagementGroups.map((group, index) => (
+                  {forums.map((group, index) => (
                     <>
                       <OtherForums
                         key={index}
@@ -439,7 +415,11 @@ function CommunityPage() {
                               d="M7 18v-1a5 5 0 0 1 5-5v0a5 5 0 0 1 5 5v1M1 18v-1a3 3 0 0 1 3-3v0m19 4v-1a3 3 0 0 0-3-3v0m-8-2a3 3 0 1 0 0-6a3 3 0 0 0 0 6m-8 2a2 2 0 1 0 0-4a2 2 0 0 0 0 4m16 0a2 2 0 1 0 0-4a2 2 0 0 0 0 4"
                             />
                           </svg>
-                          <span>139 Members</span>
+                          <span>
+                            {selectedItem.members.length > 0
+                              ? selectedItem.members.length + " Members"
+                              : selectedItem.members.length + " Member"}
+                          </span>
                         </div>
                         <p>{selectedItem.description}</p>
                         <span>
@@ -450,6 +430,34 @@ function CommunityPage() {
                           mode="ios"
                           className="primary-button"
                           expand="block"
+                          onClick={ async () => {
+                            try {
+                              updateForumMembers(
+                                "forums",
+                                `${selectedItem.id}`,
+                                [
+                                  ...selectedItem.members,
+                                  {
+                                    id: user.email,
+                                    membername: user.name,
+                                    role: user.role,
+                                  },
+                                ]
+                              );
+
+                              console.log("joined success");
+
+                              updateUserForum(
+                                user,
+                                selectedItem.name
+                              );
+
+                              
+                              console.log("suceess updating");
+                            } catch (error) {
+                              console.error(error);
+                            }
+                          }}
                         >
                           Join Group
                         </IonButton>
@@ -474,6 +482,102 @@ function CommunityPage() {
                 />
               ))}
             </div>
+              <div className="recommend">Communities you can join</div>
+                
+                <div className="groups-container">
+                  {forums.map((group, index) => (
+                    <>
+                      <OtherForums
+                        key={index}
+                        name={group.name}
+                        date={group.date}
+                        description={group.description}
+                        onClick={() => {
+                          openModal(group);
+                        }}
+                      />
+                    </>
+                  ))}
+            </div>
+             {showModal && selectedItem && (
+                  <IonModal
+                    isOpen={showModal}
+                    onDidDismiss={closeModal}
+                    trigger="open-modal"
+                    initialBreakpoint={0.6}
+                    breakpoints={[0, 0.25, 0.5, 0.6, 0.75]}
+                    handleBehavior="cycle"
+                  >
+                    <IonContent className="ion-padding ">
+                      <div className="ion-margin-top modal-content-community">
+                        <div className="intials">FM</div>
+                        <h3>{selectedItem.name}</h3>
+                        <div className="members">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="22"
+                            height="22"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="1.5"
+                              d="M7 18v-1a5 5 0 0 1 5-5v0a5 5 0 0 1 5 5v1M1 18v-1a3 3 0 0 1 3-3v0m19 4v-1a3 3 0 0 0-3-3v0m-8-2a3 3 0 1 0 0-6a3 3 0 0 0 0 6m-8 2a2 2 0 1 0 0-4a2 2 0 0 0 0 4m16 0a2 2 0 1 0 0-4a2 2 0 0 0 0 4"
+                            />
+                          </svg>
+                          <span>
+                            {selectedItem.members.length > 0
+                              ? selectedItem.members.length + " Members"
+                              : selectedItem.members.length + " Member"}
+                          </span>
+                        </div>
+                        <p>{selectedItem.description}</p>
+                        <span>
+                          A responder must approve your request to join this
+                          community
+                        </span>
+                        <IonButton
+                          mode="ios"
+                          className="primary-button"
+                          expand="block"
+                          onClick={ async () => {
+                            try {
+                              updateForumMembers(
+                                "forums",
+                                `${selectedItem.id}`,
+                                [
+                                  ...selectedItem.members,
+                                  {
+                                    id: user.email,
+                                    membername: user.name,
+                                    role: user.role,
+                                  },
+                                ]
+                              );
+
+                              console.log("joined success");
+
+                              updateUserForum(
+                                user,
+                                selectedItem.name
+                              );
+
+                              
+                              console.log("suceess updating");
+                            } catch (error) {
+                              console.error(error);
+                            }
+                          }}
+                        >
+                          Join Group
+                        </IonButton>
+                      </div>
+                    </IonContent>
+                  </IonModal>
+                )}
           </>
         )}
         {selectedSegment === "third" && <ChatRoom />}

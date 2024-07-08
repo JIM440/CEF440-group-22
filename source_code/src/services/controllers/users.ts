@@ -108,4 +108,19 @@ const deleteUser = async (userId: string): Promise<void> => {
   }
 };
 
+const updateForum = async (collectionName: string, forumId: string, updatedData:any): Promise<void> => {
+  const forumDocRef = doc(db, collectionName, forumId);
+
+  try {
+    await updateDoc(forumDocRef, {
+      ...updatedData,
+      timestamp: serverTimestamp()
+    });
+    console.log('Forum updated successfully');
+  } catch (error) {
+    console.error('Error updating forum:', error);
+    throw error;
+  }
+};
+
 export { deleteUser, getAllUserVolunteers, getUsersInLosAngeles, updateUserLocation, getUser };
