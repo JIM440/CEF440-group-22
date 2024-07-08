@@ -60,6 +60,8 @@ const ReportDisaster: React.FC = () => {
   const { user, setUser } = useContext(userContext);
 
   const [telephone, setTelephone] = useState('');
+  const [status, setStatus] = useState('potential');
+  const [incidentstatus, setIncidentStatus] = useState('pending');
   const [location, setLocation] = useState('');
   const [disasterType, setDisasterType] = useState('');
   const [description, setDescription] = useState('');
@@ -106,6 +108,8 @@ const ReportDisaster: React.FC = () => {
     const report = {
       telephone,
       location,
+      status,
+      incidentstatus,
       disasterType,
       description,
       image: urlToUpload,
