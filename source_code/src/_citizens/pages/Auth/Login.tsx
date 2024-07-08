@@ -30,8 +30,11 @@ import BackBtn from "../../../components/HeaderBack";
 import { signInWithGoogle } from "../../../services/AuthService/auth";
 import { userContext } from "../../../context/UserContext";
 import { getUser } from "../../../services/controllers/users";
+import Loader from "../../../components/Loader";
 
 function LoginPage() {
+  const [displayLoader, setDisplayLoader] = useState('none');
+  const [errorText, setErrorText] = useState(false)
 
   const router = useIonRouter()
   const DoLogin = (event: any) => {
@@ -50,6 +53,8 @@ function LoginPage() {
     e.preventDefault();
     try {
       console.log(email, "---", password);
+      setDisplayLoader('flex')
+      
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
@@ -57,12 +62,16 @@ function LoginPage() {
       );
       console.log(userCredential.user.uid);
 
+    
       const userFetched = await getUser(userCredential.user.uid);
       console.log(userFetched)
       setUser(userFetched);
       navigate.push("/tabs/home");
+      setDisplayLoader('none')
     } catch (error) {
       console.error("Error during sign-in:", error);
+      setDisplayLoader('none')
+      setErrorText(true)
     }
   };
 
@@ -82,6 +91,7 @@ function LoginPage() {
       </IonHeader>
 
       <IonContent>
+  <Loader display={displayLoader} />
         <div className="main-login-container">
           <img src={loginIllustration} alt="Login" />
           <form action="" onSubmit={signIn}>
@@ -104,11 +114,13 @@ function LoginPage() {
               value={password}
               onIonInput={(e: any) => setPassword(e.detail.value!)}
             />
+            {errorText && <p style={{color: 'red', fontSize: '14px', marginTop: '0px'}}>Incorrect UserName or Password</p>}
             <IonButton
               className="ion-margin-top primary-button proceed-language"
               type="submit"
               expand="block"
               mode="ios"
+              disabled={email === '' || password == ''}
             >
               Login
             </IonButton>

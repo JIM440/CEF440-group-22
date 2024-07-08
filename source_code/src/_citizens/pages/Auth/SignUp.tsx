@@ -26,12 +26,15 @@ import {
 } from "@ionic/react";
 import "./RegistrationForm.css";
 import { chevronBack, chevronForward } from "ionicons/icons";
+import Loader from "../../../components/Loader";
+
 
 const RegistrationForm: React.FC = () => {
   const router = useIonRouter();
   const [step, setStep] = useState(1);
   const { user, setUser } = useContext(userContext);
 
+  const [displayLoader, setDisplayLoader] = useState('none')
 
   const getLocation = async () => {
     try {
@@ -91,7 +94,6 @@ const RegistrationForm: React.FC = () => {
   ];
 
   const handleNextStep = () => {
-    console.log("clicked");
     switch (step) {
       case 1:
         if (validateStep1()) {
@@ -143,6 +145,7 @@ const RegistrationForm: React.FC = () => {
 
   const createUser = async (userInfo: User): Promise<void> => {
     try {
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         userInfo.email,
@@ -165,6 +168,7 @@ const RegistrationForm: React.FC = () => {
 
       // Store the document in Firestore with the same UID as the authenticated user
       await setDoc(doc(db, "users", user.uid), userDoc);
+
     } catch (error) {
       console.error("Error creating user: ", error);
       throw error;
@@ -187,12 +191,18 @@ const RegistrationForm: React.FC = () => {
     };
 
     try {
+      setDisplayLoader('flex')
+
      const p = await createUser(user1);
       console.log("success creating user",p);
       setUser(user1)
+      setDisplayLoader('none')
+      
       router.push("/tabs/home");
+
     } catch (error) {
       console.error(error);
+      setDisplayLoader('none')
     }
   };
 
@@ -207,6 +217,9 @@ const RegistrationForm: React.FC = () => {
         </IonToolbar>{" "}
       </IonHeader>
       <IonContent className="ion-padding">
+        
+        <Loader display={displayLoader} />
+
         <div className="progress-bar-container">
           {steps.map((s) => (
             <div
@@ -264,13 +277,14 @@ const RegistrationForm: React.FC = () => {
               labelPlacement="floating"
               className="ion-margin-top"
             />
+            <p style={{fontSize: '14px', color: 'var(--ion-color-muted)', marginTop: '-1px', textAlign: 'center'}}>Password should be atleast 6 characters</p>
             <div className="ion-text-center ion-margin-top">
               <IonButton
                 className="btn"
                 mode="ios"
                 onClick={handleNextStep}
                 disabled={
-                  !(fullName !== "") || !(username !== "") || !(password !== "")
+                  !(fullName !== "") || !(username !== "") || !(password.length > 6)
                 }
               >
                 Next <IonIcon icon={chevronForward} slot="end" />
@@ -374,7 +388,7 @@ const RegistrationForm: React.FC = () => {
             </div>
           </form>
         )}
-        {step === 4 && (
+        { step === 4 && (
           <div>
             <p className="ion-text-center">Please review your information:</p>
             <p>Full Name: {fullName}</p>
@@ -382,10 +396,10 @@ const RegistrationForm: React.FC = () => {
             <p>Email: {email}</p>
             <p>Phone: {phone}</p>
             <p>
-              Location:{" "}
-              {location.length > 0
+              Location:
+              { location.length > 0
                 ? `${location[0].latitude}, ${location[0].longitude}`
-                : "Location not available"}
+                : "Location not available" }
             </p>
             <div className="btn-container ion-text-center ion-margin-top">
               <button
@@ -401,7 +415,7 @@ const RegistrationForm: React.FC = () => {
               </IonButton>
             </div>
           </div>
-        )}
+              )}
       </IonContent>
     </IonPage>
   );
