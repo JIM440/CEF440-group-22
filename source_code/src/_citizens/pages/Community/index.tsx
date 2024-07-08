@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState, useEffect } from 'react';
+import { db } from '../../../config/firebase';
+import { collection, onSnapshot, DocumentData } from 'firebase/firestore';
 import {
   IonContent,
   IonModal,
@@ -147,70 +149,77 @@ const disasterManagementGroups = [
   },
 ];
 
-  const messages = [
-    {
-      id: 1,
-      sender: "Emergency Services",
-      timestamp: new Date(),
-      content: "Evacuation underway for residents near the Central Park fire. Please follow instructions from emergency personnel.",
-      severity: "High",
-    },
-    {
-      id: 2,
-      sender: "Red Cross",
-      timestamp: new Date(Date.now() - 3600000), // One hour ago
-      content: "Donation centers are open at City Hall and Central Library. We urgently need water, blankets, and non-perishable food items.",
-      severity: "Medium",
-    },
-    {
-      id: 3,
-      sender: "Community Shelter",
-      timestamp: new Date(Date.now() - 7200000), // Two hours ago
-      content: "The Community Shelter at the School Gymnasium is now open to displaced residents. Please bring identification and any necessary medications.",
-      severity: "Low",
-    },
-    {
-      id: 4,
-      sender: "Power Company",
-      timestamp: new Date(),
-      content: "Power outages are expected in the affected area. Crews are working to restore power as quickly as possible.",
-      severity: "Medium",
-    },
-    {
-      id: 5,
-      sender: "Department of Transportation",
-      timestamp: new Date(Date.now() - 1800000), // Half hour ago
-      content: "Roads surrounding the fire are closed. Please use alternate routes and avoid the area.",
-      severity: "High",
-    },
-    {
-      id: 6,
-      sender: "Local News Station",
-      timestamp: new Date(Date.now() - 5400000), // One and a half hours ago
-      content: "Live updates on the Central Park fire are available on our website and social media channels.",
-      severity: "Low",
-    },
-    {
-      id: 7,
-      sender: "Community Volunteer Group",
-      timestamp: new Date(),
-      content: "We are organizing a volunteer effort to assist with relief operations. If you can help, please contact us at [phone number] or [email address].",
-      severity: "Medium",
-    },
-    {
-      id: 8,
-      sender: "Animal Shelter",
-      timestamp: new Date(Date.now() - 21600000), // Six hours ago
-      content: "The Animal Shelter is accepting lost or displaced pets. Please bring any necessary documentation for your pet.",
-      severity: "Medium",
-    },
-  ];
+const messages = [
+  {
+    id: 1,
+    sender: "Emergency Services",
+    timestamp: new Date(),
+    content:
+      "Evacuation underway for residents near the Central Park fire. Please follow instructions from emergency personnel.",
+    severity: "High",
+  },
+  {
+    id: 2,
+    sender: "Red Cross",
+    timestamp: new Date(Date.now() - 3600000), // One hour ago
+    content:
+      "Donation centers are open at City Hall and Central Library. We urgently need water, blankets, and non-perishable food items.",
+    severity: "Medium",
+  },
+  {
+    id: 3,
+    sender: "Community Shelter",
+    timestamp: new Date(Date.now() - 7200000), // Two hours ago
+    content:
+      "The Community Shelter at the School Gymnasium is now open to displaced residents. Please bring identification and any necessary medications.",
+    severity: "Low",
+  },
+  {
+    id: 4,
+    sender: "Power Company",
+    timestamp: new Date(),
+    content:
+      "Power outages are expected in the affected area. Crews are working to restore power as quickly as possible.",
+    severity: "Medium",
+  },
+  {
+    id: 5,
+    sender: "Department of Transportation",
+    timestamp: new Date(Date.now() - 1800000), // Half hour ago
+    content:
+      "Roads surrounding the fire are closed. Please use alternate routes and avoid the area.",
+    severity: "High",
+  },
+  {
+    id: 6,
+    sender: "Local News Station",
+    timestamp: new Date(Date.now() - 5400000), // One and a half hours ago
+    content:
+      "Live updates on the Central Park fire are available on our website and social media channels.",
+    severity: "Low",
+  },
+  {
+    id: 7,
+    sender: "Community Volunteer Group",
+    timestamp: new Date(),
+    content:
+      "We are organizing a volunteer effort to assist with relief operations. If you can help, please contact us at [phone number] or [email address].",
+    severity: "Medium",
+  },
+  {
+    id: 8,
+    sender: "Animal Shelter",
+    timestamp: new Date(Date.now() - 21600000), // Six hours ago
+    content:
+      "The Animal Shelter is accepting lost or displaced pets. Please bring any necessary documentation for your pet.",
+    severity: "Medium",
+  },
+];
 
 interface ForumInfo {
   name: string;
   description: string;
   author: string;
-  timestamp: Date;
   members: {
     id: string;
     membername: string;
@@ -240,29 +249,40 @@ interface DisasterGuide {
     after: DisasterContentSection;
   };
 }
-
-import { handleCreateAnnouncement } from '../../../services/controllers/announcement'
-import { handleCreateUser,getAllUserVolunteers,getUsersInLosAngeles, updateUserLocation,deleteUser } from '../../../services/controllers/users'
-import { handleCreateResponder } from '../../../services/controllers/responder'
-import { handleCreateHelpRequest } from '../../../services/controllers/help_request'
-import { createForum,getAllForums } from '../../../services/controllers/forum'
-import { handleCreateGuide} from '../../../services/controllers/Guide'
-
-import { handleCreateIncident } from '../../../services/controllers/incident'
-import '../Anouncement/Announcements.css'
+import "../Anouncement/Announcements.css";
 import AlertIcon from "../components/Alerts";
 import ChatRoom from "./chatRooms/Chatroom";
+
+
 function CommunityPage() {
+
+
   const navigateTo = useHistory();
   const [selectedSegment, setSelectedSegment] = useState<string>("first");
   const [showCommunities, setShowCommunities] = useState<boolean>(false);
-
-
+  const [forums, setForums] = useState<DocumentData[]>([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null)
+  const [selectedItem, setSelectedItem] = useState(null);
+
+    useEffect(() => {
+    const forumsCollection = collection(db, 'forums');
+
+    const unsubscribe = onSnapshot(forumsCollection, (snapshot) => {
+      const forumsData = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setForums(forumsData);
+      console.log(forumsData)
+    }, (error) => {
+      console.error('Error fetching forums:', error);
+    });
+
+    return () => unsubscribe();
+  }, ['forums']);
 
   const openModal = (item) => {
-    console.log(item)
+    console.log(item);
     setSelectedItem(item);
     setShowModal(true);
   };
@@ -272,7 +292,6 @@ function CommunityPage() {
     setSelectedItem(null);
   };
 
-
   const handleSegmentChange = (event: CustomEvent) => {
     setSelectedSegment(event.detail.value);
   };
@@ -281,74 +300,33 @@ function CommunityPage() {
     navigateTo.push("/community/chatsessionpage");
   }
 
-  const chatRoom:ForumInfo = {
-  name: "Sample Chat Room",
-  description: "This is a sample chat room",
-  author: "john_doe",
-  timestamp: new Date(),
-  members: [
-    { id: "user1", membername: "John Doe", role: true },
-    { id: "user2", membername: "Jane Smith", role: false }
-  ],
-  messages: [
-    {
-      id: "msg1",
-      content: "Hello, world!",
-      timestamp: new Date(),
-      author: "john_doe",
-      repliedto: ""
-    },
-    {
-      id: "msg2",
-      content: "Hi, John!",
-      timestamp: new Date(),
-      author: "jane_smith",
-      repliedto: "msg1"
-    }
-  ]
-  };
-  
-  const disasterGuide: DisasterGuide = {
-  id: "unique-identifier-001",
-  disaster: "earthquake",
-  content: {
-    before: {
-      image: "path/to/before-image.jpg",
-      introductory_text: "What to do before an earthquake strikes:",
-      content: "Ensure your home is earthquake-resistant. Secure heavy furniture and have an emergency kit ready."
-    },
-    during: {
-      image: "path/to/during-image.jpg",
-      introductory_text: "What to do during an earthquake:",
-      content: "Drop, Cover, and Hold On. Stay indoors until the shaking stops and it is safe to exit."
-    },
-    after: {
-      image: "path/to/after-image.jpg",
-      introductory_text: "What to do after an earthquake:",
-      content: "Check yourself and others for injuries. Be prepared for aftershocks and follow official updates."
-    }
-  }
-};
-
-
-   const handleCreateForum = async () => {
-     try {
-      // await handleCreateAnnouncement()
-      // await handleCreateHelpRequest()
-      // await handleCreateIncident()
-      // await handleCreateResponder()
-       // await handleCreateUser()
-       //  await handleCreateGuide()
-       
-       const data = await deleteUser()
-       console.log(data);
-    
-    } catch (error) {
-      console.error('Error creating collections:', error);
-    }
+  const chatRoom: ForumInfo = {
+    name: "Sample Chat Room",
+    description: "This is a sample chat room",
+    author: "john_doe",
+    members: [
+      { id: "user1", membername: "John Doe", role: true },
+      { id: "user2", membername: "Jane Smith", role: false },
+    ],
+    messages: [
+      {
+        id: "msg1",
+        content: "Hello, world!",
+        timestamp: new Date(),
+        author: "john_doe",
+        repliedto: "",
+      },
+      {
+        id: "msg2",
+        content: "Hi, John!",
+        timestamp: new Date(),
+        author: "jane_smith",
+        repliedto: "msg1",
+      },
+    ],
   };
 
-   const router = useIonRouter()
+  const router = useIonRouter();
   return (
     <IonPage>
       <IonHeader class="ion-no-border">
@@ -366,9 +344,9 @@ function CommunityPage() {
         </IonToolbar>
       </IonHeader>
 
-
       <IonContent>
-        <IonSegment mode='md'
+        <IonSegment
+          mode="md"
           value={selectedSegment}
           onIonChange={handleSegmentChange}
           className="community-segment"
@@ -406,47 +384,79 @@ function CommunityPage() {
                 ))}
               </div>
             ) : (
-                <>
-                  <div className="info-group">
+              <>
+                <div className="info-group">
                   <div className="text-nogroups-joined">
-                    <p>You haven't joined any group yet
-                    </p>
+                    <p>You haven't joined any group yet</p>
                   </div>
-                  <hr style={{backgroundColor: 'var(--ion-color-contrast)'}} />
-                  <div className="recommend">Communities you can join</div></div>
+                  <hr
+                    style={{ backgroundColor: "var(--ion-color-contrast)" }}
+                  />
+                  <div className="recommend">Communities you can join</div>
+                </div>
                 <div className="groups-container">
-                  {disasterManagementGroups.map((group, index) => (<>
-                    <OtherForums
-                      key={index}
-                      name={group.name}
-                      date={group.date}
-                      description={group.description}
-                      onClick={()=>{openModal(group)}}
-                    />
-                </>
+                  {disasterManagementGroups.map((group, index) => (
+                    <>
+                      <OtherForums
+                        key={index}
+                        name={group.name}
+                        date={group.date}
+                        description={group.description}
+                        onClick={() => {
+                          openModal(group);
+                        }}
+                      />
+                    </>
                   ))}
                 </div>
 
-                {showModal && selectedItem && <IonModal isOpen={showModal} onDidDismiss={closeModal}
-          trigger="open-modal"
-          initialBreakpoint={0.6}
-          breakpoints={[0, 0.25, 0.5, 0.6, 0.75]}
-          handleBehavior="cycle"
-        >
-          <IonContent className="ion-padding ">
-            <div className="ion-margin-top modal-content-community">
-              <div className='intials'>FM</div>
-              <h3>{selectedItem.name}</h3>
-              <div className='members'>
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 18v-1a5 5 0 0 1 5-5v0a5 5 0 0 1 5 5v1M1 18v-1a3 3 0 0 1 3-3v0m19 4v-1a3 3 0 0 0-3-3v0m-8-2a3 3 0 1 0 0-6a3 3 0 0 0 0 6m-8 2a2 2 0 1 0 0-4a2 2 0 0 0 0 4m16 0a2 2 0 1 0 0-4a2 2 0 0 0 0 4"/></svg>
-              <span>139 Members</span>
-              </div>
-              <p>{selectedItem.description}</p>
-              <span>A responder must approve your request to join this community</span>
-              <IonButton mode='ios' className='primary-button' expand='block'>Join Group</IonButton>
-            </div>
-          </IonContent>
-        </IonModal>}
+                {showModal && selectedItem && (
+                  <IonModal
+                    isOpen={showModal}
+                    onDidDismiss={closeModal}
+                    trigger="open-modal"
+                    initialBreakpoint={0.6}
+                    breakpoints={[0, 0.25, 0.5, 0.6, 0.75]}
+                    handleBehavior="cycle"
+                  >
+                    <IonContent className="ion-padding ">
+                      <div className="ion-margin-top modal-content-community">
+                        <div className="intials">FM</div>
+                        <h3>{selectedItem.name}</h3>
+                        <div className="members">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="22"
+                            height="22"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="1.5"
+                              d="M7 18v-1a5 5 0 0 1 5-5v0a5 5 0 0 1 5 5v1M1 18v-1a3 3 0 0 1 3-3v0m19 4v-1a3 3 0 0 0-3-3v0m-8-2a3 3 0 1 0 0-6a3 3 0 0 0 0 6m-8 2a2 2 0 1 0 0-4a2 2 0 0 0 0 4m16 0a2 2 0 1 0 0-4a2 2 0 0 0 0 4"
+                            />
+                          </svg>
+                          <span>139 Members</span>
+                        </div>
+                        <p>{selectedItem.description}</p>
+                        <span>
+                          A responder must approve your request to join this
+                          community
+                        </span>
+                        <IonButton
+                          mode="ios"
+                          className="primary-button"
+                          expand="block"
+                        >
+                          Join Group
+                        </IonButton>
+                      </div>
+                    </IonContent>
+                  </IonModal>
+                )}
               </>
             )}
           </div>
@@ -454,38 +464,45 @@ function CommunityPage() {
         {selectedSegment === "second" && (
           <>
             <div>
-           {disasterForums.map((forum, i) => (
-                  <ForumSessionCard
-                    key={i}
-                    group_name={forum.group_name}
-                    date={forum.date}
-                    last_text={forum.last_text}
-                    icon={forum.icon}
-                  />
-                ))}
-              </div>
-             
+              {disasterForums.map((forum, i) => (
+                <ForumSessionCard
+                  key={i}
+                  group_name={forum.group_name}
+                  date={forum.date}
+                  last_text={forum.last_text}
+                  icon={forum.icon}
+                />
+              ))}
+            </div>
           </>
         )}
-        {selectedSegment === "third" && <ChatRoom /> }
-        
+        {selectedSegment === "third" && <ChatRoom />}
+
         {selectedSegment === "four" && (
-              <IonContent className="">
-               <div className='FS-card-container' onClick={()=>{router.push('/community/announcements/content')}}>
-            <div className="left-card">
-                <div className='icon gen-icon'><IonIcon src={announcement}  /></div>
-            </div>
-            <div className="right-card">
-                <div className='name-date'>
-                    <p className='group_name'>Annoucements</p>
-                    <div>June 5</div>
+          <IonContent className="">
+            <div
+              className="FS-card-container"
+              onClick={() => {
+                router.push("/community/announcements/content");
+              }}
+            >
+              <div className="left-card">
+                <div className="icon gen-icon">
+                  <IonIcon src={announcement} />
+                </div>
+              </div>
+              <div className="right-card">
+                <div className="name-date">
+                  <p className="group_name">Annoucements</p>
+                  <div>June 5</div>
                 </div>
                 <div className="last-text">
-                We saved 3 girls from Buea Lanslide yesterday beside the mountain.
+                  We saved 3 girls from Buea Lanslide yesterday beside the
+                  mountain.
                 </div>
+              </div>
             </div>
-        </div>
-               </IonContent>
+          </IonContent>
         )}
 
         <div className="add-button">
