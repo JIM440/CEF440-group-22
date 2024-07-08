@@ -16,20 +16,7 @@ export const useDisasterContext = () => {
 };
 
 export const DisasterProvider: React.FC = ({ children }) => {
-  const [reportedDisasters, setReportedDisasters] = useState<DocumentData[]>([]);
 
-  useEffect(() => {
-    const disastersCollectionRef = collection(db, 'reported-disasters');
-    const unsubscribe = onSnapshot(disastersCollectionRef, (snapshot) => {
-      const disasters = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setReportedDisasters(disasters);
-    });
-
-    return () => unsubscribe();
-  }, []);
 
   return (
     <DisasterContext.Provider value={{ reportedDisasters }}>

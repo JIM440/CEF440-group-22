@@ -24,7 +24,11 @@ import {
   import { FormattedMessage } from 'react-intl';
   import AlertIcon from '../components/Alerts';
   
-  const ResponderEmergency = () => {
+const ResponderEmergency = () => {
+    
+
+
+  
     const router = useIonRouter();
     return (
       <IonPage>

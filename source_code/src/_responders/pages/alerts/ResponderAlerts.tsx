@@ -18,10 +18,36 @@ import BackBtn from '../../../components/HeaderBack';
 import plus from '../../../assets/icons/plus.svg';
 import fire from '../../../assets/icons/fire.svg'
 import tornado from '../../../assets/icons/tornado.svg'
+import { collection, onSnapshot, DocumentData } from 'firebase/firestore';
+import { db } from '../../../config/firebase';
 
 const ResponderAlerts: React.FC = () => {
   const router = useIonRouter();
   const [segment, setCurrentSegment] = useState('pending');
+
+  const [reportedDisasters, setReportedDisasters] = useState([]);
+
+
+  useEffect(() => {
+    const disastersCollection = collection(db, "reported-disasters");
+
+    const unsubscribe = onSnapshot(
+      disastersCollection,
+      (snapshot) => {
+        const disastersData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) ;
+        setReportedDisasters(disastersData);
+        console.log(disastersData);
+      },
+      (error) => {
+        console.error("Error fetching reported disasters:", error);
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
 
   const [detected, setDetected] = useState(null);
 
