@@ -8,7 +8,7 @@ interface User {
     language?: string;
     photo?: string;
     role?: string;
-    locations?: string[];
+    locations?: { latitude: number; longitude: number }[];
     forums?: string[];
 }
 
