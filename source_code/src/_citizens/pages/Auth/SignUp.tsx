@@ -22,14 +22,34 @@ import {
   IonProgressBar,
   IonLabel,
   IonIcon,
+  IonToast,
   useIonRouter,
 } from "@ionic/react";
 import "./RegistrationForm.css";
-import { chevronBack, chevronForward } from "ionicons/icons";
+import { chevronBack, chevronForward, checkmarkCircle, closeCircle } from "ionicons/icons";
 import Loader from "../../../components/Loader";
+import BackBtn from "../../../components/HeaderBack";
 
 
 const RegistrationForm: React.FC = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastColor, setToastColor] = useState('primary');
+  const [toastIcon, setToastIcon] = useState(checkmarkCircle);
+
+  const showToast = (message, color, icon) => {
+    setToastMessage(message);
+    setToastColor(color);
+    setToastIcon(icon);
+    setIsOpen(true);
+  };
+
+  const hideToast = () => {
+    setIsOpen(false);
+  };
+  
+
   const router = useIonRouter();
   const [step, setStep] = useState(1);
   const { user, setUser } = useContext(userContext);
@@ -197,26 +217,39 @@ const RegistrationForm: React.FC = () => {
       console.log("success creating user",p);
       setUser(user1)
       setDisplayLoader('none')
-      
+      showToast('Registration successful!', 'primary', checkmarkCircle);
+
       router.push("/tabs/home");
 
     } catch (error) {
       console.error(error);
       setDisplayLoader('none')
+      showToast('Registration failed. Please try again.', 'danger', closeCircle);
+
     }
   };
 
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton></IonBackButton>
-          </IonButtons>
-          <IonTitle>Register</IonTitle>
-        </IonToolbar>{" "}
+      <BackBtn title='Register' />
       </IonHeader>
       <IonContent className="ion-padding">
+
+      <IonToast
+      icon={toastIcon}
+        isOpen={isOpen}
+        message={toastMessage}
+        color={toastColor}
+        duration={4000}
+        buttons={[
+          {
+            text: 'Close',
+            role: 'cancel',
+            handler: hideToast,
+          },
+        ]}
+        onDidDismiss={hideToast} />
         
         <Loader display={displayLoader} />
 

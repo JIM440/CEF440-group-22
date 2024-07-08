@@ -14,11 +14,12 @@ import {
   IonTextarea,
   IonSelect,
   IonSelectOption,
+  IonToast,
 } from '@ionic/react';
 
 import '../Page.css';
 import './emergency.css';
-import { chevronBack, chevronForward } from 'ionicons/icons';
+import { checkmarkCircle, chevronBack, chevronForward, closeCircle } from 'ionicons/icons';
 import BackBtn from '../../../components/HeaderBack';
 import { storage } from '../../../config/firebase';
 import { userContext } from '../../../context/UserContext';
@@ -36,6 +37,23 @@ import { db } from '../../../config/firebase';
 import Loader from '../../../components/Loader';
 
 const ReportDisaster: React.FC = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastColor, setToastColor] = useState('primary');
+  const [toastIcon, setToastIcon] = useState(checkmarkCircle);
+
+  const showToast = (message, color, icon) => {
+    setToastMessage(message);
+    setToastColor(color);
+    setToastIcon(icon);
+    setIsOpen(true);
+  };
+
+  const hideToast = () => {
+    setIsOpen(false);
+  };
+
   const [displayLoader, setDisplayLoader] = useState('none');
 
   const [step, setStep] = useState(0);
@@ -108,9 +126,11 @@ const ReportDisaster: React.FC = () => {
       setUrlToUpload('');
 
       setDisplayLoader('none');
+      showToast(' Disaster Reported successfully!', 'primary', checkmarkCircle);
       setStep(0);
     } catch (error) {
       setDisplayLoader('none');
+      showToast('Failed to report disaster. Please try again.', 'danger', closeCircle);
       console.log('Error reporting disaster:', error);
     }
   };
@@ -122,6 +142,22 @@ const ReportDisaster: React.FC = () => {
       </IonHeader>
 
       <IonContent fullscreen>
+
+      <IonToast
+      icon={toastIcon}
+        isOpen={isOpen}
+        message={toastMessage}
+        color={toastColor}
+        duration={4000}
+        buttons={[
+          {
+            text: 'Close',
+            role: 'cancel',
+            handler: hideToast,
+          },
+        ]}
+        onDidDismiss={hideToast} />
+        
         <Loader display={displayLoader} />
 
         <div className="progress-tracker-container">

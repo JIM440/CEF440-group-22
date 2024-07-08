@@ -15,24 +15,41 @@ import {
   IonIcon,
   IonLabel,
   IonPage,
-
+  IonToast,
   useIonRouter
         } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 
-import { logInOutline } from "ionicons/icons";
+import { checkmarkCircle, closeCircle } from "ionicons/icons";
 import appleIcon from "../../../assets/icons/appleIcon.svg";
 import googleIcon from "../../../assets/icons/googleIcon.svg";
 import loginIllustration from "./../../../assets/images/Login-illustration.png";
 
 import SignUpPage from "./SignUp";
-import BackBtn from "../../../components/HeaderBack";
 import { signInWithGoogle } from "../../../services/AuthService/auth";
 import { userContext } from "../../../context/UserContext";
 import { getUser } from "../../../services/controllers/users";
 import Loader from "../../../components/Loader";
+import BackBtn from "../../../components/HeaderBack";
 
 function LoginPage() {
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastColor, setToastColor] = useState('primary');
+  const [toastIcon, setToastIcon] = useState(checkmarkCircle);
+
+  const showToast = (message, color, icon) => {
+    setToastMessage(message);
+    setToastColor(color);
+    setToastIcon(icon);
+    setIsOpen(true);
+  };
+
+  const hideToast = () => {
+    setIsOpen(false);
+  };
+  
   const [displayLoader, setDisplayLoader] = useState('none');
   const [errorText, setErrorText] = useState(false)
 
@@ -49,6 +66,7 @@ function LoginPage() {
 
   const navigate = useHistory();
 
+  
   const signIn = async (e: FormEvent) => {
     e.preventDefault();
     try {
@@ -61,17 +79,20 @@ function LoginPage() {
         password
       );
       console.log(userCredential.user.uid);
-
-    
+      
+      
       const userFetched = await getUser(userCredential.user.uid);
       console.log(userFetched)
       setUser(userFetched);
-      navigate.push("/tabs/home");
       setDisplayLoader('none')
+      showToast('Login successful!', 'primary', checkmarkCircle);
+      navigate.push("/tabs/home");
+
     } catch (error) {
       console.error("Error during sign-in:", error);
       setDisplayLoader('none')
       setErrorText(true)
+      showToast('Login failed. Please try again.', 'danger', closeCircle);
     }
   };
 
@@ -82,16 +103,29 @@ function LoginPage() {
   return (
     <IonPage>
       <IonHeader className="ion-no-border">
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton></IonBackButton>
-          </IonButtons>
-          <IonTitle>Login</IonTitle>
-        </IonToolbar>
+        <BackBtn title='Login' />
       </IonHeader>
 
       <IonContent>
+
+      <IonToast
+      icon={toastIcon}
+        isOpen={isOpen}
+        message={toastMessage}
+        color={toastColor}
+        duration={4000}
+        buttons={[
+          {
+            text: 'Close',
+            role: 'cancel',
+            handler: hideToast,
+          },
+        ]}
+        onDidDismiss={hideToast} />
+
   <Loader display={displayLoader} />
+
+
         <div className="main-login-container">
           <img src={loginIllustration} alt="Login" />
           <form action="" onSubmit={signIn}>
@@ -114,7 +148,7 @@ function LoginPage() {
               value={password}
               onIonInput={(e: any) => setPassword(e.detail.value!)}
             />
-            {errorText && <p style={{color: 'red', fontSize: '14px', marginTop: '0px'}}>Incorrect UserName or Password</p>}
+            {errorText && <p style={{color: '#ce3737', fontSize: '14px', marginTop: '0px'}}>Incorrect UserName or Password</p>}
             <IonButton
               className="ion-margin-top primary-button proceed-language"
               type="submit"
@@ -127,7 +161,7 @@ function LoginPage() {
             <p className="signup-link-container">
               Don't have an account?
 
-                <button className="sign-up-link"               
+                <button type="button" className="sign-up-link"               
                onClick={()=>{
                 router.push('/index/register')
                }} >Sign up</button>
