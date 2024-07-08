@@ -3,17 +3,12 @@ import "./ForumInfo.css";
 import { Link, useHistory } from "react-router-dom";
 
 import {
-  IonButton,
   IonContent,
-  IonFooter,
   IonHeader,
   IonIcon,
-  IonInput,
-  IonItem,
   IonLabel,
   IonPage,
-  IonTitle,
-  IonToolbar,
+  IonToolbar
 } from "@ionic/react";
 
 import leftArrow from "../../../../assets/icons/arrowLeft.svg";

@@ -3,7 +3,7 @@ import React from 'react';
 import BackBtn from '../../../components/HeaderBack';
 import './Announcements.css'
 
-const TheShit: React.FC = () => {
+const Announcements: React.FC = () => {
 
   const router = useIonRouter()
 
@@ -70,30 +70,37 @@ const TheShit: React.FC = () => {
     return (
         <IonPage>
             <IonHeader>
-                <BackBtn title='Anouncements' />
+                <BackBtn title='Announcements' />
             </IonHeader>
             
             <IonContent className="ion-padding">
                <div className="message-container">
              { messages.map((message, index) => (
-              <div key={message.id} className="message">
-                <p style={{margin: '0px', marginBottom: '10px'}}>{message.content}</p>
-              </div>
+<div className="group-card" key={message.id}>
+      <div className="group-header">
+        <div className="group-name-parent">
+        <div className="group-initials">
+          <p>FM</p>
+        </div><div className="group-name">{ name}</div>
+        </div>
+
+              <p className="group-date">June 03</p>
+      </div>
+
+      <div className="group-description">
+      {message.content}
+      </div>
+    </div>
               ))}
-                
+
                </div>
-               <IonButton onClick={()=>{
-                router.push('/anouncements/y')
-               }}>
-                Go Back
-               </IonButton>
                </IonContent>
 
             <IonFooter class='ion-padding-horizontal'>
-        <p style={{textAlign: 'center'}}>Only <span style={{color: '#1e7fdb'}}>Emergency Responders</span> can send announcements.</p>
+        <p style={{textAlign: 'center'}}>Only <span style={{color: '#1e7fdb'}}>Emergency Responders</span> can send messages in this community.</p>
       </IonFooter>
         </IonPage>
     );
 };
 
-export default TheShit;
+export default Announcements;

@@ -1,6 +1,7 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonButtons, IonMenuButton, IonIcon } from '@ionic/react';
 import React,{useContext} from 'react';
 
+import menuIcon from "../../../assets/icons/menu.svg";
 import { createUser } from '../../../services/AuthService/auth';
 import { userContext } from '../../../context/UserContext';
 import { handleCreateUser } from '../../../services/AuthService/auth';
@@ -42,6 +43,7 @@ const users = [
 ];
 
 import { handleCreateGuide } from '../../../services/controllers/Guide';
+import AlertIcon from '../components/Alerts';
 
 const ResponderCommunity: React.FC = () => {
 
@@ -62,7 +64,13 @@ const ResponderCommunity: React.FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>Responder Community</IonTitle>
+                <IonButtons slot="start">
+            <IonMenuButton>
+              <IonIcon src={menuIcon}></IonIcon>
+            </IonMenuButton>
+          </IonButtons>
+                    <IonTitle>Community</IonTitle>
+                    <AlertIcon />
                 </IonToolbar>
             </IonHeader>
             <IonContent className="ion-padding">

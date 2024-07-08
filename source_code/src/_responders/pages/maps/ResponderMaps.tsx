@@ -5,13 +5,8 @@ const ResponderMaps: React.FC = () => {
 
     return (
         <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Responder Maps</IonTitle>
-                </IonToolbar>
-            </IonHeader>
             <IonContent className="ion-padding">
-                Responder Maps...
+                Responder Map Content...
             </IonContent>
         </IonPage>
     );

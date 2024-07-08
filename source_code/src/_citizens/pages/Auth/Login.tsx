@@ -15,7 +15,9 @@ import {
   IonIcon,
   IonLabel,
   IonPage,
-} from "@ionic/react";
+
+  useIonRouter
+        } from "@ionic/react";
 import { useHistory } from "react-router-dom";
 
 import { logInOutline } from "ionicons/icons";
@@ -30,6 +32,13 @@ import { userContext } from "../../../context/UserContext";
 import { getUser } from "../../../services/controllers/users";
 
 function LoginPage() {
+
+  const router = useIonRouter()
+  const DoLogin = (event: any) => {
+    event.preventDefault();
+    console.log("Logged In🙂");
+  }
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -105,12 +114,11 @@ function LoginPage() {
             </IonButton>
             <p className="signup-link-container">
               Don't have an account?
-              <IonNavLink
-                routerDirection="forward"
-                component={() => <SignUpPage />}
-              >
-                <button className="sign-up-link">Sign up</button>
-              </IonNavLink>
+
+                <button className="sign-up-link"               
+               onClick={()=>{
+                router.push('/index/register')
+               }} >Sign up</button>
             </p>
             <div className="login-divider">
               <span>OR</span>

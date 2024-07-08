@@ -1,0 +1,43 @@
+.help-requests-container{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.help-requests-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color: var(--ion-bg-white);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+}
+
+.help-requests-card img {
+    width: 100%;
+    border-radius: 8px;
+    min-height: 220px;
+    background-color: #eee;
+    border-radius: 8px 8px 0px 0px;
+    object-fit: cover;
+}
+
+.user-details {
+   padding: 10px
+}
+
+.user-details h4{
+    color: var(--ion-color-primary);
+    font-weight: bold;
+}
+
+.user-details span {
+    font-size: 12px;
+    margin-top: -6px;
+    display: block;
+    color: var(--ion-color-muted);
+}
+
+.user-details .btn-link {
+    margin-left: -16px;
+    margin-top: -10px;
+}

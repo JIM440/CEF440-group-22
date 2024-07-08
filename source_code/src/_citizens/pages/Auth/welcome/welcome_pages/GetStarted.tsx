@@ -22,17 +22,10 @@ const GetStartedScreen: React.FC = () => {
         <div className="welcome-action-buttons">
           <IonButton
             mode="ios"
-            className="welcome-login primary-button"
-            routerLink="/index/login"
-          >
-            Login
-          </IonButton>
-          <IonButton
-            mode="ios"
             className="welcome-signup primary-button"
-            routerLink="/index/sign-up"
+            routerLink="/index/logintype"
           >
-            Sign up
+            Get Started
           </IonButton>
         </div>
       </div>

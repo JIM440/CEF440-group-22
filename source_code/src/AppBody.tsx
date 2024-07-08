@@ -41,6 +41,7 @@ import GuideContent from "./_citizens/pages/Guides/GuideContent";
 import Profile from "./_citizens/pages/Profile/Profile";
 import EditProfile from "./_citizens/pages/Profile/EditProfile";
 import Alerts from "./_citizens/pages/Alerts/Alerts";
+import LoginType from "./_citizens/pages/Auth/LoginType";
 
 import ChatBot from "./_citizens/pages/ChatBot/ChatBot";
 import WeatherDetailPage from "./_citizens/pages/WeatherDetailPage/WeatherDetailPage";
@@ -56,6 +57,13 @@ import ResponderProfile from "./_responders/pages/profile/ResponderProfile";
 import ResponderValidateDisaster from "./_responders/pages/alerts/ResponderValidateAlert";
 import ResponderReportUpdate from "./_responders/pages/alerts/ResponderReportUpdate";
 import ResponderUpdateDisasterStatus from "./_responders/pages/alerts/ResponderUpdateAlertStatus";
+import ResponderLogin from "./_citizens/pages/Auth/ResponderLogin";
+import ResponderAccountApplication from "./_citizens/pages/Auth/ResponderAccountApply";
+import RequestHelp from "./_citizens/pages/Emergency/RequestHelp";
+import HelpRequestDetail from "./_responders/pages/emergency/HelpRequestsDetail";
+import AddAlertResponder from './_responders/pages/alerts/AddAlert'
+import SignUpPage from "./_citizens/pages/Auth/SignUp";
+import Announcements from "./_citizens/pages/Anouncement/Announcements";
 
 // ================================ responder pages ================================
 
@@ -122,6 +130,12 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
           <Route path="/index/welcome" exact={true}>
             <WelcomeScreen />
           </Route>
+          <Route path="/index/logintype" exact={true}>
+              <LoginType />
+          </Route>
+          <Route path="/index/register" exact={true}>
+              <SignUpPage />
+          </Route>
           <Route path="/tabs/home" exact={true}>
             <HomePage locale={locale} />
           </Route>
@@ -131,11 +145,17 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
           <Route path="/tabs/map" exact={true}>
             <MapPage />
           </Route>
+          <Route path='/emergency/call' exact={true} component={EmergencyCall} />
+          <Route path='/emergency/report' exact={true} component={ReportDisasterPage} />
+          <Route path='/emergency/help' exact={true} component={RequestHelp} />
           <Route path="/tabs/community" exact={true}>
             <CommunityPage />
           </Route>
           <Route path="/community/chatpage" exact={true}>
             <CommunityChatPage />
+          </Route>
+          <Route path="/community/announcements/content" exact={true}>
+            <Announcements />
           </Route>
           <Route path="/community/foruminfo" exact={true}>
             <ForumInfo />
@@ -193,11 +213,11 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
           ================================
           ================================ */}
 
-          <Route
-            path="/responder/tabs/home"
-            component={ResponderHome}
-            exact={true}
-          />
+<Route path='/index/responder/login' exact={true} component={ResponderLogin} />
+<Route path='/index/responder/apply' exact={true} component={ResponderAccountApplication} />
+<Route path="/responder/tabs/home" exact={true}>
+            <ResponderHome locale={locale} />
+            </Route>
           <Route
             path="/responder/tabs/map"
             exact={true}
@@ -207,6 +227,11 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
             path="/responder/tabs/emergency"
             exact={true}
             component={ResponderEmergency}
+          />
+          <Route
+            path="/responder/emergency/requests_detail"
+            exact={true}
+            component={HelpRequestDetail}
           />
           <Route
             path="/responder/tabs/community"
@@ -233,6 +258,11 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
             path="/responder/alerts/reportupdate"
             exact={true}
             component={ResponderReportUpdate}
+          />
+          <Route
+            path="/responder/alerts/new"
+            exact={true}
+            component={AddAlertResponder}
           />
           {/* profile */}
           <Route
@@ -345,7 +375,7 @@ Responder Tabs
                 }
               />
               <IonLabel>
-                <FormattedMessage id="Emergency" />
+                <FormattedMessage id="Help Requests" />
               </IonLabel>
             </IonTabButton>
 

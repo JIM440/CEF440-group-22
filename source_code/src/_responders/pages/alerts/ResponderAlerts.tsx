@@ -2,6 +2,7 @@ import {
   IonBackButton,
   IonContent,
   IonHeader,
+  IonIcon,
   IonLabel,
   IonPage,
   IonSegment,
@@ -12,7 +13,9 @@ import {
 } from '@ionic/react';
 import React, { useState } from 'react';
 import '../../../_citizens/pages/Alerts/Alerts.css';
+import './Alerts.css';
 import BackBtn from '../../../components/HeaderBack';
+import plus from '../../../assets/icons/plus.svg'
 
 const ResponderAlerts: React.FC = () => {
   const router = useIonRouter();
@@ -41,6 +44,13 @@ const ResponderAlerts: React.FC = () => {
       </IonHeader>
 
       <IonContent className="ion-padding">
+
+        <div className='add-alert' onClick={()=>{
+          router.push('/responder/alerts/new')
+        }}>
+          <IonIcon icon={plus} />
+        </div>
+
         {segment === 'pending' ? (
           <div className="pending-container alerts-container">
             <div className="alert-box">

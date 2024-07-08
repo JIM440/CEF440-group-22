@@ -219,7 +219,7 @@ const GuideContent: React.FC = () => {
     // Map each segment to JSX elements with <br> tags
     const formattedText = segments.map((segment, index) => (
       <React.Fragment key={index}>
-        {index > 0 && (<><br />- </>)}
+        {index > 0 && (<><br /></>)}
         {segment}
       </React.Fragment>
     ));

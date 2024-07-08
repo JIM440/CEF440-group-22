@@ -132,6 +132,7 @@ ion-header.welcome-direction-control {
   font-size: 16px;
   font-weight: 600;
   letter-spacing: 0.04rem;
+  color: #fff;
 }
 
 @media screen and (max-width: 395px) {
@@ -151,11 +152,11 @@ ion-header.welcome-direction-control {
 }
 
 @media screen and (max-height: 650px) {
-    .welcome-page-screen-content{
-        gap: 0;
-    }
+  .welcome-page-screen-content {
+    gap: 0;
+  }
 
-    .welcome-page-screen-container{
-        gap: 0;
-    }
+  .welcome-page-screen-container {
+    gap: 0;
+  }
 }
