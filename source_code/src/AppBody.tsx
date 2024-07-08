@@ -251,7 +251,7 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
             component={ResponderAlerts}
           />
           <Route
-            path="/responder/alerts/validate"
+            path="/responder/alerts/validate/:id"
             exact={true}
             component={ResponderValidateDisaster}
           />

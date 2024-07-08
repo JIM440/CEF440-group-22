@@ -1,19 +1,57 @@
 import {
-  IonBackButton,
   IonContent,
-  IonFooter,
   IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
   useIonRouter,
 } from '@ionic/react';
-import React from 'react';
-import floodOccur from '../../../assets/images/flood-occurred2.jpg';
+import React, { useEffect, useState } from 'react';
+import { collection, onSnapshot, DocumentData } from 'firebase/firestore';
+import { db } from '../../../config/firebase';
+import { useParams } from 'react-router';
 import BackBtn from '../../../components/HeaderBack';
+
+interface Disaster {
+  id: string;
+  image: string;
+  disasterType: string;
+  description: string;
+  [key: string]: any; 
+}
 
 const ResponderValidateDisaster: React.FC = () => {
   const router = useIonRouter();
+  const { id } = useParams<{ id: string }>();
+  const [reportedDisasters, setReportedDisasters] = useState<Disaster[]>([]);
+  const [selectedDisaster, setSelectedDisaster] = useState<Disaster | null>(null);
+
+  useEffect(() => {
+    const disastersCollection = collection(db, 'reported-disasters');
+
+    const unsubscribe = onSnapshot(
+      disastersCollection,
+      (snapshot) => {
+        const disastersData = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Disaster[];
+
+        setReportedDisasters(disastersData);
+
+        const disaster = disastersData.find((disaster) => disaster.id === id);
+        setSelectedDisaster(disaster || null);
+      },
+      (error) => {
+        console.error('Error fetching reported disasters:', error);
+      }
+    );
+
+    return () => unsubscribe();
+  }, [id]);
+
+  if (!selectedDisaster) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <IonPage>
       <IonHeader class='ion-no-border'>
@@ -21,13 +59,16 @@ const ResponderValidateDisaster: React.FC = () => {
       </IonHeader>
       <IonContent>
         <div className="intro-image-report">
-        <img style={{
-            objectFit: 'cover'
-        }} height='280px' src={floodOccur} />
+          <img
+            style={{ objectFit: 'cover' }}
+            height='280px'
+            src={selectedDisaster.image}
+            alt="Disaster"
+          />
         </div>
         <div className="ion-padding-horizontal header-pending-content">
           <div className="row-1">
-            <h4>Fire</h4>
+            <h4>{selectedDisaster.disasterType}</h4>
             <span>Buea, Cameroon</span>
           </div>
           <div className="row-2">
@@ -48,51 +89,15 @@ const ResponderValidateDisaster: React.FC = () => {
           </div>
         </div>
         <div className="content ion-padding-horizontal">
-          <p>
-            Breaking News: Fire Erupts in Buea, Cameroon Buea, Cameroon -
-            [Current Date] - A fire broke out earlier today in Buea, Cameroon.
-            Details are still emerging, but initial reports indicate the blaze
-            began in [Location of fire, e.g., a residential building, a market,
-            etc.] located in the [Area of Buea, e.g., central district,
-            commercial area] district. Emergency responders are currently on the
-            scene battling the flames and evacuating residents from the
-            surrounding area. The cause of the fire is unknown at this time, and
-            there are no confirmed reports of injuries or casualties.
-            <br />
-            <br />
-            Here's what we know so far:
-            <br />
-            <br />
-            The fire began at approximately [Time of fire] in [Location of
-            fire]. The extent of the damage is still being assessed.
-            Firefighters are working to contain the blaze and prevent it from
-            spreading. Local authorities are urging residents to avoid the area
-            and follow the instructions of emergency personnel.
-            <br />
-            <br />
-            We will continue to update this story as more information becomes
-            available. Here are some additional details we are following:
-            <br />
-            <br />
-            Whether the fire has been contained. The cause of the fire, if it
-            has been determined. Any injuries or casualties resulting from the
-            fire. The extent of the damage to property.
-            <br />
-            <br />
-            If you have any information about this fire, please contact local
-            authorities.
-            <br />
-            <br />
-            <br />
-            Stay safe, Buea!
-          </p>
+          {selectedDisaster.description}
         </div>
-      
+
         <div className="confirm-disaster">
-          <h5>Confirm  Disaster Occurrence:</h5>
+          <h5>Confirm Disaster Occurrence:</h5>
           <div className="btn-right-aligned">
-            <button className="cancel" style={{width: '100%'}}>Reject</button>
-            <button style={{width: '100%'}}
+            <button className="cancel" style={{ width: '100%' }}>Reject</button>
+            <button
+              style={{ width: '100%' }}
               onClick={() => {
                 router.push('/responder/alerts/');
               }}
