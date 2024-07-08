@@ -171,7 +171,7 @@ const HomePage: React.FC<ContainerProps> = (locale) => {
             <div className="welcome-location">
               <span className="salutation">
                 <FormattedMessage id={greetingText} />,{" "}
-                <IonLabel>{ user.email}</IonLabel>
+                <IonLabel>{ user.name}</IonLabel>
               </span>
               <div className="location-changer">
                 <div className="location-icon">

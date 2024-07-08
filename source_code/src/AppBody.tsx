@@ -149,6 +149,12 @@ const AppBody: React.FC<ContainerProps> = ({ locale, setLocale }) => {
           <Route path="/tabs/report" exact={true}>
             <ReportPage />
           </Route>
+          <Route path="/emergency/report" exact={true}>
+            <ReportDisasterPage/>
+          </Route>
+          <Route path="/emergency/call" exact={true}>
+            <EmergencyCall />
+          </Route>
           <Route path="/menu/Settings" exact={true}>
             <SettingPage
               history={history}
