@@ -101,7 +101,7 @@ import BackBtn from '../../../components/HeaderBack';
         </IonContent>
 
         <IonFooter>
-          <IonButton expand='full' onClick={()=>{
+          <IonButton mode='ios' expand='block' className='primary-button' onClick={()=>{
             router.push('/responder/alerts/reportupdate')
           }}>
             Report Updates
