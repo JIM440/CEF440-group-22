@@ -3,16 +3,17 @@ import {
   IonContent,
   IonHeader,
   IonInput,
-  IonLabel,
   IonPage,
   IonTextarea,
-  IonTitle,
-  IonToolbar,
-} from '@ionic/react';
+  IonToast
+  } from '@ionic/react';
 import React, { useState } from 'react';
 import BackBtn from '../../../components/HeaderBack';
 import { db } from '../../../config/firebase';
 import { addDoc, collection, serverTimestamp, DocumentReference } from 'firebase/firestore';
+import { checkmarkCircle, closeCircle } from "ionicons/icons";
+import Loader from '../../../components/Loader';
+
 
 interface ForumInfo {
   name: string;
@@ -36,6 +37,27 @@ const createForum = async (collectionName: string, forumInfo: ForumInfo): Promis
 };
 
 const AddForum: React.FC = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastColor, setToastColor] = useState('primary');
+  const [toastIcon, setToastIcon] = useState(checkmarkCircle);
+
+  const showToast = (message, color, icon) => {
+    setToastMessage(message);
+    setToastColor(color);
+    setToastIcon(icon);
+    setIsOpen(true);
+  };
+
+  const hideToast = () => {
+    setIsOpen(false);
+  };
+
+  const [displayLoader, setDisplayLoader] = useState('none');
+
+  
+
   const [forumTitle, setForumTitle] = useState<string>('');
   const [forumDescription, setForumDescription] = useState<string>('');
   const author = "Anonymous"; 
@@ -50,11 +72,16 @@ const AddForum: React.FC = () => {
     };
 
     try {
+      setDisplayLoader('flex')
       const result = await createForum('forums', forumInfo);
       console.log('Forum created with ID:', result.id);
       setForumTitle('');
       setForumDescription('');
+      showToast('Forum created successful!', 'primary', checkmarkCircle);
+      setDisplayLoader('none')
     } catch (error) {
+      showToast('Error creating forum failed. Please try again.', 'danger', closeCircle);
+      setDisplayLoader('none')
       console.error('Error creating forum:', error);
     }
   };
@@ -65,6 +92,26 @@ const AddForum: React.FC = () => {
         <BackBtn title="Create Forum" />
       </IonHeader>
       <IonContent className="ion-padding create-forum-container">
+
+
+      <IonToast
+      icon={toastIcon}
+        isOpen={isOpen}
+        message={toastMessage}
+        color={toastColor}
+        duration={4000}
+        buttons={[
+          {
+            text: 'Close',
+            role: 'cancel',
+            handler: hideToast,
+          },
+        ]}
+        onDidDismiss={hideToast} />
+
+  <Loader display={displayLoader} />
+
+
         <p style={{ color: 'var(--ion-color-muted)' }}>
           Enter Forum Details:
         </p>

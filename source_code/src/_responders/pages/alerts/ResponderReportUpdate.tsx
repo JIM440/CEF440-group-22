@@ -24,21 +24,21 @@ const ResponderReportUpdate: React.FC = () => {
           placeholder="Updates"
           fill="outline"
           labelPlacement="floating"
-          value={`Firefighters have contained the blaze to the building's eastern wing. No additional injuries reported since the la Structural integrity of neighboring buildings appears stable at this time, but further assessment is needed.`}
+          className='text-area-input text-area-large'
         />
-      </IonContent>
       <div
         style={{
           display: 'grid',
           gridTemplateColumns: '1fr 1fr',
-          padding: '1rem',
+          gap: '0.8rem',
         }}
       >
         <IonButton fill="outline" color="dark">
           Cancel
         </IonButton>
-        <IonButton >Submit</IonButton>
+        <IonButton mode='ios' className='primary-button' >Submit</IonButton>
       </div>
+      </IonContent>
     </IonPage>
   );
 };
