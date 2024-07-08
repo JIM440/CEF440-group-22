@@ -108,6 +108,11 @@ ion-segment-button::part(native) {
   background-color: #1e80db11;
 }
 
+.disaster-img-type .icon img {
+  width: 25px;
+  color: #1e7fdb;
+}
+
 .map-view {
   display: flex;
   align-items: center;

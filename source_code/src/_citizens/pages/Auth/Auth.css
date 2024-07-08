@@ -274,7 +274,6 @@ form ion-button {
 }
 
 .login-type-container .logo img {
-  background-color: var(--ion-color-primary);
   width: 40px;
 }
 

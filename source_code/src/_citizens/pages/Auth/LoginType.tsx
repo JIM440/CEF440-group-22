@@ -12,7 +12,7 @@ import { chevronBack, chevronForward } from 'ionicons/icons';
 import React from 'react';
 import './Auth.css'
 
-import logo from '../../../assets/images/logo-white.svg';
+import logo from '../../../assets/images/logo-blue.svg';
 
 const LoginType: React.FC = () => {
   const router = useIonRouter();

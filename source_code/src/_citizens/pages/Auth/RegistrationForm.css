@@ -32,6 +32,7 @@
 
 .progress-step.active .step-number {
   background-color: var(--ion-color-primary);
+  color: #fff;
 }
 
 .step-number {
@@ -53,7 +54,7 @@
   text-align: center;
 }
 
-.progress-step.active .step-title{
+.progress-step.active .step-title {
   color: var(--ion-color-primary);
 }
 

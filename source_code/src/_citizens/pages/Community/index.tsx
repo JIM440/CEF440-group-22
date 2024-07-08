@@ -366,7 +366,7 @@ useEffect(() => {
                     
                   </div>
                   <hr
-                    style={{ backgroundColor: "var(--ion-color-contrast)" }}
+                    style={{ backgroundColor: "#3f3f3f82" }}
                   />
                   <div className="recommend">Communities you can join</div>
                 </div>
@@ -391,8 +391,8 @@ useEffect(() => {
                     isOpen={showModal}
                     onDidDismiss={closeModal}
                     trigger="open-modal"
-                    initialBreakpoint={0.6}
-                    breakpoints={[0, 0.25, 0.5, 0.6, 0.75]}
+                    initialBreakpoint={0.65}
+                    breakpoints={[0, 0.25, 0.5, 0.6, 0.65, 0.75]}
                     handleBehavior="cycle"
                   >
                     <IonContent className="ion-padding ">

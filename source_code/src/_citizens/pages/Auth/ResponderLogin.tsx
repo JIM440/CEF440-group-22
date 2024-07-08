@@ -1,8 +1,7 @@
-import React, { FormEvent, useState, useContext } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../../config/firebase";
-import { signInWithGoogle } from "../../../services/AuthService/auth";
-
+import React, { FormEvent, useState, useContext } from 'react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../config/firebase';
+import { signInWithGoogle } from '../../../services/AuthService/auth';
 
 import {
   IonBackButton,
@@ -14,20 +13,45 @@ import {
   IonTitle,
   IonInput,
   IonPage,
-  useIonRouter
-} from "@ionic/react";
+  useIonRouter,
+  IonToast,
+} from '@ionic/react';
 
-import loginIllustration from "./../../../assets/images/Login-illustration.png";
+import { checkmarkCircle, closeCircle } from 'ionicons/icons';
+
+import loginIllustration from './../../../assets/images/Login-illustration.png';
+import Loader from '../../../components/Loader';
+import BackBtn from '../../../components/HeaderBack';
 
 function ResponderLogin() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [toastColor, setToastColor] = useState('primary');
+  const [toastIcon, setToastIcon] = useState(checkmarkCircle);
+
+  const showToast = (message, color, icon) => {
+    setToastMessage(message);
+    setToastColor(color);
+    setToastIcon(icon);
+    setIsOpen(true);
+  };
+
+  const hideToast = () => {
+    setIsOpen(false);
+  };
+
+  const [displayLoader, setDisplayLoader] = useState('none');
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useIonRouter();
 
-    const signIn = async (e: FormEvent) => {
+  const signIn = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      console.log(email, "---", password);
+      setDisplayLoader('flex');
+
+      console.log(email, '---', password);
       const userCredential = await signInWithEmailAndPassword(
         auth,
         email,
@@ -35,10 +59,13 @@ function ResponderLogin() {
       );
       console.log(userCredential.user.uid);
 
-    
-      router.push("/responder/tabs/home");
+      setDisplayLoader('none');
+      router.push('/responder/tabs/home');
+      showToast('Login successful!', 'primary', checkmarkCircle);
     } catch (error) {
-      console.error("Error during sign-in:", error);
+      console.error('Error during sign-in:', error);
+      setDisplayLoader('none');
+      showToast('Login failed. Please try again.', 'danger', closeCircle);
     }
   };
 
@@ -49,15 +76,28 @@ function ResponderLogin() {
   return (
     <IonPage>
       <IonHeader className="ion-no-border">
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton></IonBackButton>
-          </IonButtons>
-          <IonTitle>Responder Login</IonTitle>
-        </IonToolbar>
+        <BackBtn title='Login' />
       </IonHeader>
 
       <IonContent>
+        <IonToast
+          icon={toastIcon}
+          isOpen={isOpen}
+          message={toastMessage}
+          color={toastColor}
+          duration={4000}
+          buttons={[
+            {
+              text: 'Close',
+              role: 'cancel',
+              handler: hideToast,
+            },
+          ]}
+          onDidDismiss={hideToast}
+        />
+
+        <Loader display={displayLoader} />
+
         <div className="main-login-container responder">
           <img src={loginIllustration} alt="Login" />
           <form>
@@ -68,7 +108,7 @@ function ResponderLogin() {
               labelPlacement="floating"
               fill="outline"
               value={email}
-              onIonInput={e => setEmail(e.detail.value as string)}
+              onIonInput={(e) => setEmail(e.detail.value as string)}
             ></IonInput>
             <IonInput
               mode="md"
@@ -78,7 +118,7 @@ function ResponderLogin() {
               type="password"
               className="password-field"
               value={password}
-              onIonInput={e => setPassword(e.detail.value as string)}
+              onIonInput={(e) => setPassword(e.detail.value as string)}
             ></IonInput>
             <IonButton
               className="ion-margin-top primary-button proceed-language"
@@ -89,11 +129,11 @@ function ResponderLogin() {
             >
               Login
             </IonButton>
-            <p className="signup-link-container"> 
+            <p className="signup-link-container">
               Don't have an account?
-              <button 
-                type="button" 
-                onClick={() => router.push("/index/responder/apply")} 
+              <button
+                type="button"
+                onClick={() => router.push('/index/responder/apply')}
                 className="sign-up-link"
               >
                 Apply for one

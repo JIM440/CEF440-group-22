@@ -428,3 +428,10 @@ a.mapboxgl-ctrl-logo {
   background-color: rgba(255, 255, 255, 0.5);
   left: 0;
 }
+
+.overlay-loader.none {
+  display: none;
+}
+.overlay-loader.flex {
+  display: flex;
+}
